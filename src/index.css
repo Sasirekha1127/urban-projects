@@ -1,0 +1,71 @@
+body {
+  font-family:sans-serif; /* clean modern font */
+}
+
+/* Let modal content position elements relative to it */
+.modal-wrapper {
+  position: relative;
+}
+/* Search box wrapper */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 8px 12px;
+  transition: border-color 0.3s ease;
+}
+
+/*  Hover / focus styles — black border */
+.search-input-wrapper:hover,
+.search-input-wrapper:focus-within {
+  border-color: #000;
+}
+
+/* Back arrow inside the search box */
+.back-arrow {
+  color: #000;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+/* Input style */
+.search-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  flex: 1;
+  font-size: 15px;
+}
+
+.use-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.outside-close-icon {
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  z-index: 1060;
+  transition: all 0.2s ease;
+}
+.modal-dialog-centered {
+  max-width: 500px;
+  margin-top: 40px;
+}
+
+.modal-content {
+  min-height: 290px; 
+  border-radius: 15px;
+}

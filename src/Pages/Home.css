@@ -1,0 +1,214 @@
+/* ----------- MAIN WRAPPER ----------- */
+.home-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 60px 4%;
+  font-family: "Poppins", sans-serif;
+  background-color: #fff;
+  flex-wrap: wrap;
+}
+
+/* ----------- LEFT CONTAINER ----------- */
+.home-container {
+  flex: 1;
+  text-align: left;
+  color: #333;
+  position: relative;
+  right: 30px;
+}
+
+.home-container h1 {
+  font-size: 2.4rem;
+  color: #0f0f0f;
+  margin-bottom: 35px;
+  line-height: 1.3;
+}
+
+/* ----------- BOX AREA ----------- */
+.home-box {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 35px 30px;
+  border: 1px solid #e5e5e5;
+  width: 90%;
+}
+
+.home-box h3 {
+  color: #222;
+  font-weight: 500;
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+}
+
+/* ----------- SERVICE GRID ----------- */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ----------- SERVICE GROUP (WRAPPER) ----------- */
+.service-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* ----------- SERVICE CARD (IMAGE AREA) ----------- */
+.service-item {
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  transition: all 0.25s ease-in-out;
+  text-align: center;
+  padding: 25px 10px;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-item:hover {
+  background-color: #f3f3f3;
+}
+
+/* ----------- IMAGE ----------- */
+.service-img img {
+  width: 100%;
+  height: 60px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ----------- TEXT (OUTSIDE BOX) ----------- */
+.service-text {
+  margin-top: 8px;
+  text-align: center;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.service-text p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.2;
+}
+
+.service-group:hover .service-text {
+  border-bottom: 2px solid rgb(10, 9, 9);
+}
+
+/* ----------- RIGHT IMAGE ----------- */
+.home-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 30px;
+}
+
+.home-image {
+  width: 100%;
+  max-width: 550px;
+  border-radius: 10px;
+  margin-left: 40px;
+}
+
+/* ----------- RESPONSIVE STYLES ----------- */
+
+/* Large Tablets (Below 1024px) */
+@media (max-width: 1024px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-box {
+    width: 100%;
+  }
+
+  .home-container {
+    right: 0;
+  }
+
+  .home-image-container {
+    left: 0;
+  }
+}
+
+/* Tablets & Small Screens (Below 768px) */
+@media (max-width: 768px) {
+  .home-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 5%;
+  }
+
+  .home-container {
+    right: 0;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .home-container h1 {
+    font-size: 2rem;
+  }
+
+  .home-box {
+    padding: 30px 20px;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .home-image-container {
+    margin-top: 20px;
+    left: 0;
+  }
+
+  .home-image {
+    margin: 0 auto;
+    max-width: 400px;
+  }
+}
+
+/* Mobile (Below 480px) */
+@media (max-width: 480px) {
+  .service-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .service-item {
+    height: auto;
+    padding: 20px;
+  }
+
+  .service-img img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .home-container h1 {
+    font-size: 1.6rem;
+  }
+
+  .service-text p {
+    font-size: 0.9rem;
+  }
+
+  .home-box {
+    width: 100%;
+  }
+
+  .home-image {
+    max-width: 320px;
+  }
+}

@@ -1,0 +1,164 @@
+.search-dropdown-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  width: 20%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Trending list */
+.trending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trending-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #313131;
+  border: 1px solid #cbc6c6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.trending-item:hover {
+  background-color: #f8f9fa;
+}
+
+.trend-icon {
+  color: #777;
+  font-size: 11px;
+}
+
+/* Subservice list */
+.subservice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subservice-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+
+.subservice-item:hover {
+  background-color: #f8f9fa;
+}
+
+.subservice-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.subservice-item p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.subservice-item span {
+  font-size: 12px;
+  color: #666;
+}
+
+/* RESPONSIVE STYLES*/
+@media (max-width: 992px) {
+  .search-dropdown-box {
+    width: 40%;
+    padding: 14px;
+  }
+
+  .trending-item {
+    font-size: 13px;
+  }
+
+  .subservice-item img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-dropdown-box {
+    width: 60%;
+    padding: 14px;
+  }
+
+  .trending-item {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .subservice-item {
+    gap: 10px;
+  }
+
+  .subservice-item p {
+    font-size: 13px;
+  }
+
+  .subservice-item span {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-dropdown-box {
+    width: 78%;
+    left: 5%;
+    right: 5%;
+    padding: 12px;
+  }
+
+  .trending-item {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .trend-icon {
+    font-size: 13px;
+  }
+
+  .subservice-item {
+    flex-direction: row;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .subservice-item img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .subservice-item p {
+    font-size: 13px;
+  }
+
+  .subservice-item span {
+    font-size: 11px;
+  }
+
+  /* Back button center */
+  .subservice-list .btn {
+    display: block;
+    margin: 10px auto 0;
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
