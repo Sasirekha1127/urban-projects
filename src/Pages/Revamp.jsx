@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./Revamp.css";
 
-export default function RevampPage({ setHideNavbar }) {   
+export default function RevampPage({ setHideNavbar }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-   
-    setHideNavbar(true);
+    // Hide navbar when loading starts
+    if (setHideNavbar) setHideNavbar(true);
 
     const timer = setTimeout(() => {
       setLoading(false);
-      setHideNavbar(false); 
-    }, 2000);
+      if (setHideNavbar) setHideNavbar(false);
+    }, 2000); // 2 seconds spinner
 
     return () => clearTimeout(timer);
   }, [setHideNavbar]);
@@ -23,9 +23,10 @@ export default function RevampPage({ setHideNavbar }) {
           <div className="dot"></div>
           <div className="dot"></div>
           <div className="dot"></div>
+          <p className="loading-text">Loading Revamp Page...</p>
         </div>
       ) : (
-        <h1>Welcome to Revamp Page</h1>
+        <h1> Welcome to Revamp Page </h1>
       )}
     </div>
   );

@@ -5,6 +5,8 @@ body {
 /* Navbar height */
 .navbar-tall {
   min-height: 85px;
+  position: relative;
+  z-index: 10;
 }
 
 /* Logo hover */
@@ -41,6 +43,14 @@ body {
   align-items: center;
   padding: 0.4rem 0.6rem;
 }
+.location-dropdown {
+  position: absolute;
+  top: 70px; /* adjust below the navbar */
+  left: 0;
+  right: 0;
+  z-index: 2000; /* ensures it's on top of everything */
+}
+
 .search-box{
   min-width: 280px;
 }
@@ -54,6 +64,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 
 /*  MOBILE RESPONSIVE */
 @media (max-width: 991px) {
@@ -75,6 +86,7 @@ body {
   .icon-wrapper {
     align-self: flex-end;
     margin-top: 8px;
+    display: none !important;
   }
 
   .navbar-collapse {
@@ -82,6 +94,7 @@ body {
     padding: 1rem;
     border-radius: 10px;
   }
+
   .search-section {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -120,5 +133,19 @@ body {
     width: 38px;
     height: 38px;
   }
+  /* .location-dropdown {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 3000;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  } */
 }
+
+  
+
+
 

@@ -23,7 +23,7 @@ function NavbarUC() {
   const [placeholder, setPlaceholder] = useState('service');
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
 
   useEffect(() => {
     let typeSpeed = 90;
@@ -48,11 +48,11 @@ function NavbarUC() {
           return updated;
         });
       }
-      };
+    };
     const timer = setTimeout(handling, typeSpeed);
     return () => clearTimeout(timer);
   }, [placeholder, isDeleting, index, word]);
-        
+
   const searchRef = useRef(null);
   const navigate = useNavigate();
 
@@ -72,10 +72,26 @@ function NavbarUC() {
           </Navbar.Brand>
 
           {/* ---------- TOGGLE (MOBILE) ---------- */}
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            className="d-lg-none"
-          />
+          {/* ---------- TOGGLE (MOBILE) + ICONS ---------- */}
+          <div className="d-flex align-items-center d-lg-none gap-2">
+            {/* Cart + Account icons */}
+            <div
+              className="icon-outline"
+              onClick={() => navigate("/cart")}
+              style={{ cursor: "pointer" }}
+            >
+              <LuShoppingCart size={20} className="text-dark" />
+            </div>
+            <div
+              onClick={() => setShowLogin(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <RiAccountCircleLine size={22} className="ms-1 text-dark" />
+            </div>
+
+            {/* Mobile toggle */}
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          </div>
 
           {/* ---------- LINKS ---------- */}
           <Navbar.Collapse id="basic-navbar-nav">
@@ -141,7 +157,7 @@ function NavbarUC() {
                 <FormControl
                   type="text"
                   placeholder={
-                    `${isFocused ? 'search for service' :`search for '${placeholder}'`}`
+                    `${isFocused ? 'search for service' : `search for '${placeholder}'`}`
                   }
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
@@ -152,7 +168,10 @@ function NavbarUC() {
             </div>
 
             {/* CART + ACCOUNT ICONS */}
-            <div className="d-flex align-items-center ms-4 icon-wrapper">
+            <div
+              className={`align-items-center ms-4 icon-wrapper ${window.innerWidth > 991 ? "d-flex" : ""
+                }`}
+            >
               <div
                 className="icon-outline"
                 onClick={() => navigate("/cart")}
@@ -167,6 +186,7 @@ function NavbarUC() {
                 <RiAccountCircleLine size={22} className="ms-2 text-dark" />
               </div>
             </div>
+
           </Form>
         </Container>
       </Navbar>

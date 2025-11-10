@@ -1,0 +1,44 @@
+.native-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* center full screen */
+  background: #fff;
+}
+
+/* Spinner wrapper — force horizontal line */
+.spinner {
+  display: flex;
+  flex-direction: row; /* ensures horizontal alignment */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Dots style */
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #070707;
+  border-radius: 50%;
+  animation: bounce 0.8s infinite alternate;
+}
+
+/* Delay each dot animation for wave effect */
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Dot bounce animation */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}

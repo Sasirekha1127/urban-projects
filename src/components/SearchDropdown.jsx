@@ -107,68 +107,74 @@ export default function SearchDropdown({ target, show, handleClose,onServies }) 
 
   return (
     <Overlay
-      target={target}
-      show={!!show}
-      placement="bottom-start"
-      rootClose
-      onHide={() => {
-        handleClose();
-        setSelectedService(null);
-      }}
+  target={target}
+  show={!!show}
+  placement="bottom-start"
+  rootClose
+  onHide={() => {
+    handleClose();
+    setSelectedService(null);
+  }}
+>
+  {({ placement, arrowProps, show: _show, popper, ...overlayProps }) => (
+    <div
+      ref={overlayProps.ref}          // keep overlay position working
+      style={overlayProps.style}      // apply dynamic position
+      className="search-dropdown-box"
+      data-placement={placement}
     >
-      {({ ...props }) => (
-        <div {...props} className="search-dropdown-box" style={props.style}>
-          {/* Header */}
-          <h6 className="fw-semibold mb-3">
-            {selectedService ? "Available services" : "Trending searches"}
-          </h6>
+      {/* Header */}
+      <h6 className="fw-semibold mb-3">
+        {selectedService ? "Available services" : "Trending searches"}
+      </h6>
 
-          {/*  Main Trending list */}
-          {!selectedService && (
-            <div className="trending-list">
-              {trending.map((item, i) => (
-                <div
-                  key={i}
-                  className={`trending-item ${item.className}`}
-                  onClick={() => handleItemClick(item)}
-                >
-                  <FaArrowTrendUp className="trend-icon" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
+      {/* Trending List */}
+      {!selectedService && (
+        <div className="trending-list">
+          {trending.map((item, i) => (
+            <div
+              key={i}
+              className={`trending-item ${item.className}`}
+              onClick={() => handleItemClick(item)}
+            >
+              <FaArrowTrendUp className="trend-icon" />
+              <span>{item.text}</span>
             </div>
-          )}
-
-          {/* Subservices list (Urban Company style) */}
-          {selectedService && (
-            <div className="subservice-list">
-              {selectedService.subServices.map((srv, i) => (
-                <div
-                  key={i}
-                  className="subservice-item"
-                  onClick={() => handleSubServiceClick(srv)} 
-                >
-                  <img src={srv.image} alt={srv.name} />
-                  <div>
-                    <p>
-                      <strong>{srv.name.split(" ")[0]}</strong>{" "}
-                      {srv.name.replace(srv.name.split(" ")[0], "")}
-                    </p>
-                    <span>{srv.info}</span>
-                  </div>
-                </div>
-              ))}
-
-              <button
-                className="btn btn-outline-dark btn-sm mt-3"
-                onClick={() => setSelectedService(null)}
-              >
-                ← Back
-              </button>
-            </div>
-          )}
+          ))}
         </div>
       )}
-    </Overlay>
+
+      {/* Subservices */}
+      {selectedService && (
+        <div className="subservice-list">
+          {selectedService.subServices.map((srv, i) => (
+            <div
+              key={i}
+              className="subservice-item"
+              onClick={() => handleSubServiceClick(srv)}
+            >
+              <img src={srv.image} alt={srv.name} />
+              <div>
+                <p>
+                  <strong>{srv.name.split(" ")[0]}</strong>{" "}
+                  {srv.name.replace(srv.name.split(" ")[0], "")}
+                </p>
+                <span>{srv.info}</span>
+              </div>
+            </div>
+          ))}
+
+          <button
+            className="btn btn-outline-dark btn-sm mt-3"
+            onClick={() => setSelectedService(null)}
+          >
+            ← Back
+          </button>
+        </div>
+      )}
+    </div>
+  )}
+</Overlay>
+
   );
 }
