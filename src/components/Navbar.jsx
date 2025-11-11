@@ -71,7 +71,6 @@ function NavbarUC() {
             <img src={logo} alt="Urban Company" className="navbar-logo" />
           </Navbar.Brand>
 
-          {/* ---------- TOGGLE (MOBILE) ---------- */}
           {/* ---------- TOGGLE (MOBILE) + ICONS ---------- */}
           <div className="d-flex align-items-center d-lg-none gap-2">
             {/* Cart + Account icons */}

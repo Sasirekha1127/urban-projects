@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Pages/Home.css";
 import urban from "../assets/urban.png";
 import women from "../assets/women.png";
@@ -31,6 +31,21 @@ import most3 from "../assets/most3.png"
 import most4 from "../assets/most4.png"
 import most5 from "../assets/most5.png"
 import most6 from "../assets/most6.png"
+import walls from "../assets/wallpanel.jpg"
+import wax from "../assets/salon1.png"
+import cleanup from "../assets/salon2.png"
+import haircare from "../assets/salon3.png"
+// import AOS from "aos";
+import stress from "../assets/spa1.png"
+import pain from "../assets/spa2.png"
+import wall2 from "../assets/wallpanel2.png"
+import homes from "../assets/homes.png"
+import kitchen from "../assets/kitchendeep.png"
+import bathroomfull from "../assets/bathroomfull.png"
+import cock from "../assets/cock.png"
+import sofa from "../assets/sofa.png"
+
+
 
 
 function Home() {
@@ -108,15 +123,32 @@ function Home() {
   ////*         MOST BOOKED SERVICE           */////
 
   const mostBooked = [
-  { img: most1, text: "Furniture Repair", rating: 4.5, reviews: "3.5M", price: "₹500" },
-  { img: most2, text: "Wall Painting", rating: 4.2, reviews: "3.5M", price: "₹1200" },
-  { img: most3, text: "Smart Lock Setup", rating: 4.7, reviews: "471k", price: "₹800" },
-  { img: most4, text: "Kitchen Deep Clean", rating: 4.6, reviews: "1.8M", price: "₹1500" },
-  { img: most5, text: "Laptop Repair", rating: 4.3, reviews: "333k", price: "₹1000" },
-  { img: most6, text: "Water Purifier Service", rating: 4.4, reviews: "155k", price: "₹600" },
-];
+    { img: most1, text: "Intense bathroom cleaning", rating: 4.9, reviews: "3.5M", price: "₹449" },
+    { img: most2, text: "Intense cleaning (2 bathrooms)", rating: 4.49, reviews: "3.5M", price: "₹1200" },
+    { img: most3, text: "Haircut for men", rating: 4.7, reviews: "471k", price: "₹299" },
+    { img: most4, text: "Chimney cleaning", rating: 4.6, reviews: "1.8M", price: "₹399" },
+    { img: most5, text: "Intense cleaning (3 bathrooms)", rating: 4.3, reviews: "333k", price: "₹1200" },
+    { img: most6, text: "Roll-on waxing(full arms,legs & underarms", rating: 4.4, reviews: "155k", price: "₹899" },
+  ];
 
+  // SALON SERVICES
+  const salonServices = [
+    { img: wax, title: "Waxing" },
+    { img: cleanup, title: "Cleanup" },
+    { img: haircare, title: "Hair care" },
+  ];
 
+  // SPA SECTION
+  const spaServices = [
+    {
+      title: "Stress relief",
+      img: stress,
+    },
+    {
+      title: "Pain relief",
+      img: pain,
+    },
+  ]
 
   const visibleCount = 5;
 
@@ -331,6 +363,77 @@ function Home() {
           )}
         </div>
       </div>
+
+      {/* wall panel */}
+
+      <div className="wall-panel-card">
+
+        <div className="wall-panel-image">
+          <img src={walls} alt="Wall Panels" />
+        </div>
+      </div>
+
+
+
+      {/* SALON WAPPER */}
+      <div className="salon-wrapper">
+        <h2 className="salon-heading" >Salon for women</h2>
+
+        <div className="salon-cards">
+          {salonServices.map((item, index) => (
+            <div key={index} className="salon-card">
+              <img src={item.img} alt={item.title} />
+              <p className="salon-title">{item.title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+      {/* SPA SECTION */}
+      <div className="spa-wrapper">
+        <h2 className="spa-heading">Spa for women</h2>
+        <p className="spa-sub">
+          Refresh. Rewind. Rejuvenate.
+        </p>
+
+        <div className="spa-cards">
+          {spaServices.map((item, index) => (
+            <div key={index} className="spa-card">
+              <img src={item.img} alt={item.title} />
+              <p className="spa-title">{item.title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+      {/* wall panel 2 */}
+      <div className="wall-panel-card">
+
+        <div className="wall-panel-image">
+          <img src={wall2} alt="Wall Panels" />
+        </div>
+      </div >
+
+      {/* CLEANING CONTROL */}
+
+      <div className="service-panel-card">
+        {/* Header row: Left text + Right button */}
+        <div className="service-panel-header">
+          <h2>Cleaning & Pest Control</h2>
+          <button className="see-more-btn">See More</button>
+        </div>
+
+        {/* Image row below */}
+        <div className="service-images-row">
+          {[homes, kitchen, bathroomfull, cock, sofa].map((img, index) => (
+            <img key={index} src={img} alt={`Service ${index + 1}`} />
+          ))}
+        </div>
+      </div>
+          
+
 
     </>
   );
