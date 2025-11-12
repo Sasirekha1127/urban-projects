@@ -1,12 +1,14 @@
 .search-dropdown-box {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 1px;
   padding: 16px;
-  width: 20%;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  width: 22%;       /* let it size naturally or match parent */
+  min-width: 220px;  /* optional minimum */
   transition: all 0.3s ease;
+  z-index: 2000;     /* ensures overlay is on top */
 }
+
 
 /* Trending list */
 .trending-list {

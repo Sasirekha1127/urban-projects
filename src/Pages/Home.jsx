@@ -42,8 +42,11 @@ import wall2 from "../assets/wallpanel2.png"
 import homes from "../assets/homes.png"
 import kitchen from "../assets/kitchendeep.png"
 import bathroomfull from "../assets/bathroomfull.png"
-import cock from "../assets/cock.png"
 import sofa from "../assets/sofa.png"
+import wall3 from "../assets/wall3.png"
+import ApplianceSection from "../Pages/Appliance.jsx";
+import Footer from "./Footer.jsx";
+
 
 
 
@@ -149,6 +152,19 @@ function Home() {
       img: pain,
     },
   ]
+
+
+  // cleaning & pest control
+  const cleaning = [
+    { img: homes, title: "Full Home/Move in Cleaning" },
+    { img: bathroomfull, title: "Bathroom Cleaning" },
+    { img: kitchen, title: " Kitchen Cleaning" },
+    { img: sofa, title: " Sofa & carpet Cleaning" },
+  ];
+
+
+
+
 
   const visibleCount = 5;
 
@@ -410,29 +426,45 @@ function Home() {
 
       {/* wall panel 2 */}
       <div className="wall-panel-card">
-
         <div className="wall-panel-image">
           <img src={wall2} alt="Wall Panels" />
         </div>
       </div >
 
-      {/* CLEANING CONTROL */}
+      {/* CLEANING & PEST CONTROL SECTION */}
+      <div className="cleaning-wrapper">
+        <h2 className="cleaning-heading">Cleaning & Pest Control</h2>
 
-      <div className="service-panel-card">
-        {/* Header row: Left text + Right button */}
-        <div className="service-panel-header">
-          <h2>Cleaning & Pest Control</h2>
-          <button className="see-more-btn">See More</button>
-        </div>
-
-        {/* Image row below */}
-        <div className="service-images-row">
-          {[homes, kitchen, bathroomfull, cock, sofa].map((img, index) => (
-            <img key={index} src={img} alt={`Service ${index + 1}`} />
+        <div className="cleaning-cards">
+          {cleaning.map((item, index) => (
+            <div key={index} className="cleaning-card">
+              <img src={item.img} alt={item.title} />
+              <p className="cleaning-title">{item.title}</p>
+            </div>
           ))}
         </div>
       </div>
-          
+
+      {/* wall panel 3 */}
+      <div className="wall-panel-card">
+        <div className="wall-panel-image">
+          <img src={wall3} alt="Wall Panels" />
+        </div>
+      </div >
+      <ApplianceSection />
+      <Footer/>
+           
+
+
+      
+
+
+      
+
+
+
+
+
 
 
     </>

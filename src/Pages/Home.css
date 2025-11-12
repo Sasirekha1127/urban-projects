@@ -309,10 +309,10 @@
   }
 }
 /* ---------- CAROUSEL MAIN CONTAINER ---------- */
-carousel-container {
-  width: 99%;
+.carousel-container {
+  width: 98%;
   position: relative;
-  left: 20px;
+  left: 15px;
 }
 
 /* Each slide */
@@ -326,7 +326,7 @@ carousel-container {
 }
 
 .carousel-image {
-  width: 90%;
+  width: 94%;
   border-radius: 15px;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
@@ -584,14 +584,16 @@ flex: 0 0 calc(100% / 5);
 .mostbooked-wrapper {
   margin-top: 70px;
   padding: 20px 5%;
+  
 }
 
 .mostbooked-heading {
-  font-size: 40px;
+  font-size: 2.5rem;
   margin-bottom: 60px;
   color: #222;
   position: relative;
   right: 30px;
+  font-weight: 600;
 }
 
 .mostbooked-carousel {
@@ -710,7 +712,6 @@ flex: 0 0 calc(100% / 5);
   transition: transform 0.4s ease; /* smooth zoom animation */
 }
 
-/* Hover effect - only zoom the image */
 .wall-panel-image:hover img {
   transform: scale(1.02);
 }
@@ -773,7 +774,6 @@ flex: 0 0 calc(100% / 5);
   background: #fff;
   border: 1px solid #eee;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   flex: 1 1 250px;
   max-width: 250px;
@@ -784,7 +784,10 @@ flex: 0 0 calc(100% / 5);
 .salon-card:hover img {
   transform: scale(1.05);
 }
+.salon-card:hover{
+    border: #000 1px solid;
 
+}
 .salon-card img {
  width: 100%;
   height: 220px;
@@ -878,7 +881,6 @@ right: 20px;
   background: #fff;
   border: 1px solid #eee;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   flex: 1 1 250px;
   max-width: 300px;
@@ -888,6 +890,10 @@ right: 20px;
 
 .spa-card:hover img {
   transform: scale(1.05);
+}
+.spa-card:hover{
+    border: #000 1px solid;
+
 }
 
 .spa-card img {
@@ -915,5 +921,199 @@ right: 20px;
 
 
         /* cleaning control */
-        
+        /* ---------- CLEANING & PEST CONTROL ---------- */
+.cleaning-wrapper {
+  width: 100%;
+  margin: 60px 0;
+}
+
+.cleaning-heading {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #222;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  top: 40px;
+  margin-left: 30px;
+ 
+}
+
+.cleaning-cards {
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: stretch; */
+  gap: 20px;
+  flex-wrap: nowrap;
+  padding: 0 3%;
+  margin-top: 90px;
+}
+
+.cleaning-card {
+  /* flex: 1 1 calc(20% - 20px); leave space as if 5th card exists */
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 18%;
+}
+
+.cleaning-card:hover img {
+  transform: scale(1.05);
+}
+.cleaning-card:hover{
+    border: #000 1px solid;
+
+}
+
+.cleaning-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.cleaning-title {
+  font-size: 1rem;
+  padding: 15px;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .cleaning-cards {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cleaning-card {
+    flex: 1 1 calc(45% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .cleaning-card {
+    flex: 1 1 100%;
+  }
+}
+
+/* APPLIANCE */
+
+.appliance-wrapper {
+  font-family: "Poppins", sans-serif;
+  padding: 40px 6%;
+  background-color: #fff;
+  position: relative;
+}
+
+.appliance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.appliance-header h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #222;
+}
+
+.see-all-btn {
+  background-color: #f6f6f6;
+  border: 1px solid #ddd;
+  color: #5a2dff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.see-all-btn:hover {
+  background-color: #5a2dff;
+  color: #fff;
+}
+
+/* Scrollable container with arrows */
+.appliance-scroll-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.appliance-cards {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* hide scrollbar for Firefox */
+}
+
+.appliance-cards::-webkit-scrollbar {
+  display: none; /* hide scrollbar for Chrome */
+}
+
+.appliance-card {
+  flex: 0 0 200px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.appliance-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.appliance-card p {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.appliance-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.appliance-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Arrow buttons */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.arrow-btn:hover {
+  background-color: #5a2dff;
+  color: #fff;
+}
+
+.arrow-btn.left {
+  left: -10px;
+}
+
+.arrow-btn.right {
+  right: -10px;
+}
 
