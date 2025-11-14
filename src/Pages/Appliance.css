@@ -63,9 +63,9 @@ right: 20px;
   object-fit: cover;
 }
 
-.appliance-slide :hover {
+/* .appliance-slide :hover {
     border: #000 3px solid;
-}
+} */
 
 .appliance-slide p {
   margin-top: 10px;

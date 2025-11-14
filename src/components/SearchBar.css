@@ -3,12 +3,11 @@
   border: 1px solid #ddd;
   border-radius: 1px;
   padding: 16px;
-  width: 22%;       /* let it size naturally or match parent */
-  min-width: 220px;  /* optional minimum */
+  width: 22%;       
+  min-width: 220px;  
   transition: all 0.3s ease;
-  z-index: 2000;     /* ensures overlay is on top */
+  z-index: 2000;
 }
-
 
 /* Trending list */
 .trending-list {

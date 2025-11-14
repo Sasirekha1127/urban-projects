@@ -423,19 +423,41 @@
 }
 
 @media (max-width: 480px) {
+  body, html {
+    overflow-x: hidden;
+  }
+
+  .carousel-container {
+    overflow-x: hidden;
+    width: 100%;
+    padding: 0;
+  }
+
+  .carousel-slide {
+    width: calc(100vw - 3px); 
+    flex-shrink: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
   .carousel-image {
-    height: 180px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    max-width: 100%;
   }
 
   .custom-arrow.left {
-    left: -20px;
+    left: 5px;
   }
 
   .custom-arrow.right {
-    right: -20px;
+    right: 5px;
   }
 }
-
+    /* .newnote-wrapper */
 .newnote-wrapper {
   width: 100%;
   margin: 60px auto;

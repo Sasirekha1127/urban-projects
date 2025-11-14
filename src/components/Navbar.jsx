@@ -128,7 +128,7 @@ function NavbarUC() {
           </Navbar.Collapse>
 
           {/* ---------- SEARCH + LOCATION + ICONS ---------- */}
-          <Form className="search-section d-flex align-items-center gap-2 me-4">
+          <Form className="mt-2 search-section d-flex align-items-center gap-2 me-4">
             {/* LOCATION */}
             <div
               className="d-flex align-items-center px-2 py-2 border border-secondary-subtle rounded cursor-pointer location-box"

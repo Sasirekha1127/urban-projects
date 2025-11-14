@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import { Overlay } from "react-bootstrap";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import bathroomImg from "../assets/bathroom.png"
-import doorImg from "../assets/door.png"
-import homeImg from "../assets/home.png"
+import bathroomImg from "../assets/bathroom.png";
+import doorImg from "../assets/door.png";
+import homeImg from "../assets/home.png";
 import "./SearchBar.css";
 
-export default function SearchDropdown({ target, show, handleClose,onServies }) {
+export default function SearchDropdown({ target, show, handleClose, onServices }) {
   const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState(null);
 
-  // Trending list with navigation links
   const trending = [
     {
       text: "Professional bathroom cleaning",
@@ -56,35 +55,8 @@ export default function SearchDropdown({ target, show, handleClose,onServies }) 
         },
       ],
     },
-    {
-      text: "Professional kitchen cleaning",
-      className: "trend-kitchen",
-      subServices: [
-        {
-          name: "Kitchen cleaning",
-          info: "4 services in Bathroom & Kitchen Cleaning",
-          image: "/images/kitchen.jpg",
-        },
-        {
-          name: "Sofa cleaning",
-          info: "1 service in Sofa & Carpet Cleaning",
-          image: "/images/sofa.jpg",
-        },
-        {
-          name: "Carpet cleaning",
-          info: "1 service in Sofa & Carpet Cleaning",
-          image: "/images/carpet.jpg",
-        },
-        {
-          name: "Full home deep cleaning",
-          info: "4.7 (8k) ₹899 - Full Home Deep Cleaning",
-          image: "/images/deepclean.jpg",
-        },
-      ],
-    },
   ];
 
-  //  When a main trending item clicked
   const handleItemClick = (item) => {
     if (item.text === "Salon") {
       handleClose();
@@ -94,87 +66,86 @@ export default function SearchDropdown({ target, show, handleClose,onServies }) 
     }
   };
 
-  //  When a subservice is clicked
   const handleSubServiceClick = (srv) => {
-    handleClose(); 
-    if (srv.link)
-      navigate(srv.link);
-    if(onServies){
-      onserviesSelect(srv.name);
-     //  navigate to linked page
-    }
+    handleClose();
+    if (srv.link) navigate(srv.link);
+    if (onServices) onServices(srv.name);
   };
 
   return (
     <Overlay
-  target={target}
-  show={!!show}
-  placement="bottom-start"
-  rootClose
-  onHide={() => {
-    handleClose();
-    setSelectedService(null);
-  }}
->
-  {({ placement, arrowProps, show: _show, popper, ...overlayProps }) => (
-    <div
-      ref={overlayProps.ref}          // keep overlay position working
-      style={overlayProps.style}      // apply dynamic position
-      className="search-dropdown-box"
-      data-placement={placement}
+      target={target}
+      show={!!show}
+      rootClose
+      onHide={handleClose}
+      placement={window.innerWidth < 768 ? "bottom" : "bottom-start"}
+      popperConfig={{
+        modifiers: [
+          {
+            name: "offset",
+            options: { offset: [0, 12] },
+          },
+        ],
+      }}
     >
-      {/* Header */}
-      <h6 className="fw-semibold mb-3">
-        {selectedService ? "Available services" : "Trending searches"}
-      </h6>
+      {({ placement, ...overlayProps }) => (
+        <div
+          ref={overlayProps.ref}
+          style={{
+            ...overlayProps.style,
+            width: window.innerWidth < 768 ? "100%" : "22%",
+            left: window.innerWidth < 768 ? 0 : overlayProps.style.left,
+            transform: window.innerWidth < 768 ? "none" : overlayProps.style.transform,
+            zIndex: 3000,
+          }}
+          className="search-dropdown-box"
+        >
 
-      {/* Trending List */}
-      {!selectedService && (
-        <div className="trending-list">
-          {trending.map((item, i) => (
-            <div
-              key={i}
-              className={`trending-item ${item.className}`}
-              onClick={() => handleItemClick(item)}
-            >
-              <FaArrowTrendUp className="trend-icon" />
-              <span>{item.text}</span>
+          <h6 className="fw-semibold mb-3">
+            {selectedService ? "Available services" : "Trending searches"}
+          </h6>
+
+          {!selectedService && (
+            <div className="trending-list">
+              {trending.map((item, i) => (
+                <div
+                  key={i}
+                  className={`trending-item ${item.className}`}
+                  onClick={() => handleItemClick(item)}
+                >
+                  <FaArrowTrendUp className="trend-icon" />
+                  <span>{item.text}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
+
+          {selectedService && (
+            <div className="subservice-list">
+              {selectedService.subServices.map((srv, i) => (
+                <div key={i} className="subservice-item" onClick={() => handleSubServiceClick(srv)}>
+                  <img src={srv.image} alt={srv.name} />
+                  <div>
+                    <p>
+                      <strong>{srv.name.split(" ")[0]}</strong>{" "}
+                      {srv.name.replace(srv.name.split(" ")[0], "")}
+                    </p>
+                    <span>{srv.info}</span>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                className="btn btn-outline-dark btn-sm mt-3"
+                onClick={() => setSelectedService(null)}
+              >
+                ← Back
+              </button>
+            </div>
+          )}
+
         </div>
       )}
-
-      {/* Subservices */}
-      {selectedService && (
-        <div className="subservice-list">
-          {selectedService.subServices.map((srv, i) => (
-            <div
-              key={i}
-              className="subservice-item"
-              onClick={() => handleSubServiceClick(srv)}
-            >
-              <img src={srv.image} alt={srv.name} />
-              <div>
-                <p>
-                  <strong>{srv.name.split(" ")[0]}</strong>{" "}
-                  {srv.name.replace(srv.name.split(" ")[0], "")}
-                </p>
-                <span>{srv.info}</span>
-              </div>
-            </div>
-          ))}
-
-          <button
-            className="btn btn-outline-dark btn-sm mt-3"
-            onClick={() => setSelectedService(null)}
-          >
-            ← Back
-          </button>
-        </div>
-      )}
-    </div>
-  )}
-</Overlay>
-
+    </Overlay>
   );
 }
