@@ -128,7 +128,8 @@ function NavbarUC() {
           </Navbar.Collapse>
 
           {/* ---------- SEARCH + LOCATION + ICONS ---------- */}
-          <Form className="mt-2 search-section d-flex align-items-center gap-2 me-4">
+          <Form className="mt-2 search-section d-flex gap-2 me-4">
+
             {/* LOCATION */}
             <div
               className="d-flex align-items-center px-2 py-2 border border-secondary-subtle rounded cursor-pointer location-box"
@@ -141,22 +142,24 @@ function NavbarUC() {
                 className="border-0 bg-transparent shadow-none"
                 readOnly
               />
-              <IoIosArrowDown className="ms-2 " />
+              <IoIosArrowDown className="ms-2" />
             </div>
 
             {/* SEARCH BOX */}
-            <div className="search-icons">
+            <div className="search-icons d-flex">
               <div
                 ref={searchRef}
                 className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
                 onClick={() => setShowSearch(true)}
                 style={{ cursor: "pointer" }}
               >
-                <FaSearch className="" />
+                <FaSearch />
                 <FormControl
                   type="text"
                   placeholder={
-                    `${isFocused ? 'search for service' : `search for '${placeholder}'`}`
+                    isFocused
+                      ? "search for service"
+                      : `search for '${placeholder}'`
                   }
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
@@ -165,6 +168,8 @@ function NavbarUC() {
                 />
               </div>
             </div>
+
+
 
             {/* CART + ACCOUNT ICONS */}
             <div
@@ -188,20 +193,21 @@ function NavbarUC() {
 
           </Form>
         </Container>
-      </Navbar>
+      </Navbar >
 
       {/* ---------- POPUPS ---------- */}
-      <LocationBox
+      < LocationBox
         show={showLocation}
-        handleClose={() => setShowLocation(false)}
+        handleClose={() => setShowLocation(false)
+        }
       />
-      <SearchDropdown
+      < SearchDropdown
         target={searchRef.current}
         show={showSearch}
         handleClose={() => setShowSearch(false)}
         onServices={(name) => setPlaceholder(name)}
       />
-      <LoginPopup show={showLogin} handleClose={() => setShowLogin(false)} />
+      < LoginPopup show={showLogin} handleClose={() => setShowLogin(false)} />
     </>
   );
 }

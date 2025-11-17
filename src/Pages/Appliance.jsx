@@ -21,13 +21,6 @@ import switchs from "../assets/switch.png";
 import tap from "../assets/tap.png";
 import cupboard from "../assets/cupboard.png";
 import decors from "../assets/decors.png";
-import men1 from "../assets/men1.png"
-import men2 from "../assets/men2.png"
-import hair from "../assets/hairmen.png"
-import facial from "../assets/facialmen.png"
-import pedicure from "../assets/pedicuremen.png"
-import walls3 from "../assets/walls3.png"
-
 
 // ------- Custom Arrows -------
 const NextArrow = ({ onClick }) => (
@@ -82,26 +75,7 @@ export default function ApplianceCarousel() {
     { img: fan, text: "Fan repair", rating: 4.4, reviews: "155k", price: "₹199" },
   ];
 
-  // SPA FOR MEN
-  const spaServices = [
-    {
-      title: "Stress relief",
-      img: men1,
-    },
-    {
-      title: "Pain relief",
-      img: men2,
-    },
-  ]
-
-  //  SALON FOR WOMEN
-
-  const salonServices = [
-    { img: facial, title: "Haircut" },
-    { img: hair, title: "Cleanup" },
-    { img: pedicure, title: "Pedicure" },
-  ];
-
+  
   // "Most Booked" slider
   const [currentIndex, setCurrentIndex] = useState(0);
   const visibleCount = 3; // Number of cards visible at once
@@ -181,47 +155,6 @@ export default function ApplianceCarousel() {
         </div>
       </div>
 
-
-      {/* SPA FOR MEN*/}
-
-      <div className="spa-wrapper">
-        <h2 className="spa-heading">Spa for Men</h2>
-        <p className="spa-sub">
-          Refresh. Rewind. Rejuvenate.
-        </p>
-
-        <div className="spa-cards">
-          {spaServices.map((item, index) => (
-            <div key={index} className="spa-card">
-              <img src={item.img} alt={item.title} />
-              <p className="spa-title">{item.title}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-
-      {/* WALL PANEL */}
-      <div className="wall-panel-card">
-
-        <div className="wall-panel-image">
-          <img src={walls3} alt="Wall Panels" />
-        </div>
-      </div>
-      {/* SALON FOR MEN */}
-
-      <div className="salon-wrapper">
-        <h2 className="salon-heading" >Salon for women</h2>
-
-        <div className="salon-cards">
-          {salonServices.map((item, index) => (
-            <div key={index} className="salon-card">
-              <img src={item.img} alt={item.title} />
-              <p className="salon-title">{item.title}</p>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 }

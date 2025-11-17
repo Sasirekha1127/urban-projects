@@ -1,8 +1,7 @@
 body {
-  font-family:sans-serif; /* clean modern font */
+  font-family:sans-serif; 
 }
 
-/* Let modal content position elements relative to it */
 .modal-wrapper {
   position: relative;
 }

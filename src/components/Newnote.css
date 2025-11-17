@@ -1,0 +1,144 @@
+.newnote-wrapper {
+  width: 100%;
+  margin: 60px auto;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  top: 30px;
+
+}
+
+.newnote-heading {
+  font-size: 40px;
+  margin-bottom: 40px;
+  color: #333;
+  margin-left: 30px;
+  
+}
+
+.newnote-carousel {
+  position: relative;
+  width: 98%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.newnote-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.newnote-item {
+flex: 0 0 calc(100% / 5);
+  padding: 10px;
+}
+
+.newnote-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Arrows */
+.newnote-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transition: background 0.3s ease;
+}
+
+.newnote-arrow:hover {
+  background-color: #f0f0f0;
+}
+
+.newnote-arrow.left {
+  left: 10px;
+}
+
+.newnote-arrow.right {
+  right: 10px;
+}
+.newnote-image {
+  text-align: center;
+  padding: 10px;
+}
+
+.newnote-text {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---------- RESPONSIVE: NEW & NOTEWORTHY CAROUSEL ---------- */
+
+/* Large Tablets (Below 1024px) */
+@media (max-width: 1024px) {
+  .newnote-item {
+    flex: 0 0 calc(100% / 4); /* show 4 items */
+  }
+  .newnote-item img {
+    height: 220px;
+  }
+}
+
+/* Tablets (Below 768px) */
+@media (max-width: 768px) {
+  .newnote-item {
+    flex: 0 0 calc(100% / 3); /* show 3 items */
+  }
+
+  .newnote-item img {
+    height: 200px;
+  }
+
+  .newnote-heading {
+    font-size: 20px;
+  }
+
+  .newnote-arrow {
+    padding: 10px;
+    font-size: 18px;
+  }
+}
+
+/* Mobiles (Below 576px) */
+@media (max-width: 576px) {
+  .newnote-item {
+    flex: 0 0 calc(100% / 2); /* show 2 items */
+  }
+
+  .newnote-item img {
+    height: 160px;
+  }
+
+  .newnote-heading {
+    font-size: 18px;
+  }
+
+  .newnote-arrow {
+    padding: 8px;
+    font-size: 16px;
+  }
+}
+
+/* Small Mobiles (Below 400px) */
+@media (max-width: 400px) {
+  .newnote-item {
+    flex: 0 0 100%; /* show 1 item */
+  }
+
+  .newnote-item img {
+    height: 150px;
+  }
+
+}

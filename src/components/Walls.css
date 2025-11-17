@@ -1,0 +1,59 @@
+   /* WALL PANELS */
+
+.wall-panel-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f4f0;
+  overflow: hidden;
+  margin: 50px auto;
+  width: 96%;
+  max-width: 1500px;
+  transition: transform 0.3s ease;
+  position: relative;
+  left:4px;
+}
+
+/* Image container */
+.wall-panel-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Base image style */
+.wall-panel-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.4s ease; /* smooth zoom animation */
+}
+
+.wall-panel-image:hover img {
+  transform: scale(1.02);
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 1024px) {
+  .wall-panel-card {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .wall-panel-image img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .wall-panel-card {
+    margin: 30px 0;
+    padding: 0 2%;
+  }
+
+  .wall-panel-image img { /* fixed typo here */
+    width: 100%;
+    border-radius: 10px;
+  }
+}

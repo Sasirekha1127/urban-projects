@@ -11,6 +11,16 @@ import Wallmakeover from "./Pages/Wallmakeover.jsx";
 import Sofacleaning from "./Pages/Sofacleaning.jsx";
 import Salonpackages from "./Pages/Salonpackages.jsx"
 import SalonPage from "./Pages/SalonPage.jsx";
+import CarouselPage from "./components/Carouselpage.jsx";
+import Newnote from "../src/components/Newnote.jsx"
+import Mostbook from "../src/components/Mostbook.jsx"
+import Walls from "../src/components/Walls.jsx"
+import Salon from "../src/components/Salon.jsx"
+import Wallpannel from "../src/components/Wallpannel.jsx"
+import CleaningPest from "./components/Cleaningpest.jsx";
+import Wallpannels from "../src/components/Wallpannels.jsx"
+import Salonmen from "../src/components/Salonmen.jsx"
+import Wal from "../src/components/Wal.jsx"
 
 function AppContent({ setHideNavbar, hideNavbar }) {
   const location = useLocation();
@@ -29,6 +39,17 @@ function AppContent({ setHideNavbar, hideNavbar }) {
         <Route path="/beauty" element={<Beauty setHideNavbar={setHideNavbar} />} />
         <Route path="/revamp" element={<Revamp setHideNavbar={setHideNavbar} />} />
         <Route path="/native" element={<Native setHideNavbar={setHideNavbar} />} />
+        <Route path="/carouselpage" element={<CarouselPage />} />
+        <Route path="/Newnote" element={<Newnote />} />
+        <Route path="/Mostbook" element={<Mostbook />} />
+        <Route path="/Walls" element={<Walls />} />
+        <Route path="/salon" element={<Salon />} />
+        <Route path="/Wallpannel" element={<Wallpannel />} />
+        <Route path="/Cleaningpest" element={<CleaningPest />} />
+        <Route path="/Wallpannels" element={<Wallpannels />} />
+        <Route path="/Salonmen" element={<Salonmen/>} />
+        <Route path="/Wal" element={<Wal/>} />
+
         <Route path="/bathroom-cleaning" element={<BathroomCleaning />} />
         <Route path="/wallmakeover" element={<Wallmakeover setHideNavbar={setHideNavbar} />} />
         <Route path="/sofacleaning" element={<Sofacleaning setHideNavbar={setHideNavbar} />} />

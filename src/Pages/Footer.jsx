@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  FaTwitter,
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import {FaTwitter,FaFacebookF,FaInstagram,FaLinkedinIn,} from "react-icons/fa";
 import "./Footer.css";
 import logo from "../assets/logo.png"
 import appstore from "../assets/footer1.png"
