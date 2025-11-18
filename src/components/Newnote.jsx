@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import Slider from "react-slick";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+
+// Import slick-carousel default styles
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
+import "../components/Newnote.css";
+
 import furniture from "../assets/furniture.jpg";
 import wall from "../assets/wallmakeover.jpg";
 import smartlock from "../assets/smartlocks.jpg";
 import water from "../assets/waterpurifier.png";
 import kitchcleaning from "../assets/kitchen-cleaning.jpg";
 import laptop from "../assets/laptop.jpg";
-import "../components/Newnote.css";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Newnote = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const images = [
+  const slides = [
     { img: furniture, text: "Furniture Wood Polish" },
     { img: water, text: "Native Water Purifier" },
     { img: wall, text: "Wall makeover by Rewamp" },
@@ -20,56 +25,64 @@ const Newnote = () => {
     { img: laptop, text: "Laptop" },
   ];
 
-  // How many items visible in desktop
-  const visibleCount = 3;
+  const NextArrow = ({ onClick }) => (
+    <div className="newnote-arrow right" onClick={onClick}>
+      <FaArrowRight />
+    </div>
+  );
 
-  const handleNext = () => {
-    if (currentIndex < images.length - visibleCount) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
+  const PrevArrow = ({ onClick }) => (
+    <div className="newnote-arrow left" onClick={onClick}>
+      <FaArrowLeft />
+    </div>
+  );
 
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,   // tablet view shows 3
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,   // small tablets still 3
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,   // mobile shows 1
+        slidesToScroll: 1,
+      },
+    },
+    ],
   };
 
   return (
     <div className="newnote-wrapper">
       <h2 className="newnote-heading">New & Noteworthy</h2>
-
-      <div className="newnote-carousel">
-
-        {/* Left Arrow */}
-        {currentIndex > 0 && (
-          <button className="newnote-arrow left" onClick={handlePrev}>
-            <FaArrowLeft />
-          </button>
-        )}
-
-        {/* Image Track */}
-        <div
-          className="newnote-track"
-          style={{
-            transform: `translateX(-${currentIndex * (100 / visibleCount)}%)`,
-          }}
-        >
-          {images.map((item, i) => (
-            <div key={i} className="newnote-item">
-              <img src={item.img} alt={item.text} />
-              <p className="newnote-text">{item.text}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Right Arrow */}
-        {currentIndex < images.length - visibleCount && (
-          <button className="newnote-arrow right" onClick={handleNext}>
-            <FaArrowRight />
-          </button>
-        )}
-      </div>
+      <Slider {...settings} className="newnote-slider">
+        {slides.map((slide, index) => (
+          <div key={index} className="newnote-slide">
+            <img src={slide.img} alt={slide.text} className="newnote-image" />
+            <p className="newnote-text">{slide.text}</p>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };

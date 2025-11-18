@@ -1,144 +1,116 @@
 .newnote-wrapper {
-  width: 100%;
-  margin: 60px auto;
-  font-family: "Poppins", sans-serif;
-  position: relative;
-  top: 30px;
-
+  padding: 20px;
 }
 
 .newnote-heading {
-  font-size: 40px;
-  margin-bottom: 40px;
-  color: #333;
-  margin-left: 30px;
-  
-}
-
-.newnote-carousel {
+  font-size: 2.5rem;
+  font-weight: 600;
   position: relative;
-  width: 98%;
-  margin: auto;
-  overflow: hidden;
+  top: 90px; /* REMOVE this for mobile */
+  left: 15px;
+  margin-bottom: 30px; /* controls spacing */
 }
 
-.newnote-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.newnote-item {
-flex: 0 0 calc(100% / 5);
+.newnote-slide {
   padding: 10px;
+  text-align: center;
 }
 
-.newnote-item img {
+.newnote-image {
   width: 100%;
   height: 250px;
   object-fit: cover;
   border-radius: 10px;
-}
-
-/* Arrows */
-.newnote-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-  transition: background 0.3s ease;
-}
-
-.newnote-arrow:hover {
-  background-color: #f0f0f0;
-}
-
-.newnote-arrow.left {
-  left: 10px;
-}
-
-.newnote-arrow.right {
-  right: 10px;
-}
-.newnote-image {
-  text-align: center;
-  padding: 10px;
+  margin-top: 60%;
 }
 
 .newnote-text {
-  margin-top: 20px;
   font-size: 16px;
-  font-weight: 500;
-  color: #333;
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  margin-top: 20px;
 }
 
-/* ---------- RESPONSIVE: NEW & NOTEWORTHY CAROUSEL ---------- */
-
-/* Large Tablets (Below 1024px) */
-@media (max-width: 1024px) {
-  .newnote-item {
-    flex: 0 0 calc(100% / 4); /* show 4 items */
-  }
-  .newnote-item img {
-    height: 220px;
-  }
+/* Custom arrows */
+.newnote-arrow {
+  position: absolute;
+  top: 60%;
+  transform: translateY(-50%);
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Tablets (Below 768px) */
+.newnote-arrow.left {
+  left: -15px;
+}
+
+.newnote-arrow.right {
+  right: -15px;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-  .newnote-item {
-    flex: 0 0 calc(100% / 3); /* show 3 items */
-  }
-
-  .newnote-item img {
-    height: 200px;
-  }
-
   .newnote-heading {
-    font-size: 20px;
+    font-size: 1.6rem;
+    top: 0;
+    left: 0;
+    margin-bottom: 40px;
+  }
+
+  .newnote-image {
+    height: 180px;
+    margin-top: 10px;
+  }
+
+  .newnote-text {
+    font-size: 14px;
   }
 
   .newnote-arrow {
-    padding: 10px;
-    font-size: 18px;
-  }
-}
-
-/* Mobiles (Below 576px) */
-@media (max-width: 576px) {
-  .newnote-item {
-    flex: 0 0 calc(100% / 2); /* show 2 items */
-  }
-
-  .newnote-item img {
-    height: 160px;
-  }
-
-  .newnote-heading {
-    font-size: 18px;
-  }
-
-  .newnote-arrow {
+    top: 40%; 
+    transform: translateY(-50%);
     padding: 8px;
-    font-size: 16px;
   }
+
+  .newnote-arrow.left {
+    left: 5px;
+  }
+
+  .newnote-arrow.right {
+    right: 5px;
+  }
+
 }
 
-/* Small Mobiles (Below 400px) */
-@media (max-width: 400px) {
-  .newnote-item {
-    flex: 0 0 100%; /* show 1 item */
+/* Small Mobile */
+@media (max-width: 480px) {
+   .newnote-heading {
+    font-size: 1.4rem;
+    margin-bottom: 60px;
+    top: 0;       
+    left: 0;     
+    text-align: center;
   }
 
-  .newnote-item img {
-    height: 150px;
+  .newnote-image {
+    height: 140px;  /* smaller height */
+    margin-top: 10px; /* small spacing if needed */
+    object-fit: cover; 
   }
 
+  .newnote-text {
+    font-size: 13px;
+  }
+
+  .newnote-arrow {
+    top: 40%;                /* vertically center */
+    transform: translateY(-50%); /* shift up half of its height */
+    padding: 8px;
+    
+  }
 }

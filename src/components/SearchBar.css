@@ -97,7 +97,7 @@
 
 @media (max-width: 768px) {
   .search-dropdown-box {
-    width: 60%;
+    width: 100%;
     padding: 14px;
   }
 
@@ -117,6 +117,7 @@
   .subservice-item span {
     font-size: 11px;
   }
+
 }
 
 @media (max-width: 576px) {

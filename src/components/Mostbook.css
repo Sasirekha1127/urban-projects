@@ -41,7 +41,7 @@
 }
 
 .mostbooked-item img {
-  width: 100%;
+  width: 90%;
   height: 250px;
   object-fit: cover;
   border-radius: 10px;
@@ -84,17 +84,102 @@
 
 
 /* ---------- Responsive ---------- */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .mostbooked-item {
-    flex: 0 0 calc(100% / 2); 
+    flex: 0 0 calc((100% - 30px) / 3); /* 3 items */
+  }
+  .mostbooked-item img {
+    height: 220px;
+  }
+  .mostbooked-heading {
+    font-size: 2rem;
   }
 }
 
+/* Small Tablet: 2 items */
+@media (max-width: 1024px) {
+  .mostbooked-item {
+    flex: 0 0 calc((100% - 20px) / 3);
+  }
+
+  .mostbooked-item img {
+    height: 220px;
+  }
+
+  .mostbooked-heading {
+    font-size: 2rem;
+  }
+}
+
+/* Tablet view */
+@media (max-width: 768px) {
+  .mostbooked-item {
+    flex: 0 0 calc(50% - 10px);  
+    display: flex;               
+    flex-direction: column;
+    align-items: center;         
+    text-align: center;
+    margin-bottom: 20px;         
+  }
+
+  .mostbooked-item img {
+    /* width: 100%;               */
+    height: 160px;               
+    object-fit: cover;          
+    border-radius: 10px;         
+    display: block;
+    margin-bottom: 10px;   
+  }
+
+  .mostbooked-heading {
+    font-size: 1.8rem;
+  }
+
+  .mostbooked-text {
+    font-size: 15px;             
+  }
+
+  .mostbooked-arrow {
+    top: 25%;                    
+    padding: 8px;
+  }
+}
+
+
+/* Mobile: 1 item per row */
 @media (max-width: 480px) {
   .mostbooked-item {
-    flex: 0 0 100%;
+    flex: 0 0 100%;          
+    display: flex;            
+    flex-direction: column;   
+    align-items: center;     
+    text-align: center;  
+    
   }
+
   .mostbooked-item img {
-    height: 160px;
+    width: 90%;              
+    object-fit: contain;        
+    display: block;    
+    margin-left: 50px;  
+  }
+
+  .mostbooked-heading {
+    font-size: 1.4rem;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;   
+    top: -50px;           
+    left: 0;              
+  }
+  .mostbooked-text {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .mostbooked-arrow {
+    top: 30%;
+    transform: translateY(-50%);
+    padding: 8px;
   }
 }

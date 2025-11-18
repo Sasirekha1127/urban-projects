@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../Pages/Home.css";
+
+// ------- Assets -------
 import urban from "../assets/urban.png";
 import women from "../assets/women.png";
 import cleaningImage from "../assets/cleaning.png";
@@ -7,35 +9,33 @@ import electricianImage from "../assets/electricion.png";
 import waterpurifierImage from "../assets/waterpurifier.png";
 import acImage from "../assets/ac repairs.png";
 import men from "../assets/men.png";
-import { useNavigate } from "react-router-dom";
 import customerImg from "../assets/customer.png";
 import starImg from "../assets/star.png";
+
+// ------- Libraries -------
+import { useNavigate } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// ........components........
+
+// ------- Components -------
 import ApplianceSection from "../Pages/Appliance.jsx";
 import Footer from "./Footer.jsx";
 import CarouselPage from "../components/Carouselpage.jsx";
 import Newnote from "../components/Newnote.jsx";
-import Mostbook from "../components/Mostbook.jsx"
+import Mostbook from "../components/Mostbook.jsx";
 import Walls from "../components/Walls.jsx";
 import Salon from "../components/Salon.jsx";
-import Wallpannel from "../components/Wallpannel.jsx"
+import Wallpannel from "../components/Wallpannel.jsx";
 import CleaningPest from "../components/Cleaningpest.jsx";
-import Wallpannels from "../components/Wallpannels.jsx"
-import Salonmen from "../components/Salonmen.jsx"
-
-
+import Wallpannels from "../components/Wallpannels.jsx";
+import Salonmen from "../components/Salonmen.jsx";
 
 function Home() {
   const navigate = useNavigate();
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNavigate = (path) => {
     if (path) navigate(path);
   };
-
-
 
   return (
     <>
@@ -50,10 +50,7 @@ function Home() {
             <h3>What are you looking for?</h3>
 
             <div className="service-grid">
-              <div
-                className="service-group"
-                onClick={() => handleNavigate("/salon")}
-              >
+              <div className="service-group" onClick={() => handleNavigate("/salon")}>
                 <div className="service-item1">
                   <img src={women} alt="Salon for Women" />
                 </div>
@@ -62,10 +59,7 @@ function Home() {
                 </div>
               </div>
 
-              <div
-                className="service-group"
-                onClick={() => handleNavigate("/men")}
-              >
+              <div className="service-group" onClick={() => handleNavigate("/men")}>
                 <div className="service-item1">
                   <img src={men} alt="Salon for Men" />
                 </div>
@@ -74,10 +68,7 @@ function Home() {
                 </div>
               </div>
 
-              <div
-                className="service-group"
-                onClick={() => handleNavigate("/cleaning")}
-              >
+              <div className="service-group" onClick={() => handleNavigate("/cleaning")}>
                 <div className="service-item1">
                   <img src={cleaningImage} alt="Cleaning" />
                 </div>
@@ -86,10 +77,7 @@ function Home() {
                 </div>
               </div>
 
-              <div
-                className="service-group"
-                onClick={() => handleNavigate("/electrician")}
-              >
+              <div className="service-group" onClick={() => handleNavigate("/electrician")}>
                 <div className="service-item1">
                   <img src={electricianImage} alt="Electrician" />
                 </div>
@@ -98,10 +86,7 @@ function Home() {
                 </div>
               </div>
 
-              <div
-                className="service-group"
-                onClick={() => handleNavigate("/waterpurifier")}
-              >
+              <div className="service-group" onClick={() => handleNavigate("/waterpurifier")}>
                 <div className="service-item1">
                   <img src={waterpurifierImage} alt="Purifier" />
                 </div>
@@ -110,10 +95,7 @@ function Home() {
                 </div>
               </div>
 
-              <div
-                className="service-group"
-                onClick={() => handleNavigate("/ac-repair")}
-              >
+              <div className="service-group" onClick={() => handleNavigate("/ac-repair")}>
                 <div className="service-item1">
                   <img src={acImage} alt="AC Repair" />
                 </div>
@@ -149,6 +131,8 @@ function Home() {
           </div>
         </div>
       </div>
+
+      {/* COMPONENTS */}
       <CarouselPage />
       <Newnote />
       <Mostbook />
@@ -157,7 +141,6 @@ function Home() {
       <Wallpannel />
       <CleaningPest />
       <Wallpannels />
-
       <ApplianceSection />
       <Salonmen />
       <Footer />

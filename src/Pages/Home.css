@@ -162,7 +162,6 @@
   }
 }
 
-/* Tablets & Small Screens (Below 768px) */
 /* Tablet (Below 768px) */
 @media (max-width: 768px) {
   .home-wrapper {
@@ -170,12 +169,16 @@
     align-items: center;
     text-align: center;
     padding: 40px 5%;
+    width: 100%;           
   }
 
   .home-container {
     right: 0;
     text-align: center;
     margin-bottom: 30px;
+    width: 100%;           /* ADD THIS */
+    padding: 0 10px;       /* OPTIONAL – inside spacing */
+    box-sizing: border-box;
   }
 
   .home-container h1 {
@@ -184,21 +187,28 @@
 
   .home-box {
     padding: 30px 20px;
+    width: 100%;           /* ADD THIS */
   }
 
   .service-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
+    width: 100%;           /* ADD THIS */
   }
 
   .home-image-container {
     margin-top: 20px;
     left: 0;
+    width: 100%;           
+    display: flex;
+    justify-content: center;
   }
 
-  .home-image {
-    margin: 0 auto;
-    max-width: 400px;
+   .home-image {
+    width: 100% !important;     
+    max-width: 95% !important; 
+    height: auto;  
+    margin: 0;
   }
 }
 
@@ -249,7 +259,6 @@
   gap: 20px;
 }
 
-/* Each rating box (icon + text) */
 .rating-box1 {
   display: flex;
   align-items: center;
@@ -257,13 +266,11 @@
   margin-left: 30px;
 }
 
-/* Icon style */
 .rating-icon {
   width: 20%;
   object-fit: contain;
 }
 
-/* Text beside icon */
 .rating-box1 h4 {
   font-size: 1.3rem;
   font-weight: bold;
@@ -282,6 +289,19 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+
+  .home-image-container {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .home-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
   }
 
   .ratings-section {

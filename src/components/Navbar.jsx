@@ -19,7 +19,7 @@ function NavbarUC() {
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const word = ['facial', 'Ketchen cleaning', 'AC cleaning'];
+  const word = ['facial', 'Kitchen cleaning', 'AC cleaning'];
   const [placeholder, setPlaceholder] = useState('service');
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -128,70 +128,70 @@ function NavbarUC() {
           </Navbar.Collapse>
 
           {/* ---------- SEARCH + LOCATION + ICONS ---------- */}
-          <Form className="mt-2 search-section d-flex gap-2 me-4">
+          <div className="search-wrapper w-100">
+            <Form className="mt-2 search-section d-flex gap-2">
 
-            {/* LOCATION */}
-            <div
-              className="d-flex align-items-center px-2 py-2 border border-secondary-subtle rounded cursor-pointer location-box"
-              onClick={() => setShowLocation(true)}
-            >
-              <SlLocationPin size={22} />
-              <FormControl
-                type="text"
-                placeholder="Connaught Place, New..."
-                className="border-0 bg-transparent shadow-none"
-                readOnly
-              />
-              <IoIosArrowDown className="ms-2" />
-            </div>
-
-            {/* SEARCH BOX */}
-            <div className="search-icons d-flex">
+              {/* LOCATION */}
               <div
-                ref={searchRef}
-                className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
-                onClick={() => setShowSearch(true)}
-                style={{ cursor: "pointer" }}
+                className="d-flex align-items-center px-2 py-2 border border-secondary-subtle rounded cursor-pointer location-box"
+                onClick={() => setShowLocation(true)}
               >
-                <FaSearch />
+                <SlLocationPin size={22} />
                 <FormControl
                   type="text"
-                  placeholder={
-                    isFocused
-                      ? "search for service"
-                      : `search for '${placeholder}'`
-                  }
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
-                  className="border-0 bg-transparent shadow-none cursor-pointer"
+                  placeholder="Connaught Place, New..."
+                  className="border-0 bg-transparent shadow-none"
                   readOnly
                 />
+                <IoIosArrowDown className="ms-2" />
               </div>
+
+              {/* SEARCH BOX */}
+              <div className="search-icons d-flex">
+                <div
+                  ref={searchRef}
+                  className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
+                  onClick={() => setShowSearch(true)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <FaSearch />
+                  <FormControl
+                    type="text"
+                    placeholder={
+                      isFocused
+                        ? "search for service"
+                        : `search for '${placeholder}'`
+                    }
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    className="border-0 bg-transparent shadow-none cursor-pointer"
+                    readOnly
+                  />
+                </div>
+              </div>
+
+
+
+              {/* CART + ACCOUNT ICONS */}
+              <div className="d-none d-lg-flex align-items-center ms-4 icon-wrapper">
+
+                <div
+                  className="icon-outline"
+                  onClick={() => navigate("/cart")}
+                  style={{ cursor: "pointer" }}
+                >
+                  <LuShoppingCart size={20} className="text-dark" />
+                </div>
+                <div
+                  onClick={() => setShowLogin(true)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <RiAccountCircleLine size={22} className="ms-2 text-dark" />
+                </div>
+              </div>
+
+            </Form>
             </div>
-
-
-
-            {/* CART + ACCOUNT ICONS */}
-            <div
-              className={`align-items-center ms-4 icon-wrapper ${window.innerWidth > 991 ? "d-flex" : ""
-                }`}
-            >
-              <div
-                className="icon-outline"
-                onClick={() => navigate("/cart")}
-                style={{ cursor: "pointer" }}
-              >
-                <LuShoppingCart size={20} className="text-dark" />
-              </div>
-              <div
-                onClick={() => setShowLogin(true)}
-                style={{ cursor: "pointer" }}
-              >
-                <RiAccountCircleLine size={22} className="ms-2 text-dark" />
-              </div>
-            </div>
-
-          </Form>
         </Container>
       </Navbar >
 
