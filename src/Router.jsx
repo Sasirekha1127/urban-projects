@@ -21,6 +21,7 @@ import CleaningPest from "./components/Cleaningpest.jsx";
 import Wallpannels from "../src/components/Wallpannels.jsx"
 import Salonmen from "../src/components/Salonmen.jsx"
 import Wal from "../src/components/Wal.jsx"
+import Homerepair from "../src/components/Homerepair.jsx"
 
 function AppContent({ setHideNavbar, hideNavbar }) {
   const location = useLocation();
@@ -49,6 +50,7 @@ function AppContent({ setHideNavbar, hideNavbar }) {
         <Route path="/Wallpannels" element={<Wallpannels />} />
         <Route path="/Salonmen" element={<Salonmen/>} />
         <Route path="/Wal" element={<Wal/>} />
+        <Route path="homwrepair" element={<Homerepair/>}/>
 
         <Route path="/bathroom-cleaning" element={<BathroomCleaning />} />
         <Route path="/wallmakeover" element={<Wallmakeover setHideNavbar={setHideNavbar} />} />

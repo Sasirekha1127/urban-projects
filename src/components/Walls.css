@@ -1,5 +1,6 @@
-   /* WALL PANELS */
-
+/* =========================
+   WALL PANEL CARD - DESKTOP
+   ========================= */
 .wall-panel-card {
   display: flex;
   align-items: center;
@@ -11,7 +12,8 @@
   max-width: 1500px;
   transition: transform 0.3s ease;
   position: relative;
-  left:4px;
+  left: 4px;
+  border-radius: 12px;
 }
 
 /* Image container */
@@ -22,38 +24,64 @@
   overflow: hidden;
 }
 
-/* Base image style */
+/* Image */
 .wall-panel-image img {
   width: 100%;
   height: auto;
   object-fit: cover;
-  transition: transform 0.4s ease; /* smooth zoom animation */
+  transition: transform 0.4s ease;
 }
 
 .wall-panel-image:hover img {
   transform: scale(1.02);
 }
 
-/* ---------- RESPONSIVE DESIGN ---------- */
+/* =========================
+     RESPONSIVE BREAKPOINTS
+   ========================= */
+
+/* ----- Large Tablets (≤1024px) ----- */
 @media (max-width: 1024px) {
   .wall-panel-card {
+    width: 98%;
+    margin: 40px auto;
+  }
+
+  .wall-panel-image img {
+    object-fit: cover;
+    height: auto;
+  }
+}
+
+/* ----- Tablets (≤768px) ----- */
+@media (max-width: 768px) {
+  .wall-panel-card {
     flex-direction: column;
-    padding: 20px;
+    padding: 10px;
+    width: 98%;
+    left: 0;
+  }
+
+  .wall-panel-image {
+    width: 100%;
   }
 
   .wall-panel-image img {
     width: 100%;
+    border-radius: 10px;
   }
 }
 
-@media (max-width: 600px) {
+/* ----- Small Mobile (≤480px) ----- */
+@media (max-width: 480px) {
   .wall-panel-card {
-    margin: 30px 0;
-    padding: 0 2%;
+    margin: 25px auto;
+    border-radius: 10px;
+    padding: 8px;
   }
 
-  .wall-panel-image img { /* fixed typo here */
+  .wall-panel-image img {
     width: 100%;
-    border-radius: 10px;
+    height: auto;
   }
 }

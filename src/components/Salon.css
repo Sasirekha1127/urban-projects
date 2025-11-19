@@ -61,40 +61,48 @@
 }
 
 /* ---------- RESPONSIVE BREAKPOINTS ---------- */
-
-/* Tablets (2 cards per row) */
-@media (max-width: 992px) {
-  .salon-card {
-    flex: 1 1 calc(50% - 25px);
-  }
-}
-
-/* Mobile (1 card per row) */
-@media (max-width: 600px) {
-  .salon-heading {
-    font-size: 28px;
-    text-align: center;
-  }
+  @media (max-width: 767px) {
 
   .salon-cards {
-    justify-content: center;
-    gap: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-left: 30px;
+    width: 100%;
   }
 
   .salon-card {
     flex: 1 1 100%;
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .salon-card img {
     height: 200px;
   }
 
-  .salon-title {
-    font-size: 16px;
+  .salon-heading {
     text-align: center;
+    font-size: 28px;
+    margin-left: 40px;
+  }
+
+}
+
+
+/* -----------------------------------------
+   📱 TABLET VIEW (768–1024px) → 2 cards
+------------------------------------------*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  .salon-card {
+    flex: 1 1 calc(50% - 15px);
+    max-width: calc(50% - 15px);
+  }
+
+  .salon-card img {
+    height: 210px;
   }
 }
+
 
           /* SPA SECTION */
     
@@ -168,12 +176,59 @@ right: 20px;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+
+
+/* ---------- Tablet View (2 Cards) ---------- */
+@media (max-width: 1024px) and (min-width: 768px) {
+
   .spa-cards {
     justify-content: center;
+    right: 0; 
   }
+
   .spa-card {
-    max-width: 90%;
+    flex: 1 1 calc(50% - 20px);   /* 2 per row */
+    max-width: calc(50% - 20px);
+  }
+
+  .spa-card img {
+    height: 200px;
+  }
+
+  .spa-heading,
+  .spa-sub {
+    right: 0;
   }
 }
 
+
+/* ---------- Mobile View (1 Card) ---------- */
+@media (max-width: 767px) {
+
+  .spa-cards {
+    justify-content: center;   
+    right: 0;
+  }
+
+  .spa-card {
+    flex: 1 1 100%;  
+    max-width: 100%; /* Full width card */
+  }
+
+  .spa-card img {
+    height: 180px;
+  }
+
+  .spa-heading {
+    font-size: 1.8rem;
+    text-align: center;
+    right: 0;
+    top: 20px;
+  }
+
+  .spa-sub {
+    text-align: center;
+    right: 0;
+    top: 20px;
+  }
+}

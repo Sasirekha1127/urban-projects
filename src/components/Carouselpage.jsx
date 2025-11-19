@@ -33,7 +33,7 @@ const CarouselPage = () => {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 700,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -63,6 +63,8 @@ const CarouselPage = () => {
 
   return (
     <div className="carousel-container">
+      <h2 className="carousel-heading">Offers & discounts</h2>
+
       <Slider {...settings} className="bg-red">
         {slides.map((slide, index) => (
           <div key={index} className="carousel-slide">

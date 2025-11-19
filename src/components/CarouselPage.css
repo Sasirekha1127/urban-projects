@@ -21,6 +21,15 @@
   object-fit: contain !important;
   transition: transform 0.3s ease;
 }
+.carousel-heading {
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: #222;
+  font-weight: 600;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
 
 
 /* Arrows */
@@ -64,6 +73,10 @@
   .carousel-image {
     height: 220px;
   }
+  .carousel-heading {
+    font-size: 1.8rem;
+    right: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -80,7 +93,11 @@
     object-fit: cover; 
     width: 100%;
   }
-
+.carousel-heading {
+    font-size: 1.8rem;
+    right: 0;
+    text-align: center;
+  }
   .custom-arrow {
     width: 32px;
     height: 32px;

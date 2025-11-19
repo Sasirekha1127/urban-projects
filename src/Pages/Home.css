@@ -66,23 +66,15 @@
   background: #fafafa;
   border-radius: 12px;
   transition: all 0.25s ease-in-out;
-  text-align: center;
-  padding: 25px 10px;
-  width: 80%;
-  height: 80px;
+  width: 80px;        /* square width */
+  height: 80px;       /* square height */
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  overflow: visible;
-  position: relative;
-  
-
+  overflow: hidden;
+  padding: 0;         /* remove padding */
 }
 
-/* .service-img :hover {
-  background-color: #f3f3f3;
-} */
 
 /* ----------- IMAGE ----------- */
 .service-item1 img {
@@ -116,7 +108,6 @@
   font-size: small;
   color: #333;
   line-height: 3.;
-  /* background-color: red; */
   margin-top: 20px;
 }
 
@@ -176,8 +167,8 @@
     right: 0;
     text-align: center;
     margin-bottom: 30px;
-    width: 100%;           /* ADD THIS */
-    padding: 0 10px;       /* OPTIONAL – inside spacing */
+    width: 100%;          
+    padding: 0 10px;       
     box-sizing: border-box;
   }
 
@@ -187,13 +178,13 @@
 
   .home-box {
     padding: 30px 20px;
-    width: 100%;           /* ADD THIS */
+    width: 100%;           
   }
 
   .service-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
-    width: 100%;           /* ADD THIS */
+    width: 100%;           
   }
 
   .home-image-container {
@@ -219,23 +210,19 @@
     gap: 1px;
   }
 
-  .service-item {
-    height: auto;
-    padding: 12px;
-  }
-  .service-img{
-    width: 110% !important;
-    height: 70px !important;
+  .service-item1 {
+    width: 60px;      
+    height: 60px;     
   }
 
-  .service-img img {
-    width: 75%;
-    height: 45px;
+  .service-item1 img {
+    width: 55%;
+    height: 55%;
   }
-
   .service-text p {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
+
 
   .home-container h1 {
     font-size: 1.4rem;

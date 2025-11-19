@@ -22,7 +22,7 @@ right: 20px;
 
 .appliance-header button {
   color: #6f53df;
-  border: black 1px solid;
+  border: #ede4e4 1px solid;
   padding: 10px 18px;
   border-radius: 9px;
   font-size: 14px;
@@ -54,23 +54,27 @@ right: 20px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: #ede4e4 1px solid;
+  border-radius: 10px;
+}
+.slick-slide {
+  padding: 0 10px;          
 }
 
 .appliance-image {
   width: 90%;
   height: 180px;
+  display: block;        
+  margin: 0 auto;        
+  object-fit: contain;
   border-radius: 15px;
-  object-fit: cover;
 }
-
-/* .appliance-slide :hover {
-    border: #000 3px solid;
-} */
 
 .appliance-slide p {
   margin-top: 10px;
   font-weight: 500;
   color: #333;
+  text-align: center;
 }
 
 /* ---------- Arrows ---------- */
@@ -96,67 +100,86 @@ right: 20px;
 }
 
 .appliance-arrow.right {
- right: 10px;
+ right: -10px;
 }
 
-/* ---------- Responsive ---------- */
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablet */
 @media (max-width: 1024px) {
   .appliance-wrapper {
-    padding: 40px 30px;
+    padding: 40px 20px;
+  }
+
+  .appliance-header h2 {
+    font-size: 2rem;
   }
 
   .appliance-image {
     height: 160px;
   }
+
+  .appliance-arrow.left {
+    left: -5px;
+  }
+
+  .appliance-arrow.right {
+    right: -5px;
+  }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
   .appliance-wrapper {
-    padding: 30px 20px;
-  }
-
-  .appliance-header h2 {
-    font-size: 22px;
-  }
-
-  .appliance-header button {
-    font-size: 13px;
-    padding: 6px 14px;
-  }
-
-  .appliance-image {
-    height: 140px;
-  }
-
-  .appliance-arrow {
-    width: 32px;
-    height: 32px;
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .appliance-wrapper {
-    padding: 20px 15px;
+    padding: 30px 15px;
   }
 
   .appliance-header {
+    right: 0;
     flex-direction: column;
-    align-items: flex-start;
     gap: 10px;
   }
 
   .appliance-header h2 {
-    font-size: 20px;
+    font-size: 1.8rem;
+  }
+
+  .appliance-carousel-container {
+    width: 100%;
+    right: 0;
+  }
+
+  .appliance-image {
+    height: 130px;
+  }
+
+  .appliance-slide {
+    padding: 10px;
+  }
+
+  .appliance-arrow {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .appliance-header h2 {
+    font-size: 1.6rem;
   }
 
   .appliance-image {
     height: 120px;
   }
 
+  .slick-slide {
+    padding: 0 5px;
+  }
+
   .appliance-arrow {
-    display: none; /* hide arrows for mobile swipe */
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
   }
 }
-
-

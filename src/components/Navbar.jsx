@@ -170,7 +170,7 @@ function NavbarUC() {
                 </div>
               </div>
 
-
+ 
 
               {/* CART + ACCOUNT ICONS */}
               <div className="d-none d-lg-flex align-items-center ms-4 icon-wrapper">

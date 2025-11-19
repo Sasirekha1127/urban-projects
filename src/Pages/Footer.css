@@ -1,3 +1,4 @@
+
 .footer-wrapper {
   background-color: #f8f8f8;
   padding: 40px 8%;
@@ -6,40 +7,39 @@
   margin-top: 5%;
 }
 
+
 .footer-top {
   display: flex;
   flex-direction: column;
   gap: 30px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 30px;
-  position: relative;
-  right: 50px;
 }
 
+/* Logo */
 .footer-logo img {
   width: 15%;
-  
 }
 
-
+/* Links grid */
 .footer-links {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 40px;
 }
 
+/* Heading */
 .footer-column h3 {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-
+/* List */
 .footer-column ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  margin-top: 20px;
+  margin: 20px 0 0 0;
 }
 
 .footer-column ul li {
@@ -54,6 +54,7 @@
   color: #000;
 }
 
+/* Social icons */
 .footer-social {
   display: flex;
   gap: 12px;
@@ -70,42 +71,96 @@
   color: #007bff;
 }
 
+/* App store images */
 .footer-apps img {
   width: 130px;
   margin-top: 10px;
   cursor: pointer;
 }
 
+/* ===============================
+        BOTTOM TEXT
+================================ */
 .footer-bottom {
   margin-top: 20px;
   font-size: 13px;
   color: #666;
   text-align: left;
-  line-height: 4.9;
-   padding-top: 15px;
-   position: relative;
-    right: 5%;
-    margin-bottom: 0;
+  padding-top: 15px;
+  margin-bottom: 0;
+  line-height: 1.6;
+  background-color: transparent;
 }
 
-.footer-bottom h6{
-    position: relative;
-    bottom: 30px;
-    font-size: 13px;
-    margin-bottom: 0;
+.footer-bottom h6 {
+  font-size: 13px;
+  margin: 0;
 }
-
-/* ---- Responsive ---- */
+        /* TABLET RESPONSIVE */
 @media (max-width: 768px) {
-  .footer-links {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .footer-wrapper {
     padding: 30px 6%;
   }
 
-  .footer-logo p {
-    font-size: 16px;
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .footer-column h3 {
+    font-size: 1.15rem;
+  }
+
+  .footer-column ul li {
+    font-size: 14px;
+  }
+
+  .footer-social {
+    justify-content: flex-start;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+}
+
+        /* MOBILE RESPONSIVE */
+@media (max-width: 480px) {
+  .footer-wrapper {
+    padding: 25px 5%;
+  }
+
+  .footer-logo img {
+    width: 110px;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 22px;
+  }
+
+  .footer-column h3 {
+    font-size: 1rem;
+  }
+
+  .footer-column ul li {
+    font-size: 13px;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-apps img {
+    width: 110px;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .footer-bottom h6 {
+    margin-top: 5px;
   }
 }

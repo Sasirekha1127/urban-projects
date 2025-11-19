@@ -120,42 +120,27 @@ html, body {
 }
 /* MOBILE */
 @media (max-width: 767px) {
-  .search-section {
+
+  .search-icons {
     width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important; 
-    background-color: red;
   }
 
-  .search-icons,
-  .location-box {
+  .search-box {
+    width: 100% !important;   /* THIS is the missing part */
+    height: 35px !important;
+    padding: 0 8px !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
-
-    width: 100% !important;
-    height: 35px !important;     
-    padding: 0 8px !important;   
-    margin: 0 !important;
     box-sizing: border-box !important;
   }
 
-  .search-box input,
-  .location-box input {
-    height: 100% !important;       
-    padding: 0 6px !important;    
-    border: none !important;       
-    line-height: normal !important;
-    font-size: 14px;
-    flex: 1 1 auto !important;
+  .search-box input {
+    width: 100% !important;
+    flex: 1 !important;
+    padding: 0 6px !important;
   }
-
-  .icon-outline {
-    flex-shrink: 0 !important;
-    width: 32px !important;
-    height: 32px !important;
-    margin: 0 !important;
+  .location-box{
+    height: 35px;
+    margin-top: 30px;
   }
 }
