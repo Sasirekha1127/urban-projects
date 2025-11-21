@@ -1,0 +1,66 @@
+.loading-wrapper {
+  height: 100vh;
+  width: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo */
+.uc-logo img {
+  width: 120px;         /* auto small devices */
+  max-width: 180px;     /* large screens control */
+  margin-bottom: 40px;
+}
+
+/* Loading bar container */
+.loading-bar {
+  width: 80%;           /* full responsive width */
+  max-width: 300px;     /* avoids over-stretch on big screens */
+  height: 6px;
+  background: #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Purple moving bar */
+.loading-progress {
+  height: 100%;
+  width: 35%;            /* size of animated piece */
+  background: #7e3eff;
+  animation: loadAnim 9.3s forwards;
+}
+
+/* Smooth left → right animation */
+@keyframes loadAnim {
+  0%   { transform: translateX(-150%); }
+  100% { transform: translateX(250%); }
+}
+
+/* ----------- MOBILE ----------- */
+@media (max-width: 768px) {
+
+  .uc-logo img {
+    width: 100px;
+  }
+
+  .loading-bar {
+    width: 90%;         
+    max-width: 260px;
+  }
+}
+
+/* ----------- VERY SMALL PHONES ----------- */
+@media (max-width: 480px) {
+
+  .uc-logo img {
+    width: 90px;
+  }
+
+  .loading-bar {
+    width: 92%;
+    max-width: 220px;
+  }
+}

@@ -22,6 +22,7 @@ import Wallpannels from "../src/components/Wallpannels.jsx"
 import Salonmen from "../src/components/Salonmen.jsx"
 import Wal from "../src/components/Wal.jsx"
 import Homerepair from "../src/components/Homerepair.jsx"
+import Load from "../src/components/Loading.jsx"
 
 function AppContent({ setHideNavbar, hideNavbar }) {
   const location = useLocation();
@@ -37,6 +38,7 @@ function AppContent({ setHideNavbar, hideNavbar }) {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="Load" element={<Load/>}/>
         <Route path="/beauty" element={<Beauty setHideNavbar={setHideNavbar} />} />
         <Route path="/revamp" element={<Revamp setHideNavbar={setHideNavbar} />} />
         <Route path="/native" element={<Native setHideNavbar={setHideNavbar} />} />

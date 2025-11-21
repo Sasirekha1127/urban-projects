@@ -1,5 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
+
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import "../components/carouselPage.css";
 
@@ -11,12 +13,14 @@ import carosuelImg4 from "../assets/carouselimg-4.png";
 import carosuelImg5 from "../assets/carouselimg-5.png";
 
 const CarouselPage = () => {
+    const navigate = useNavigate(); 
+
   const slides = [
-    { img: carosuelImg1, path: "/wallmakeover" },
+     { img: carosuelImg1, path: "/wallmakeover" },
     { img: carosuelImg2, path: "/sofacleaning" },
     { img: carosuelImg3, path: "/salonpackages" },
-    { img: carosuelImg4 },
-    { img: carosuelImg5 },
+    { img: carosuelImg4, path: "/otherpage" },
+    { img: carosuelImg5, path: "/otherpage2" },
   ];
 
   const NextArrow = ({ onClick }) => (
@@ -72,6 +76,9 @@ const CarouselPage = () => {
               src={slide.img}
               alt={`Slide ${index + 1}`}
               className="carousel-image"
+              onClick={() => {
+          if (slide.path) navigate(slide.path); 
+        }}
             />
           </div>
         ))}

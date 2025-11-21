@@ -1,0 +1,129 @@
+/* Overlay for the modal */
+.uc-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+/* Modal container */
+.uc-modal-content {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Close button */
+.uc-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Image section */
+.uc-modal-images {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.uc-modal-images img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Info section */
+.uc-modal-info h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.uc-modal-info p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* Quantity controls */
+.uc-quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.uc-quantity-box button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.uc-quantity-box span {
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Add button when quantity is 0 */
+.uc-add-btn {
+  margin-top: 15px;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Done button at the bottom */
+.uc-done-container {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.uc-done-btn {
+  background-color: #1e90ff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .uc-modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .uc-modal-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .uc-add-btn,
+  .uc-done-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

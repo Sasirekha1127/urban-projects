@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 // Import slick-carousel default styles
@@ -16,6 +17,8 @@ import kitchcleaning from "../assets/kitchen-cleaning.jpg";
 import laptop from "../assets/laptop.jpg";
 
 const Newnote = () => {
+  const navigate = useNavigate();
+
   const slides = [
     { img: furniture, text: "Furniture Wood Polish" },
     { img: water, text: "Native Water Purifier" },
@@ -78,7 +81,10 @@ const Newnote = () => {
       <Slider {...settings} className="newnote-slider">
         {slides.map((slide, index) => (
           <div key={index} className="newnote-slide">
-            <img src={slide.img} alt={slide.text} className="newnote-image" />
+            <img src={slide.img} alt={slide.text} className="newnote-image"
+            onClick={() => {
+              if(slide.path) navigate(slide.path);
+            }} />
             <p className="newnote-text">{slide.text}</p>
           </div>
         ))}

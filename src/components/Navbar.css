@@ -52,11 +52,6 @@ html, body {
   max-width: 100%;
   overflow-x: hidden !important;
 }
-
-
-/* .search-box{
-  min-width: 280px;
-} */
 .search-section {
   display: flex;
   flex-direction: row;

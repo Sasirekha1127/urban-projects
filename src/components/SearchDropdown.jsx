@@ -74,32 +74,34 @@ export default function SearchDropdown({ target, show, handleClose, onServices }
 
   return (
     <Overlay
-      target={target}
-      show={!!show}
-      rootClose
-      onHide={handleClose}
-      placement={window.innerWidth < 768 ? "bottom" : "bottom-start"}
-      popperConfig={{
-        modifiers: [
-          {
-            name: "offset",
-            options: { offset: [0, 12] },
-          },
-        ],
-      }}
-    >
-      {({ placement, ...overlayProps }) => (
-        <div
-          ref={overlayProps.ref}
-          style={{
-            ...overlayProps.style,
-            width: window.innerWidth < 768 ? "100%" : "22%",
-            left: window.innerWidth < 768 ? 0 : overlayProps.style.left,
-            transform: window.innerWidth < 768 ? "none" : overlayProps.style.transform,
-            zIndex: 3000,
-          }}
-          className="search-dropdown-box"
-        >
+  target={target}
+  show={!!show}
+  rootClose
+  onHide={handleClose}
+  placement={window.innerWidth < 768 ? "bottom" : "bottom-start"}
+  container={document.body}
+>
+  {({ placement, ...overlayProps }) => {
+    const targetWidth = target?.getBoundingClientRect()?.width || 0;
+
+    return (
+      <div
+        ref={overlayProps.ref}
+        style={{
+          ...overlayProps.style,
+          position: "absolute",
+
+          width: window.innerWidth < 768 ? targetWidth + "px" : "320px",
+
+          left: overlayProps.style.left,
+          top: overlayProps.style.top,
+          transform: overlayProps.style.transform,
+
+          zIndex: 3000,
+        }}
+        className="search-dropdown-box"
+      >
+
 
           <h6 className="fw-semibold mb-3">
             {selectedService ? "Available services" : "Trending searches"}
@@ -145,7 +147,7 @@ export default function SearchDropdown({ target, show, handleClose, onServices }
           )}
 
         </div>
-      )}
+      )}}
     </Overlay>
   );
 }

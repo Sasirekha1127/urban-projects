@@ -22,8 +22,13 @@
   object-fit: cover;
   border-radius: 10px;
   margin-top: 60%;
+  cursor: pointer;
+  outline: none !important; 
+  border: none !important;
 }
-
+.newnote-slide:focus {
+  outline: none !important;   
+}
 .newnote-text {
   font-size: 16px;
   font-weight: 600;
@@ -61,6 +66,7 @@
     left: 0;
     margin-top: 20px;
   }
+  
 
   .newnote-image {
     height: 180px;
