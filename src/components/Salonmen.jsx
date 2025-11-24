@@ -38,7 +38,7 @@ const SpaSalon = () => {
       </div>
       <Wal/>
 
-      {/* Salon for Women */}
+      {/* Salon for men */}
       <div className="spa-wrapper">
         <h2 className="spa-heading">Salon for Men</h2>
 

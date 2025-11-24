@@ -102,7 +102,7 @@ html, body {
     width: 100% !important;
     max-width: 100% !important; 
     box-sizing: border-box;
-    background-color: red;
+    /* background-color: red; */
   }
 
   .container-fluid {

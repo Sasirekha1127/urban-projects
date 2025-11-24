@@ -68,9 +68,6 @@ function BathroomCleaning() {
     setIsPlaying(!isPlaying);
   };
 
-
-
-
   const offers = [
     { id: 1, title: "Mobikwik cashback up to ₹250", desc: "Via Mobikwik UPI Payment" },
     { id: 2, title: "Amazon cashback up to ₹125", desc: "Via Amazon Pay balance" },
@@ -85,7 +82,7 @@ function BathroomCleaning() {
       {/* ---------- LEFT SIDE ---------- */}
       <div className="bathroom-left">
         <h2 className="bathroom-title">
-          Bathroom &<br /> Kitchen Cleaning
+          Bathroom &<br /> Kitchen Cleaning 
         </h2>
 
         <div className="rating-box">
@@ -93,13 +90,13 @@ function BathroomCleaning() {
           <span>4.78 (8.6 M bookings)</span>
         </div>
 
-        <div className="service-container">
-          <div className="service-heading-wrapper">
-            <h5 className="service-heading">Select a service</h5>
-            <div className="heading-line"></div>
+        <div className="service-container"> 
+          <div className="service-heading-wrapper"> 
+            <h5 className="service-heading">Select a service</h5> 
+            <div className="heading-line"></div> 
           </div>
 
-          <div className="service-list">
+          <div className="service-list"> 
             {[
               { id: "combos", img: comboIcon, name: "Combos" },
               { id: "bathroom", img: bathroomIcon, name: "Bathroom cleaning" },
@@ -120,11 +117,11 @@ function BathroomCleaning() {
       </div>
 
       {/* ---------- RIGHT SIDE ---------- */}
-      <div className="bathroom-right">
-        <div className="video-box">
+      <div className="bathroom-right"> 
+        <div className="video-box"> 
           <video ref={videoRef} onClick={handleVideoClick} loop muted playsInline>
-            <source src={bathroomVideo} type="video/mp4" />
-          </video>
+            <source src={bathroomVideo} type="video/mp4" /> 
+          </video> 
         </div>
 
         <div className="bottom-section">

@@ -39,3 +39,131 @@
     transform: scale(1);
   }
 }
+.hair-wrapper {
+  margin-top: 40px;
+  padding: 0 5%;
+}
+
+/* ---------------- HEADING ---------------- */
+.hair-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.hair-main-heading {
+  font-size: 32px;
+  font-weight: 700;
+  color: #222;
+}
+
+.hair-sub-heading {
+  font-size: 15px;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* See All Button */
+.seeall-btn {
+  background: transparent;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0057ff;
+  cursor: pointer;
+  border: #777 1px solid;
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+.seeall-btn:hover {
+  background: #e4e4e4;
+}
+
+/* ---------------- GRID ---------------- */
+.hair-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Desktop */
+  gap: 20px;
+}
+
+/* ---------------- CARD ---------------- */
+.hair-card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 14px;
+  transition: 0.2s ease;
+}
+
+.hair-card img {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.hair-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 9px;
+}
+
+.hair-rating {
+  font-size: 14px;
+  color: #777;
+  margin-top: 4px;
+}
+
+.hair-price {
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablets - 3 Columns */
+@media (max-width: 992px) {
+  .hair-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hair-main-heading {
+    font-size: 28px;
+  }
+}
+
+/* Large Mobile - 2 Columns */
+@media (max-width: 768px) {
+  .hair-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .seeall-btn {
+    margin-left: 0;
+  }
+
+  .hair-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hair-card img {
+    height: 160px;
+  }
+}
+
+/* Small Mobile - 1 Column */
+@media (max-width: 480px) {
+  .hair-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .hair-main-heading {
+    font-size: 24px;
+  }
+
+  .hair-card img {
+    height: 150px;
+  }
+}
