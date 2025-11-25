@@ -68,6 +68,7 @@ function NavbarUC() {
           <Navbar
             bg="white"
             expand="lg"
+            fixed="top"
             className="border-bottom navbar-tall py-3"
           >
             <Container fluid className="px-4">

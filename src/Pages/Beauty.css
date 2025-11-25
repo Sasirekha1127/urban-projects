@@ -118,6 +118,32 @@
   font-weight: 700;
   margin-top: 6px;
 }
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+   height: 50vh;
+  width: 100%;
+}
+
+/* Loader dots */
+.dot {
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  border-radius: 50%;
+  background-color: #6a1b9a;
+  animation: bounce 0.6s infinite alternate;
+}
+
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  from { transform: translateY(0); opacity: 0.8; }
+  to { transform: translateY(-12px); opacity: 1; }
+}
 
 /* ---------------- RESPONSIVE ---------------- */
 

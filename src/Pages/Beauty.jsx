@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import "./Beauty.css";
-import Footer from "../pages/footer.jsx";
+import Footer from "./footer.jsx";
 
 import salon from "../assets/beauty1.png";
 import beauty2 from "../assets/beauty2.png";

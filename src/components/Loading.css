@@ -10,15 +10,15 @@
 
 /* Logo */
 .uc-logo img {
-  width: 120px;         /* auto small devices */
-  max-width: 180px;     /* large screens control */
+  width: 120px;         
+  max-width: 180px;    
   margin-bottom: 40px;
 }
 
 /* Loading bar container */
 .loading-bar {
-  width: 80%;           /* full responsive width */
-  max-width: 300px;     /* avoids over-stretch on big screens */
+  width: 80%;           
+  max-width: 300px;     
   height: 6px;
   background: #eee;
   border-radius: 8px;

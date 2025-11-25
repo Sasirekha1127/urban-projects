@@ -27,27 +27,14 @@ function BathroomCleaning() {
   const [showMoreOffers, setShowMoreOffers] = useState(false);
   const [activeService, setActiveService] = useState("bathroom");
 
-  const handleAdd = (serviceName) => {
-    const serviceDetails = {
-      title: serviceName,
-      // beforeImg: "/assets/before.jpg", // replace with correct path
-      // afterImg: "/assets/after.jpg",   // replace with correct path
-      rating: "4.79",
-      reviews: "3.5M reviews",
-      price: "950",
-      duration: "2 hrs 40 mins",
-      offer: "475",
-    };
-    setSelectedService(serviceDetails);
+  const handleAdd = (serviceDetails) => {
+    setSelectedService({
+      ...serviceDetails,
+      quantity: 1,
+    });
   };
 
   const closeModal = () => setSelectedService(null);
-
-
-
-
-
-
   // scroll to section
   const handleServiceClick = (service) => {
     setActiveService(service);
@@ -82,7 +69,7 @@ function BathroomCleaning() {
       {/* ---------- LEFT SIDE ---------- */}
       <div className="bathroom-left">
         <h2 className="bathroom-title">
-          Bathroom &<br /> Kitchen Cleaning 
+          Bathroom &<br /> Kitchen Cleaning
         </h2>
 
         <div className="rating-box">
@@ -90,13 +77,13 @@ function BathroomCleaning() {
           <span>4.78 (8.6 M bookings)</span>
         </div>
 
-        <div className="service-container"> 
-          <div className="service-heading-wrapper"> 
-            <h5 className="service-heading">Select a service</h5> 
-            <div className="heading-line"></div> 
+        <div className="service-container">
+          <div className="service-heading-wrapper">
+            <h5 className="service-heading">Select a service</h5>
+            <div className="heading-line"></div>
           </div>
 
-          <div className="service-list"> 
+          <div className="service-list">
             {[
               { id: "combos", img: comboIcon, name: "Combos" },
               { id: "bathroom", img: bathroomIcon, name: "Bathroom cleaning" },
@@ -117,11 +104,11 @@ function BathroomCleaning() {
       </div>
 
       {/* ---------- RIGHT SIDE ---------- */}
-      <div className="bathroom-right"> 
-        <div className="video-box"> 
+      <div className="bathroom-right">
+        <div className="video-box">
           <video ref={videoRef} onClick={handleVideoClick} loop muted playsInline>
-            <source src={bathroomVideo} type="video/mp4" /> 
-          </video> 
+            <source src={bathroomVideo} type="video/mp4" />
+          </video>
         </div>
 
         <div className="bottom-section">
@@ -139,39 +126,61 @@ function BathroomCleaning() {
                   {cartItems.find((item) => item.title === "Classic cleaning (2 bathrooms)") ? (
                     <div className="uc-quantity-box">
                       <button
+                        className="add-btn"
                         onClick={() =>
-                          setCartItems((prev) =>
-                            prev.map((item) =>
-                              item.title === "Classic cleaning (2 bathrooms)"
-                                ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
-                                : item
-                            )
-                          )
+                          handleAdd({
+                            title: "Classic cleaning (2 bathrooms)",
+                            rating: "4.82",
+                            reviews: "1.5M reviews",
+                            price: "868",
+                            duration: "2 hrs",
+                            offer: "434",        // optional
+                            beforeafter: beforeafter
+                          })
                         }
                       >
-                        −
+                        Add
                       </button>
+
                       <span>
-                        {cartItems.find((item) => item.title === "Classic cleaning (2 bathrooms)")?.quantity}
+                        {cartItems.find((item) => item.title === "Classic cleaning (3 bathrooms)")?.quantity}
                       </span>
                       <button
+                        className="add-btn"
                         onClick={() =>
-                          setCartItems((prev) =>
-                            prev.map((item) =>
-                              item.title === "Classic cleaning (2 bathrooms)"
-                                ? { ...item, quantity: item.quantity + 1 }
-                                : item
-                            )
-                          )
+                          handleAdd({
+                            title: "Intense cleaning (3 bathrooms)",
+                            rating: "4.79",
+                            reviews: "1.2M reviews",
+                            price: "1268",
+                            duration: "3 hrs",
+                            offer: "634",
+                            beforeafter: beforeafter
+                          })
                         }
                       >
-                        +
+                        Add
                       </button>
+
                     </div>
                   ) : (
-                    <button className="add-btn" onClick={() => handleAdd("Classic cleaning (2 bathrooms)")}>
+                    <button
+                      className="add-btn"
+                      onClick={() =>
+                        handleAdd({
+                          title: "Classic cleaning (2 bathrooms)",
+                          rating: "4.82",
+                          reviews: "1.5M reviews",
+                          price: "868",
+                          duration: "2 hrs",
+                          offer: "434",
+                          beforeafter: beforeafter
+                        })
+                      }
+                    >
                       Add
                     </button>
+
                   )}
 
                 </div>
@@ -189,39 +198,61 @@ function BathroomCleaning() {
                   {cartItems.find((item) => item.title === "Classic cleaning (2 bathrooms)") ? (
                     <div className="uc-quantity-box">
                       <button
+                        className="add-btn"
                         onClick={() =>
-                          setCartItems((prev) =>
-                            prev.map((item) =>
-                              item.title === "Classic cleaning (2 bathrooms)"
-                                ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
-                                : item
-                            )
-                          )
+                          handleAdd({
+                            title: "Classic cleaning (2 bathrooms)",
+                            rating: "4.82",
+                            reviews: "1.5M reviews",
+                            price: "868",
+                            duration: "2 hrs",
+                            offer: "434",
+                            beforeafter: beforeafter
+                          })
                         }
                       >
-                        −
+                        Add
                       </button>
+
                       <span>
                         {cartItems.find((item) => item.title === "Classic cleaning (3 bathrooms)")?.quantity}
                       </span>
                       <button
+                        className="add-btn"
                         onClick={() =>
-                          setCartItems((prev) =>
-                            prev.map((item) =>
-                              item.title === "Classic cleaning (3 bathrooms)"
-                                ? { ...item, quantity: item.quantity + 1 }
-                                : item
-                            )
-                          )
+                          handleAdd({
+                            title: "Classic cleaning (3 bathrooms)",
+                            rating: "4.79",
+                            reviews: "1.2M reviews",
+                            price: "1268",
+                            duration: "3 hrs",
+                            offer: "634",
+                            beforeafter: beforeafter
+                          })
                         }
                       >
-                        ＋
+                        Add
                       </button>
+
                     </div>
                   ) : (
-                    <button className="add-btn" onClick={() => handleAdd("Classic cleaning (3 bathrooms)")}>
+                    <button
+                      className="add-btn"
+                      onClick={() =>
+                        handleAdd({
+                          title: "Classic cleaning (3 bathrooms)",
+                          rating: "4.79",
+                          reviews: "1.2M reviews",
+                          price: "1268",
+                          duration: "3 hrs",
+                          offer: "634",
+                          beforeafter: beforeafter
+                        })
+                      }
+                    >
                       Add
                     </button>
+
                   )}
 
                 </div>
@@ -235,7 +266,6 @@ function BathroomCleaning() {
               {/* Bathroom Cleaning Section */}
               <div className="bathroom-cleaning-section" ref={bathroomRef}>
                 <h3 className="bathroom-cleaning-heading">Bathroom cleaning</h3>
-
                 <div className="bathroom-cards">
                   <div className="bathroom-card">
                     <div className="bathroom-left-info">
@@ -252,15 +282,26 @@ function BathroomCleaning() {
 
                     <div className="bathroom-right-img">
                       <img src={intense} alt="Intense Bathroom" />
-                      <button className="add-btn2" onClick={() => handleAdd("Intense bathroom cleaning")}>
+                      <button
+                        className="add-btn2"
+                        onClick={() =>
+                          handleAdd({
+                            title: "Intense bathroom cleaning",
+                            rating: "4.79",
+                            reviews: "4.2M reviews",
+                            price: "549",
+                            duration: "1 hr 20 mins",
+                            offer: "275",
+                            beforeafter: beforeafter
+                          })
+                        }
+                      >
                         Add
                       </button>
+
                     </div>
                   </div>
-
                   <hr />
-
-
                 </div>
               </div>
             </div>
@@ -326,8 +367,9 @@ function BathroomCleaning() {
 
             {/* ---- IMAGE SECTION ---- */}
             <div className="uc-modal-images">
-              <img src={beforeafter} alt="Before & After" />
+              <img src={selectedService.beforeafter} alt="Before & After" />
             </div>
+
 
             {/* ---- INFO SECTION ---- */}
             <div className="uc-modal-info">
@@ -408,8 +450,6 @@ function BathroomCleaning() {
           </div>
         </div>
       )}
-
-
     </div>
   );
 }
