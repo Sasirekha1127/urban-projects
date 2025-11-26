@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+// Router.jsx
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+
 import NavbarUC from "./components/Navbar.jsx";
 import CartPage from "./Pages/CardPage.jsx";
 import Beauty from "./Pages/Beauty.jsx";
@@ -9,39 +11,83 @@ import Home from "./Pages/Home.jsx";
 import BathroomCleaning from "./Pages/BathroomCleaning.jsx";
 import Wallmakeover from "./Pages/Wallmakeover.jsx";
 import Sofacleaning from "./Pages/Sofacleaning.jsx";
-import Salonpackages from "./Pages/Salonpackages.jsx"
+import Salonpackages from "./Pages/Salonpackages.jsx";
 import SalonPage from "./Pages/SalonPage.jsx";
 import CarouselPage from "./components/Carouselpage.jsx";
-import Newnote from "../src/components/Newnote.jsx"
-import Mostbook from "../src/components/Mostbook.jsx"
-import Walls from "../src/components/Walls.jsx"
-import Salon from "../src/components/Salon.jsx"
-import Wallpannel from "../src/components/Wallpannel.jsx"
+import Newnote from "./components/Newnote.jsx";
+import Mostbook from "./components/Mostbook.jsx";
+import Walls from "./components/Walls.jsx";
+import Salon from "./components/Salon.jsx";
+import Wallpannel from "./components/Wallpannel.jsx";
 import CleaningPest from "./components/Cleaningpest.jsx";
-import Wallpannels from "../src/components/Wallpannels.jsx"
-import Salonmen from "../src/components/Salonmen.jsx"
-import Wal from "../src/components/Wal.jsx"
-import Homerepair from "../src/components/Homerepair.jsx"
-import Load from "../src/components/Loading.jsx"
+import Wallpannels from "./components/Wallpannels.jsx";
+import Salonmen from "./components/Salonmen.jsx";
+import Wal from "./components/Wal.jsx";
+import Homerepair from "./components/Homerepair.jsx";
+import Load from "./components/Loading.jsx";
 
-function AppContent({ setHideNavbar, hideNavbar }) {
+export default function AppContent({ setHideNavbar, hideNavbar, hideSearch, setHideSearch }) {
   const location = useLocation();
 
-  // Pages where Navbar should always be hidden
-  const alwaysHideRoutes = ["/cart"];
-  const shouldHideNavbar = alwaysHideRoutes.includes(location.pathname) || hideNavbar;
+  // pages where search box should hide
+  const hideSearchRoutes = ["/beauty", "/native", "/revamp"];
+
+  // pages where navbar should hide completely
+  const alwaysHideNavbarRoutes = ["/cart"];
+
+  useEffect(() => {
+  setHideSearch(hideSearchRoutes.includes(location.pathname));
+  setHideNavbar(alwaysHideNavbarRoutes.includes(location.pathname));
+}, [location.pathname, setHideSearch, setHideNavbar]);
+
+
+
+  const shouldHideNavbar =
+    alwaysHideNavbarRoutes.includes(location.pathname) || hideNavbar;
 
   return (
     <>
-      {/* Show Navbar only if allowed */}
-      {!shouldHideNavbar && <NavbarUC />}
+      {/* NAVBAR - show only when allowed */}
+      {!shouldHideNavbar && <NavbarUC hideSearch={hideSearch} />}
 
+      {/* ROUTES */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="Load" element={<Load/>}/>
-        <Route path="/beauty" element={<Beauty setHideNavbar={setHideNavbar} />} />
-        <Route path="/revamp" element={<Revamp setHideNavbar={setHideNavbar} />} />
-        <Route path="/native" element={<Native setHideNavbar={setHideNavbar} />} />
+        <Route path="/Load" element={<Load />} />
+
+        {/* BEAUTY */}
+        <Route
+          path="/beauty"
+          element={
+            <Beauty
+              setHideNavbar={setHideNavbar}
+              setHideSearch={setHideSearch}
+            />
+          }
+        />
+
+        {/* REVAMP */}
+        <Route
+          path="/revamp"
+          element={
+            <Revamp
+              setHideNavbar={setHideNavbar}
+              setHideSearch={setHideSearch}
+            />
+          }
+        />
+
+        {/* NATIVE */}
+        <Route
+          path="/native"
+          element={
+            <Native
+              setHideNavbar={setHideNavbar}
+              setHideSearch={setHideSearch}
+            />
+          }
+        />
+
         <Route path="/carouselpage" element={<CarouselPage />} />
         <Route path="/Newnote" element={<Newnote />} />
         <Route path="/Mostbook" element={<Mostbook />} />
@@ -50,28 +96,17 @@ function AppContent({ setHideNavbar, hideNavbar }) {
         <Route path="/Wallpannel" element={<Wallpannel />} />
         <Route path="/Cleaningpest" element={<CleaningPest />} />
         <Route path="/Wallpannels" element={<Wallpannels />} />
-        <Route path="/Salonmen" element={<Salonmen/>} />
-        <Route path="/Wal" element={<Wal/>} />
-        <Route path="homwrepair" element={<Homerepair/>}/>
+        <Route path="/Salonmen" element={<Salonmen />} />
+        <Route path="/Wal" element={<Wal />} />
+        <Route path="/homerepair" element={<Homerepair />} />
 
         <Route path="/bathroom-cleaning" element={<BathroomCleaning />} />
         <Route path="/wallmakeover" element={<Wallmakeover setHideNavbar={setHideNavbar} />} />
-        <Route path="/sofacleaning" element={<Sofacleaning setHideNavbar={setHideNavbar} />} />
         <Route path="/sofacleaning" element={<Sofacleaning setHideNavbar={setHideNavbar} />} />
         <Route path="/salonpackages" element={<Salonpackages setHideNavbar={setHideNavbar} />} />
         <Route path="/salon" element={<SalonPage />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
     </>
-  );
-}
-
-export default function App() {
-  const [hideNavbar, setHideNavbar] = useState(false);
-
-  return (
-    <Router>
-      <AppContent setHideNavbar={setHideNavbar} hideNavbar={hideNavbar} />
-    </Router>
   );
 }

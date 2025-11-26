@@ -1,10 +1,15 @@
-
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 .footer-wrapper {
   background-color: #f8f8f8;
-  padding: 40px 8%;
+  padding: 30px 4%;
   font-family: "Poppins", sans-serif;
   color: #333;
-  margin-top: 5%;
+  /* margin-top: 3%; */
 }
 
 
@@ -18,7 +23,8 @@
 
 /* Logo */
 .footer-logo img {
-  width: 15%;
+  width: 14%;
+  margin-top: 30px;
 }
 
 /* Links grid */
@@ -76,11 +82,12 @@
   width: 130px;
   margin-top: 10px;
   cursor: pointer;
+  display: flex;
 }
 
-/* ===============================
+/* 
         BOTTOM TEXT
-================================ */
+ */
 .footer-bottom {
   margin-top: 20px;
   font-size: 13px;

@@ -15,7 +15,7 @@ import Loading from "../components/Loading.jsx";
 import logo from "../assets/logo.png";
 import "./navbar.css";
 
-function NavbarUC() {
+function NavbarUC({ hideSearch }) {
   const [showLocation, setShowLocation] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -115,8 +115,7 @@ function NavbarUC() {
                   <NavLink
                     to="/beauty"
                     className={({ isActive }) =>
-                      `text-secondary nav-link-small ${
-                        isActive ? "active-link" : ""
+                      `text-secondary nav-link-small ${isActive ? "active-link" : ""
                       }`
                     }
                   >
@@ -126,8 +125,7 @@ function NavbarUC() {
                   <NavLink
                     to="/revamp"
                     className={({ isActive }) =>
-                      `text-secondary nav-link-small ${
-                        isActive ? "active-link" : ""
+                      `text-secondary nav-link-small ${isActive ? "active-link" : ""
                       }`
                     }
                   >
@@ -137,8 +135,7 @@ function NavbarUC() {
                   <NavLink
                     to="/native"
                     className={({ isActive }) =>
-                      `text-secondary nav-link-small ${
-                        isActive ? "active-link" : ""
+                      `text-secondary nav-link-small ${isActive ? "active-link" : ""
                       }`
                     }
                   >
@@ -166,28 +163,30 @@ function NavbarUC() {
                   </div>
 
                   {/* SEARCH BOX */}
-                  <div className="search-icons d-flex">
-                    <div
-                      ref={searchRef}
-                      className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
-                      onClick={() => setShowSearch(true)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <FaSearch />
-                      <FormControl
-                        type="text"
-                        placeholder={
-                          isFocused
-                            ? "Search for service"
-                            : `Search for '${placeholder}'`
-                        }
-                        onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
-                        className="border-0 bg-transparent shadow-none cursor-pointer"
-                        readOnly
-                      />
+                  {!hideSearch && (
+                    <div className="search-icons d-flex">
+                      <div
+                        ref={searchRef}
+                        className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
+                        onClick={() => setShowSearch(true)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <FaSearch />
+                        <FormControl
+                          type="text"
+                          placeholder={
+                            isFocused
+                              ? "Search for service"
+                              : `Search for '${placeholder}'`
+                          }
+                          onFocus={() => setIsFocused(true)}
+                          onBlur={() => setIsFocused(false)}
+                          className="border-0 bg-transparent shadow-none cursor-pointer"
+                          readOnly
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* CART + ACCOUNT ICONS */}
                   <div className="d-none d-lg-flex align-items-center ms-auto icon-wrapper">

@@ -32,6 +32,7 @@ const carouselSlides = [
   { img: nativecarousel5, path: "/" },
   { img: nativecarousel6, path: "/" },
 ];
+
 const carouselSlides2 = [
   { img: nativecaro1, path: "/" },
   { img: nativecaro2, path: "/" },
@@ -40,9 +41,6 @@ const carouselSlides2 = [
   { img: nativecaro5, path: "/" },
   { img: nativecaro6, path: "/" },
 ];
-
-
-
 
 const NextArrow = ({ onClick }) => (
   <div className="custom-arrow right" onClick={onClick}>
@@ -62,35 +60,32 @@ const settings = {
   speed: 700,
   slidesToShow: 3,
   slidesToScroll: 3,
-  autoplay: true,
-  autoplaySpeed: 2500,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />,
   responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 3 } },
-    { breakpoint: 768, settings: { slidesToShow: 1 } },
+    { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3 } },
+    { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } },
   ],
 };
 
-export default function Native({ setHideNavbar }) {
+//  component
+export default function Native({ setHideNavbar, setHideSearch }) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setHideNavbar(true);
+ useEffect(() => {
+  setHideNavbar(true); 
+  const timer = setTimeout(() => {
+    setLoading(false);
+    setHideNavbar(false); 
+  }, 2000);
+  return () => clearTimeout(timer);
+}, [setHideNavbar]);
 
-    const timer = setTimeout(() => {
-      setLoading(false);
-      setHideNavbar(false);
-    }, 2000);
 
-    return () => clearTimeout(timer);
-  }, [setHideNavbar]);
 
   return (
     <div className="native-page">
-
-      {/* FULL SCREEN CENTER SPINNER */}
       {loading && (
         <div className="native-loading-overlay">
           <div className="spinner">
@@ -103,17 +98,14 @@ export default function Native({ setHideNavbar }) {
 
       {!loading && (
         <>
-          {/* Wall Panel Section */}
-          <div className="wall-panel-card">
+          <div className="wall-panel-card wall">
             <div className="wall-panel-image">
               <img src={nativewall1} alt="Wall Panels" />
             </div>
           </div>
 
-          {/* Carousel Section */}
           <div className="native-carousel-wrapper">
             <h2 className="native-carousel-title">Best-in-class Features</h2>
-
             <Slider {...settings}>
               {carouselSlides.map((slide, index) => (
                 <div key={index} className="native-carousel-slide">
@@ -128,14 +120,12 @@ export default function Native({ setHideNavbar }) {
             </Slider>
           </div>
 
-          {/* wall pannel */}
           <div className="wall-panel-card">
             <div className="wall-panel-image">
               <img src={nativewall2} alt="Wall Panels" />
             </div>
           </div>
 
-          {/* Carousel Section */}
           <div className="native-carousel-wrapper">
             <h2 className="native-carousel-title">Explore More</h2>
             <Slider {...settings}>
@@ -151,13 +141,14 @@ export default function Native({ setHideNavbar }) {
               ))}
             </Slider>
           </div>
-          {/* wall pannel */}
+
           <div className="wall-panel-card">
             <div className="wall-panel-image">
               <img src={nativewall3} alt="Wall Panels" />
             </div>
           </div>
-          <Footer/>
+
+          <Footer />
         </>
       )}
     </div>

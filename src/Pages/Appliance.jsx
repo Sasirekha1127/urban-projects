@@ -50,7 +50,7 @@ export default function ApplianceCarousel() {
     speed: 700,
     slidesToShow: 5,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2500,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,

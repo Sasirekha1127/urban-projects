@@ -1,6 +1,12 @@
 // src/Pages/Walldecoration.jsx
 import React, { useEffect, useState } from "react";
-import "./Wallmakeover.css"; // you can keep this or make a separate WallDecoration.css
+import "./Wallmakeover.css"; 
+
+import innerwall1 from "../assets/innerwall1.png";
+import innerwall2 from "../assets/innerwall2.png";
+import innerwall3 from "../assets/innerwall3.png";
+
+const wallImages = [innerwall1, innerwall2, innerwall3];
 
 export default function WallDecoration({ setHideNavbar }) {
   const [loading, setLoading] = useState(true);
@@ -23,7 +29,16 @@ export default function WallDecoration({ setHideNavbar }) {
           <div className="dot"></div>
         </div>
       ) : (
-        <h1>Welcome to Wall Decoration Page</h1>
+        <div className="wall-content">
+          <h2 className="wall-heading">Wall Decoration Ideas</h2>
+          <div className="wall-images">
+            {wallImages.map((img, index) => (
+              <div key={index} className="wall-image-card">
+                <img src={img} alt={`Wall ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

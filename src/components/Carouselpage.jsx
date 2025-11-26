@@ -41,7 +41,7 @@ const CarouselPage = () => {
     speed: 700,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2500,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
