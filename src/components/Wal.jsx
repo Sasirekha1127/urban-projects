@@ -1,5 +1,5 @@
 import walls3 from "../assets/walls3.png";
-import "./walls.css";   
+import "../components/Walls.css";   
 
 
 const WallPanel = () => {

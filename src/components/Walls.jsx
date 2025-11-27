@@ -1,7 +1,7 @@
 import React from "react";
 import walls from "../assets/wallpanel.jpg";
 
-import "./walls.css"; 
+import "../components/Walls.css"; 
 
 const Walls = () => {
   return (

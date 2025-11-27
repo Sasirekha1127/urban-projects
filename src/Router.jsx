@@ -5,6 +5,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import NavbarUC from "./components/Navbar.jsx";
 import CartPage from "./Pages/CardPage.jsx";
 import Beauty from "./Pages/Beauty.jsx";
+
+import Salonforwomen from "../src/pages/Salonforwomen.jsx";
+
 import Revamp from "./Pages/Revamp.jsx";
 import Native from "./Pages/Native.jsx";
 import Home from "./Pages/Home.jsx";
@@ -36,11 +39,9 @@ export default function AppContent({ setHideNavbar, hideNavbar, hideSearch, setH
   const alwaysHideNavbarRoutes = ["/cart"];
 
   useEffect(() => {
-  setHideSearch(hideSearchRoutes.includes(location.pathname));
-  setHideNavbar(alwaysHideNavbarRoutes.includes(location.pathname));
-}, [location.pathname, setHideSearch, setHideNavbar]);
-
-
+    setHideSearch(hideSearchRoutes.includes(location.pathname));
+    setHideNavbar(alwaysHideNavbarRoutes.includes(location.pathname));
+  }, [location.pathname, setHideSearch, setHideNavbar]);
 
   const shouldHideNavbar =
     alwaysHideNavbarRoutes.includes(location.pathname) || hideNavbar;
@@ -65,6 +66,7 @@ export default function AppContent({ setHideNavbar, hideNavbar, hideSearch, setH
             />
           }
         />
+        <Route path="/salonforwomen" element={<Salonforwomen />} />
 
         {/* REVAMP */}
         <Route

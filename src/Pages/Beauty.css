@@ -25,13 +25,13 @@
 /* Spinner */
 .spinner {
   display: flex;
-  gap: 8px;
+  gap: 2px;
 }
 
 .spinner .dot {
   width: 15px;
   height: 15px;
-  background: #ff4d6d; /* pink/red color */
+  background: #646464; /* pink/red color */
   border-radius: 50%;
   animation: bounce 0.6s infinite alternate;
 }

@@ -5,7 +5,7 @@ function SalonPage() {
   return (
     <div className="salon-wrapper">
       <h1>Salon for Women</h1>
-      <p>⭐ 4.85 (15.6M bookings)</p>
+      <p> 4.85 (15.6M bookings)</p>
 
       <div className="salon-banner">
         <img src={salonBanner} alt="Salon Service" />

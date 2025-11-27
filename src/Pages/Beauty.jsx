@@ -67,7 +67,7 @@ const PrevArrow = ({ onClick }) => (
 );
 
 // ---------- MAIN BEAUTY PAGE ----------
-function Beauty({ setHideNavbar, setHideSearch }) {
+function Beauty({ setHideNavbar,  }) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -75,12 +75,11 @@ function Beauty({ setHideNavbar, setHideSearch }) {
 
   useEffect(() => {
   setHideNavbar(true);
-  setHideSearch(true); // hide search at start
 
   const timer = setTimeout(() => {
     setLoading(false);
-    setHideNavbar(false); // show navbar
-    setHideSearch(false); // show search again
+
+    setHideNavbar(false); 
   }, 2000);
 
   return () => clearTimeout(timer);
@@ -142,7 +141,7 @@ function Beauty({ setHideNavbar, setHideSearch }) {
     prevArrow: <PrevArrow />,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1,slidesToScroll:1 } },
+      { breakpoint: 768, settings: { slidesToShow: 2,slidesToScroll:2 } },
     ],
   };
 

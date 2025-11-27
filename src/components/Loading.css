@@ -34,7 +34,7 @@
 /* Purple moving bar */
 .loading-progress {
   height: 100%;
-  width: 35%;        /* size of animated piece */
+  width: 35%;        
   background: #7e3eff;
   animation: loadAnim 9.3s forwards;
 }

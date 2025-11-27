@@ -85,9 +85,7 @@ body{
   display: flex;
 }
 
-/* 
-        BOTTOM TEXT
- */
+/*BOTTOM TEXT*/
 .footer-bottom {
   margin-top: 20px;
   font-size: 13px;
@@ -103,7 +101,8 @@ body{
   font-size: 13px;
   margin: 0;
 }
-        /* TABLET RESPONSIVE */
+
+/* TABLET RESPONSIVE */
 @media (max-width: 768px) {
   .footer-wrapper {
     padding: 30px 6%;
