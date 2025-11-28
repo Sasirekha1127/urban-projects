@@ -18,16 +18,16 @@ import Homerepair from "./components/Homerepair.jsx";
 import Load from "./components/Loading.jsx";
 
 // PAGES PROPERLY IMPORTED
-import CartPage from "./Pages/CardPage.jsx";
+import CartPage from "./pages/CardPage.jsx";
 import Beauty from "./pages/Beauty.jsx";
-import Revamp from "./Pages/Revamp.jsx";
-import Native from "./Pages/Native.jsx";
-import Home from "./Pages/Home.jsx";
+import Revamp from "./pages/Revamp.jsx";
+import Native from "./pages/Native.jsx";
+import Home from "./pages/Home.jsx";
 import BathroomCleaning from "./pages/BathroomCleaning.jsx";
-import Wallmakeover from "./Pages/Wallmakeover.jsx";
-import Sofacleaning from "./Pages/Sofacleaning.jsx";
-import Salonpackages from "./Pages/Salonpackages.jsx";
-import SalonPage from "./Pages/SalonPage.jsx";
+import Wallmakeover from "./pages/Wallmakeover.jsx";
+import Sofacleaning from "./pages/Sofacleaning.jsx";
+import Salonpackages from "./pages/Salonpackages.jsx";
+import SalonPage from "./pages/SalonPage.jsx";
 import Salonforwomen from "./pages/Salonforwomen.jsx";
 
 export default function AppContent({
