@@ -18,12 +18,12 @@ import Homerepair from "./components/Homerepair.jsx";
 import Load from "./components/Loading.jsx";
 
 // PAGES PROPERLY IMPORTED
-import CartPage from "./pages/CardPage.jsx";
-import Beauty from "./pages/Beauty.jsx";
-import Revamp from "./pages/Revamp.jsx";
-import Native from "./pages/Native.jsx";
-import Home from "./pages/Home.jsx";
-import BathroomCleaning from "./pages/BathroomCleaning.jsx";
+import Home from './pages/Home.jsx';
+import Beauty from './pages/Beauty.jsx';
+import Revamp from './pages/Revamp.jsx';
+import Native from './pages/Native.jsx';
+import BathroomCleaning from './pages/BathroomCleaning.jsx';
+import CardPage from './pages/CardPage.jsx';
 import Wallmakeover from "./pages/Wallmakeover.jsx";
 import Sofacleaning from "./pages/Sofacleaning.jsx";
 import Salonpackages from "./pages/Salonpackages.jsx";
