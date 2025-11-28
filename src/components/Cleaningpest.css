@@ -71,3 +71,16 @@
     flex: 1 1 100%;
   }
 }
+@media (max-width: 420px){
+  .cleaning-heading{
+    font-size: 2rem;
+  }
+  .cleaning-wrapper{
+    margin: 0;
+  }
+}
+@media (max-width: 789px){
+  .cleaning-heading{
+    text-align: center;
+  }
+}

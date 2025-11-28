@@ -1,3 +1,9 @@
+body{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 
 /* ---------- MOST BOOKED SERVICES ---------- */
 .mostbooked-wrapper {
@@ -118,7 +124,6 @@
     flex: 0 0 calc((100% - 10px) / 2);
         /* background-color: red; */
 
-
   }
 
   .mostbooked-item img {
@@ -126,22 +131,25 @@
     width: 100%;
 
   }
+  .mostbooked-wrapper{
+    margin: 0;
+    padding: 0;
+  }
 
   .mostbooked-heading {
     font-size: 2rem;
-    right: 0;
+    padding: 0 !important;
+    left: 20px;
+    text-align: center;
   }
 
   .mostbooked-carousel {
     width: 100%;
     right: 0;
+    border: 0 !important;
 
-  }
-  .mostbooked-arrow{
-    
   }
 }
-
 
 /* SMALL MOBILE — show 1 item */
 @media (max-width: 480px) {
