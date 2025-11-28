@@ -116,11 +116,13 @@
 @media (max-width: 768px) {
   .mostbooked-item {
     flex: 0 0 calc((100% - 10px) / 2);
+        /* background-color: red; */
+
 
   }
 
   .mostbooked-item img {
-    height: 180px;
+    height: 150px;
     width: 100%;
 
   }
@@ -136,7 +138,7 @@
 
   }
   .mostbooked-arrow{
-   margin-bottom: 20px;
+    
   }
 }
 
@@ -154,4 +156,5 @@
   .mostbooked-heading {
     font-size: 1.6rem;
   }
+  
 }

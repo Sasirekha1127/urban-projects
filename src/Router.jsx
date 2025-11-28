@@ -125,7 +125,7 @@ export default function AppContent({
         />
 
         {/* CART */}
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CardPage />} />
       </Routes>
     </>
   );

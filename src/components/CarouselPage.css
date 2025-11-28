@@ -88,10 +88,13 @@
 @media (max-width: 768px) {
   .carousel-container {
     padding: 0 0px;
+     
   }
 
   .carousel-slide {
-    padding: 8px;
+    min-width: 100% !important;
+    /* background-color: red; */
+
   }
 
   .carousel-image {
