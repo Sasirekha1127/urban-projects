@@ -19,11 +19,11 @@ import Load from "./components/Loading.jsx";
 
 // PAGES PROPERLY IMPORTED
 import CartPage from "./Pages/CardPage.jsx";
-import Beauty from "./pages/Beauty.jsx";
+import Beauty from "../src/pages/Beauty.jsx";
 import Revamp from "./Pages/Revamp.jsx";
 import Native from "./Pages/Native.jsx";
 import Home from "./Pages/Home.jsx";
-import BathroomCleaning from "./Pages/BathroomCleaning.jsx";
+import BathroomCleaning from "./pages/BathroomCleaning.jsx";
 import Wallmakeover from "./Pages/Wallmakeover.jsx";
 import Sofacleaning from "./Pages/Sofacleaning.jsx";
 import Salonpackages from "./Pages/Salonpackages.jsx";
