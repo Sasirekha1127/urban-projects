@@ -493,7 +493,7 @@ transform: scale(1.02);
   bottom: 1px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #ffffffc6;
+  background-color: #fff;
   color: #7b4dff;
   border: 1px solid #7b4dff;
   padding: 6px 16px;
@@ -528,7 +528,7 @@ transform: scale(1.02);
     max-height: 320px;
   }
 }
-/* ---------- MODAL ---------- */
+/* ---------- MODAL ----------
 .uc-modal-overlay {
   position: fixed;
   top: 0;
@@ -564,7 +564,6 @@ transform: scale(1.02);
   cursor: pointer;
 }
 
-/* Modal image */
 .uc-modal-images img {
   width: 100%;
   max-height: 250px;
@@ -573,7 +572,6 @@ transform: scale(1.02);
   margin-bottom: 15px;
 }
 
-/* Modal info */
 .uc-modal-info h3 {
   font-size: 18px;
   font-weight: 600;
@@ -585,7 +583,6 @@ transform: scale(1.02);
   margin: 4px 0;
 }
 
-/* Quantity box */
 .uc-quantity-box {
   display: flex;
   gap: 8px;
@@ -608,7 +605,6 @@ transform: scale(1.02);
   border: 1px solid #ddd;
 }
 
-/* Done button */
 .uc-done-container {
   text-align: center;
   margin-top: 15px;
@@ -627,4 +623,100 @@ transform: scale(1.02);
 
 .uc-done-btn:hover {
   background-color: #5a34d1;
+}
+.uc-add-inline-btn {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 80px; 
+  padding: 6px 10px;
+  background-color: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+} */
+.uc-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 11, 11, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+
+.uc-popup-container {
+  width: 40%;
+  height: 400px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  animation: popupShow 0.3s ease;
+  top:30px
+}
+
+@keyframes popupShow {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.uc-close-btn {
+  position: absolute;
+  top: 40px;       
+  background: white;
+  border: none;
+  font-size: 15px;
+  padding: 8px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  margin-left: 35%;
+}
+
+.uc-popup-img img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+.uc-popup-text {
+  flex: 1;
+  margin: 20px 0 0px 20px;       
+  padding: 0;
+}
+.uc-popup-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.uc-price {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+.uc-offer {
+  color: green;
+  font-weight: 500;
+}
+
+.uc-add-final-btn {
+  background-color: #ff4f00;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-right: 20px;
 }

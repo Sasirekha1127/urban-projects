@@ -1,3 +1,4 @@
+import React from "react";
 import walls3 from "../assets/walls3.png";
 import "../components/Walls.css";   
 
