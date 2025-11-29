@@ -27,7 +27,7 @@ body{
   font-size: 40px;
   color: #0f0f0f;
   margin-bottom: 35px;
-  /* margin-top: 20%; */
+  margin-top: 20%;
   line-height: 1.3;
   font-weight: 600;
 }
@@ -165,8 +165,8 @@ body{
   }
 }
 
-/* Tablet (Below 768px) */
-@media (max-width: 768px) {
+/* Tablet (Below 790px) */
+@media (max-width: 790px) {
   .home-wrapper {
     flex-direction: column;
     align-items: center;
@@ -186,12 +186,12 @@ body{
 
   .home-container h1 {
     font-size: 2rem;
-    margin-top: 5rem; 
+    margin-top: 30%; 
   }
 
   .home-box {
     padding: 30px 20px;
-    width: 100%;           
+    width: 100%; 
   }
 
   .service-grid {
@@ -216,21 +216,22 @@ body{
   }
 }
 
-/* Mobile (Below 480px) */
-@media (max-width: 480px) {
+/* Mobile (Below 600px) */
+@media (max-width: 600px) {
   .service-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1px;
   }
 
   .service-item1 {
     width: 60px;      
-    height: 60px;     
+    height: 60px;   
   }
 
   .service-item1 img {
-    width: 55%;
+    width: 60% !important;
     height: 55%;
+
   }
   .service-text p {
     font-size: 0.75rem;
@@ -239,7 +240,8 @@ body{
 
   .home-container h1 {
     font-size: 1.4rem;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    margin-top: 65%;
   }
 
   .home-box {
@@ -250,6 +252,7 @@ body{
     max-width: 300px;
   }
 }
+
 /* ----------- RATINGS SECTION ----------- */
 .ratings-section {
   display: flex;
@@ -303,6 +306,9 @@ body{
     max-width: 100% !important;
     height: auto !important;
   }
+  .service-text{
+    font-size: 10px;
+  }
 
   .ratings-section {
     flex-direction: row;
@@ -328,6 +334,7 @@ body{
     font-size: 0.8rem;
   }
 }
+
 
 /* APPLIANCE */
 

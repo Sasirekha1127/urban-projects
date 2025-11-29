@@ -3,6 +3,8 @@ import { FaStar, FaPercent } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
 import { IoMdCheckmark } from "react-icons/io";
 
+import NavbarUC from "../components/Navbar";
+
 import bathroomVideo from "../assets/bathroomvideo.mp4";
 import comboIcon from "../assets/combo.png";
 import combobathrrom from "../assets/2bathroom.png";
@@ -22,51 +24,36 @@ function BathroomCleaning() {
 
   const [selectedService, setSelectedService] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-
   const [popupData, setPopupData] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
-
-  const handleOpenPopup = (item) => {
-    setPopupData(item);
-    setShowPopup(true);
-  };
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
-  };
-
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMoreOffers, setShowMoreOffers] = useState(false);
   const [activeService, setActiveService] = useState("bathroom");
 
+  const handleOpenPopup = (item) => {
+    const existing = cartItems.find((i) => i.title === item.title);
+    setPopupData({ ...item, qty: existing ? existing.quantity : 1 });
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => setShowPopup(false);
+
   const handleAdd = (serviceDetails) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.title === serviceDetails.title);
-
       if (existing) {
         return prev.map((item) =>
-          item.title === serviceDetails.title
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          item.title === serviceDetails.title ? { ...item, quantity: serviceDetails.qty } : item
         );
       }
-
-      return [...prev, { ...serviceDetails, quantity: 1 }];
+      return [...prev, { ...serviceDetails, quantity: serviceDetails.qty }];
     });
   };
 
-  const closeModal = () => setSelectedService(null);
-
   const handleServiceClick = (service) => {
     setActiveService(service);
-
-    if (service === "combos" && comboRef.current) {
-      comboRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-
-    if (service === "bathroom" && bathroomRef.current) {
-      bathroomRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    if (service === "combos" && comboRef.current) comboRef.current.scrollIntoView({ behavior: "smooth" });
+    if (service === "bathroom" && bathroomRef.current) bathroomRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleVideoClick = () => {
@@ -85,220 +72,190 @@ function BathroomCleaning() {
   const visibleOffers = showMoreOffers ? offers : offers.slice(0, 1);
 
   return (
-    <div className="bathroom-wrapper">
+    <div className="bathroom-page">
+      <NavbarUC hideSearch={false} hideLocation={false} />
 
-      {/* LEFT SIDE */}
-      <div className="bathroom-left">
-        <h2 className="bathroom-title">
-          Bathroom &<br /> Kitchen Cleaning
-        </h2>
+      <div className="bathroom-wrapper" style={{ paddingTop: "100px" }}>
+        {/* LEFT SIDE */}
+        <div className="bathroom-left">
+          <h2 className="bathroom-title">Bathroom Cleaning</h2>
+          <div className="rating-box"><FaStar /> <span>4.78 (8.6 M bookings)</span></div>
 
-        <div className="rating-box">
-          <FaStar />
-          <span>4.78 (8.6 M bookings)</span>
-        </div>
+          <div className="service-container">
+            <div className="service-heading-wrapper">
+              <h5 className="service-heading">Select a service</h5>
+              <div className="heading-line"></div>
+            </div>
 
-        <div className="service-container">
-          <div className="service-heading-wrapper">
-            <h5 className="service-heading">Select a service</h5>
-            <div className="heading-line"></div>
-          </div>
-
-          <div className="service-list">
-            {[
-              { id: "combos", img: comboIcon, name: "Combos" },
-              { id: "bathroom", img: bathroomIcon, name: "Bathroom cleaning" },
-              { id: "kitchen", img: kitchenIcon, name: "Kitchen cleaning" },
-              { id: "mini", img: miniIcon, name: "Mini services" },
-            ].map((item) => (
-              <div
-                key={item.id}
-                className={`service-item ${activeService === item.id ? "active" : ""}`}
-                onClick={() => handleServiceClick(item.id)}
-              >
-                <img src={item.img} alt={item.name} className="service-img1" />
-                <p className="service-name">{item.name}</p>
-              </div>
-            ))}
+            <div className="service-list">
+              {[
+                { id: "combos", img: comboIcon, name: "Combos" },
+                { id: "bathroom", img: bathroomIcon, name: "Bathroom cleaning" },
+                { id: "kitchen", img: kitchenIcon, name: "Kitchen cleaning" },
+                { id: "mini", img: miniIcon, name: "Mini services" },
+              ].map((item) => (
+                <div key={item.id} className={`service-item ${activeService === item.id ? "active" : ""}`} onClick={() => handleServiceClick(item.id)}>
+                  <img src={item.img} alt={item.name} className="service-img1" />
+                  <p className="service-name">{item.name}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* RIGHT SIDE */}
-      <div className="bathroom-right">
+        {/* RIGHT SIDE */}
+        <div className="bathroom-right">
+          {/* VIDEO */}
+          <div className="video-box">
+            <video ref={videoRef} onClick={handleVideoClick} loop muted playsInline>
+              <source src={bathroomVideo} type="video/mp4" />
+            </video>
+          </div>
 
-        {/* VIDEO */}
-        <div className="video-box">
-          <video ref={videoRef} onClick={handleVideoClick} loop muted playsInline>
-            <source src={bathroomVideo} type="video/mp4" />
-          </video>
-        </div>
+          <div className="bottom-section">
+            {/* COMBOS */}
+            <div className="combos-section" ref={comboRef}>
+              <h3 className="combo-heading">Combos</h3>
 
-        <div className="bottom-section">
+              <div className="combo-cards">
+                <div className="combo-card">
+                  <div className="combo-info">
+                    <h4>Classic cleaning (2 bathrooms)</h4>
+                    <p className="combo-rating"><FaStar /> 4.82 (1.5M reviews)</p>
+                    <p className="combo-price">₹868 • 2 hrs</p>
+                    <p className="bathroom-view">View details</p>
 
-          {/* COMBOS */}
-          <div className="combos-section" ref={comboRef}>
-            <h3 className="combo-heading">Combos</h3>
-
-            <div className="combo-cards">
-              {/* CARD 1 */}
-              <div className="combo-card">
-                <div className="combo-info">
-                  <h4>Classic cleaning (2 bathrooms)</h4>
-                  <p className="combo-rating"><FaStar /> 4.82 (1.5M reviews)</p>
-                  <p className="combo-price">₹868 • 2 hrs</p>
-                  <p className="bathroom-view">View details</p>
-
-                  <button
-                    className="add-btn"
-                    onClick={() =>
-                      handleOpenPopup({
-                        title: "Classic cleaning (2 bathrooms)",
-                        rating: "4.82",
-                        reviews: "1.5M reviews",
-                        price: "868",
-                        duration: "2 hrs",
-                        offer: "434",
-                        beforeafter: beforeafter
-                      })
-                    }
-                  >
-                    Add
-                  </button>
-                </div>
-
-                <div className="combo-img">
-                  <img src={combobathrrom} alt="" />
-                </div>
-              </div>
-
-              <hr />
-
-              {/* Bathroom Section */}
-              <div className="bathroom-cleaning-section" ref={bathroomRef}>
-                <h3 className="bathroom-cleaning-heading">Bathroom cleaning</h3>
-
-                <div className="bathroom-card">
-                  <div className="bathroom-left-info">
-                    <p className="bestseller">BESTSELLER</p>
-                    <h4>Intense bathroom cleaning</h4>
-                    <p className="bathroom-rating"><FaStar /> 4.79 (4.2M reviews)</p>
-                    <p className="bathroom-price">
-                      Starts at <b>₹549</b> • 1 hr 20 mins
-                    </p>
-                    <ul className="bathroom-points">
-                      <li>Floor & tile cleaning with scrubbing machine</li>
-                      <li>Recommended for deep-cleaning and tough stains</li>
-                    </ul>
+                    <button className="add-btn" onClick={() => handleOpenPopup({
+                      title: "Classic cleaning (2 bathrooms)",
+                      rating: "4.82",
+                      reviews: "1.5M reviews",
+                      price: "868",
+                      duration: "2 hrs",
+                      offer: "434",
+                      beforeafter: beforeafter,
+                    })}>Add</button>
                   </div>
 
-                  <div className="bathroom-right-img">
-                    <img src={intense} alt="" />
-
-                    <button
-                      className="add-btn2"
-                      onClick={() =>
-                        handleOpenPopup({
-                          title: "Intense bathroom cleaning",
-                          rating: "4.79",
-                          reviews: "4.2M reviews",
-                          price: 549,
-                          duration: "1 hr 20 mins",
-                          offer: "549",
-                          beforeafter: beforeafter
-                        })
-                      }
-                    >
-                      Add
-                    </button>
-                  </div>
+                  <div className="combo-img"><img src={combobathrrom} alt="" /></div>
                 </div>
 
                 <hr />
+
+                {/* Bathroom Section */}
+                <div className="bathroom-cleaning-section" ref={bathroomRef}>
+                  <h3 className="bathroom-cleaning-heading">Bathroom cleaning</h3>
+
+                  <div className="bathroom-card">
+                    <div className="bathroom-left-info">
+                      <p className="bestseller">BESTSELLER</p>
+                      <h4>Intense bathroom cleaning</h4>
+                      <p className="bathroom-rating"><FaStar /> 4.79 (4.2M reviews)</p>
+                      <p className="bathroom-price">Starts at <b>₹549</b> • 1 hr 20 mins</p>
+                      <ul className="bathroom-points">
+                        <li>Floor & tile cleaning with scrubbing machine</li>
+                        <li>Recommended for deep-cleaning and tough stains</li>
+                      </ul>
+                    </div>
+
+                    <div className="bathroom-right-img">
+                      <img src={intense} alt="" />
+                      <button className="add-btn2" onClick={() => handleOpenPopup({
+                        title: "Intense bathroom cleaning",
+                        rating: "4.79",
+                        reviews: "4.2M reviews",
+                        price: 549,
+                        duration: "1 hr 20 mins",
+                        offer: "549",
+                        beforeafter: beforeafter,
+                      })}>Add</button>
+                    </div>
+                  </div>
+
+                  <hr />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* RIGHT SIDEBAR */}
-          <div className="right-info">
+            {/* RIGHT SIDEBAR */}
+            <div className="right-info">
+              {cartItems.length === 0 ? (
+                <div className="no-card-box"><LuShoppingCart size={45} className="cart-icon" /><h4>No items in your cart</h4></div>
+              ) : (
+                <div className="cart-box">
+                  <h4>Your Cart</h4>
+                  {cartItems.map((item) => (
+                    <div key={item.title} className="cart-item">
+                      <p>{item.title}</p>
+                      <p>Qty: {item.quantity}</p>
+                      <p>₹{item.price}</p>
+                    </div>
+                  ))}
+                  <button className="checkout-btn">Go to Cart</button>
+                </div>
+              )}
 
-            {cartItems.length === 0 ? (
-              <div className="no-card-box">
-                <LuShoppingCart size={45} className="cart-icon" />
-                <h4>No items in your cart</h4>
-              </div>
-            ) : (
-              <div className="cart-box">
-                <h4>Your Cart</h4>
-                {cartItems.map((item) => (
-                  <div key={item.title} className="cart-item">
-                    <p>{item.title}</p>
-                    <p>Qty: {item.quantity}</p>
-                    <p>₹{item.price}</p>
+              <div className="offer-box">
+                {visibleOffers.map((offer) => (
+                  <div key={offer.id} className="offer-item">
+                    <FaPercent className="offer-icon" />
+                    <div>
+                      <h4>{offer.title}</h4>
+                      <p>{offer.desc}</p>
+                    </div>
                   </div>
                 ))}
-                <button className="checkout-btn">Go to Cart</button>
+                <button className="view-more-btn" onClick={() => setShowMoreOffers(!showMoreOffers)}>
+                  {showMoreOffers ? "View Less Offers ↑" : "View More Offers ↓"}
+                </button>
               </div>
-            )}
 
-            <div className="offer-box">
-              {visibleOffers.map((offer) => (
-                <div key={offer.id} className="offer-item">
-                  <FaPercent className="offer-icon" />
-                  <div>
-                    <h4>{offer.title}</h4>
-                    <p>{offer.desc}</p>
-                  </div>
+              <div className="uc-promise">
+                <div className="uc-text">
+                  <h4>UC Promise</h4>
+                  <ul>
+                    <li><IoMdCheckmark /> Verified Professionals</li>
+                    <li><IoMdCheckmark /> Safe Chemicals</li>
+                    <li><IoMdCheckmark /> Superior Stain Removal</li>
+                  </ul>
                 </div>
-              ))}
-
-              <button
-                className="view-more-btn"
-                onClick={() => setShowMoreOffers(!showMoreOffers)}
-              >
-                {showMoreOffers ? "View Less Offers ↑" : "View More Offers ↓"}
-              </button>
-            </div>
-
-            <div className="uc-promise">
-              <div className="uc-text">
-                <h4>UC Promise</h4>
-                <ul>
-                  <li><IoMdCheckmark /> Verified Professionals</li>
-                  <li><IoMdCheckmark /> Safe Chemicals</li>
-                  <li><IoMdCheckmark /> Superior Stain Removal</li>
-                </ul>
-              </div>
-              <div className="uc-img">
-                <img src={ucImg} alt="UC Promise" />
+                <div className="uc-img"><img src={ucImg} alt="UC Promise" /></div>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
 
-      {/* POPUP */}
-      <Popup
-        show={showPopup}
-        onClose={handleClosePopup}
-        data={popupData}
-        onAdd={handleAdd}
-      />
+        {/* POPUP */}
+        <Popup show={showPopup} onClose={handleClosePopup} data={popupData} onAdd={handleAdd} />
+      </div>
     </div>
   );
 }
-
-/* POPUP COMPONENT OUTSIDE MAIN FUNCTION */
+/* ------------------ POPUP COMPONENT ------------------- */
 function Popup({ show, onClose, data, onAdd }) {
+  const [added, setAdded] = useState(false);
+  const [qty, setQty] = useState(0);
+
   if (!show || !data) return null;
+
+  const increase = () => setQty(qty + 1);
+  const decrease = () => qty > 0 && setQty(qty - 1);
+
+  const handleAdd = () => {
+    // Start with qty = 1 on first add
+    if (!added) {
+      setQty(1);
+      setAdded(true);
+      // onAdd({ ...data, qty: 1 });
+    }
+  };
+
+  const totalAmount = qty * Number(data.price);
 
   return (
     <div className="uc-popup-overlay">
-        <button className="uc-close-btn" onClick={onClose}>✕</button>
+      <button className="uc-close-btn" onClick={onClose}>✕</button>
+
       <div className="uc-popup-container">
-
-
         <div className="uc-popup-img">
           <img src={data.beforeafter} alt="" />
         </div>
@@ -311,20 +268,40 @@ function Popup({ show, onClose, data, onAdd }) {
             <p className="uc-offer">₹{data.offer} per bathroom</p>
           </div>
 
-          <button
-            className="uc-add-final-btn"
-            onClick={() => {
-              onAdd(data);
-              onClose();
-            }}
-          >
-            Add
-          </button>
-        </div>
+          {/* ADD turns into QTY */}
+          <div className="add-or-qty-wrapper">
+            {!added ? (
+              <button className="uc-add-final-btn" onClick={handleAdd}>
+                Add
+              </button>
+            ) : (
+              <div className="qty-box">
+                <button className="qty-btn" onClick={decrease}>-</button>
+                <span className="qty-number">{qty}</span>
+                <button className="qty-btn" onClick={increase}>+</button>
+              </div>
+            )}
+          </div>
 
+          {/* Bottom Amount + Done */}
+          {added && (
+            <div className="uc-bottom-controls">
+              <div className="uc-amount-box">
+                <h4>₹{totalAmount}</h4>
+                <p>Total Amount</p>
+              </div>
+              <button className="uc-done-btn" onClick={onClose}>
+                Done
+              </button>
+            </div>
+          )}
+
+        </div>
       </div>
     </div>
   );
 }
+
+
 
 export default BathroomCleaning;

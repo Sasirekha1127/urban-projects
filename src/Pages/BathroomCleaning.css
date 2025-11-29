@@ -19,9 +19,11 @@
   font-weight: 700;
   font-size: 35px;
   color: #222;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   position: relative;
   right: 50px;
+    margin-top: 10%;
+
 }
 
 .rating-box {
@@ -32,7 +34,7 @@
   position: relative;
   right: 50px;
   text-decoration-line: underline;  
-  text-decoration-style: dotted;     /* makes it dotted */
+  text-decoration-style: dotted;     
   text-underline-offset: 5px;  
 
 }
@@ -51,9 +53,14 @@
   width: 120%;
   right: 50px;
   position: relative; 
+  background-color: red;
+  z-index: 9999
+
   
 }
-
+.service-container{
+  width: 100%;
+}
 
 /* ----------- HEADING ----------- */
 .service-heading-wrapper {
@@ -61,6 +68,8 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
+
+
 }
 
 .service-heading {
@@ -82,6 +91,7 @@
   gap: 20px;
   justify-items: center;
   width: 100%;
+
   
 }
 
@@ -105,7 +115,6 @@
   width: 120%;
   justify-content: flex-start;
   /* position: relative; */
-  
 }
 
 .service-item:hover {
@@ -142,15 +151,23 @@
   flex: 2.0;
 }
 
+.bathroom-right {
+  width: 150% !important; 
+  overflow: visible;     
+}
+
 .bathroom-right video {
-  width: 100%;
+  width: 111%;            
   border-radius: 10px;
   max-height: 500px;
   object-fit: cover;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
-  position:relative;
-  left: 60px;
+  position: relative;
+  margin-top: 5%;
+  right: 20px;
 }
+
+
+
 .bottom-section {
   display: flex;
   justify-content: space-between;
@@ -170,7 +187,7 @@
 }
 
 .combo-heading {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   margin-bottom: 30px;
 }
@@ -204,6 +221,7 @@
   font-size: 15px;
   color: #222;
   margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .combo-rating {
@@ -649,18 +667,17 @@ transform: scale(1.02);
   align-items: center;
   z-index: 999;
 }
-
-
 .uc-popup-container {
   width: 40%;
-  height: 400px;
+  min-height: 350px;  /* initial small height */
   background: #fff;
   border-radius: 20px;
-  overflow: hidden;
+  overflow: visible;   /* height auto grow */
   position: relative;
   animation: popupShow 0.3s ease;
-  top:30px
+  padding-bottom: 20px;
 }
+
 
 @keyframes popupShow {
   from { transform: scale(0.9); opacity: 0; }
@@ -720,3 +737,70 @@ transform: scale(1.02);
   white-space: nowrap;
   margin-right: 20px;
 }
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.qty-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  background: #eee;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.qty-num {
+  font-size: 18px;
+  font-weight: 600;
+}
+/* BOTTOM BAR INSIDE POPUP */
+.uc-bottom-controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* display: none; */
+  position: absolute;      
+  bottom: 0;
+  left: 0;
+
+  padding: 15px 20px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+/* AMOUNT */
+.uc-amount-box h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.uc-amount-box p {
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+}
+
+/* DONE BUTTON */
+.uc-done-btn {
+  background: #ff3f6c;
+  color: white;
+  padding: 10px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+}
+
+.uc-popup-content {
+  position: relative; 
+  padding-bottom: 80px; 
+}
+/* .uc-bottom-controls.show {
+  display: flex;   /* show after Add */
+

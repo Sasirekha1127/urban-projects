@@ -46,9 +46,7 @@
 }
 
 
-/* ------------------------------
-      CAROUSEL STYLING
-------------------------------- */
+/*CAROUSEL STYLING*/
 
 .revamp-carousel-wrapper {
   width: 100%;
@@ -125,10 +123,16 @@
   .revamp-carousel-title {
     font-size: 1.4rem;
     text-align: center;
+    position: relative;
+    top: 10px;
   }
 
   .revamp-arrow {
     font-size: 20px;
     padding: 6px;
   }
+  .revamp-carousel-image{
+    margin-top: 20px;
+  }
+  
 }

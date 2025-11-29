@@ -99,7 +99,7 @@ export default function Native({ setHideNavbar, setHideSearch }) {
       {!loading && (
         <>
           <div className="wall-panel-card wall">
-            <div className="wall-panel-image">
+            <div className="wall-panel-image2">
               <img src={nativewall1} alt="Wall Panels" />
             </div>
           </div>
