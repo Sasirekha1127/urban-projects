@@ -26,6 +26,8 @@ export default function SearchDropdown({ target, show, handleClose, onServices }
           name: "Door cleaning (upto 1)",
           info: "4.8 (12k) ₹89 - Bathroom & Kitchen Cleaning",
           image: doorImg,
+         
+
         },
         {
           name: "Full home deep cleaning",
@@ -39,32 +41,29 @@ export default function SearchDropdown({ target, show, handleClose, onServices }
       className: "trend-salon",
       subServices: [
         {
-          name: "Haircut",
-          info: "4.9 (15k) ₹199 - Men's Haircut",
+          name: "Salon Luxe",
+          link: "/salon/luxe",
           image: "/images/haircut.jpg",
         },
         {
-          name: "Facial",
-          info: "4.8 (10k) ₹499 - Basic Facial",
+          name: "Salon Prime",
           image: "/images/facial.jpg",
+           link: "/salon/luxe",
         },
         {
-          name: "Waxing",
-          info: "4.7 (8k) ₹299 - Half Leg Waxing",
+          name: "Hair studio for Women",
           image: "/images/waxing.jpg",
+          link: "/salon/women",
         },
       ],
     },
   ];
 
   const handleItemClick = (item) => {
-    if (item.text === "Salon") {
-      handleClose();
-      navigate("/salon");
-    } else {
-      setSelectedService(item);
-    }
+    // Remove the navigate for "Salon"
+    setSelectedService(item); // show subservices in dropdown
   };
+
 
   const handleSubServiceClick = (srv) => {
     handleClose();
@@ -74,80 +73,81 @@ export default function SearchDropdown({ target, show, handleClose, onServices }
 
   return (
     <Overlay
-  target={target}
-  show={!!show}
-  rootClose
-  onHide={handleClose}
-  placement={window.innerWidth < 768 ? "bottom" : "bottom-start"}
-  container={document.body}
->
-  {({ placement, ...overlayProps }) => {
-    const targetWidth = target?.getBoundingClientRect()?.width || 0;
+      target={target}
+      show={!!show}
+      rootClose
+      onHide={handleClose}
+      placement={window.innerWidth < 768 ? "bottom" : "bottom-start"}
+      container={document.body}
+    >
+      {({ placement, ...overlayProps }) => {
+        const targetWidth = target?.getBoundingClientRect()?.width || 0;
 
-    return (
-      <div
-        ref={overlayProps.ref}
-        style={{
-          ...overlayProps.style,
-          position: "absolute",
+        return (
+          <div
+            ref={overlayProps.ref}
+            style={{
+              ...overlayProps.style,
+              position: "absolute",
 
-          width: window.innerWidth < 768 ? targetWidth + "px" : "320px",
+              width: window.innerWidth < 768 ? targetWidth + "px" : "320px",
 
-          left: overlayProps.style.left,
-          top: overlayProps.style.top,
-          transform: overlayProps.style.transform,
+              left: overlayProps.style.left,
+              top: overlayProps.style.top,
+              transform: overlayProps.style.transform,
 
-          zIndex: 3000,
-        }}
-        className="search-dropdown-box"
-      >
+              zIndex: 3000,
+            }}
+            className="search-dropdown-box"
+          >
 
 
-          <h6 className="fw-semibold mb-3">
-            {selectedService ? "Available services" : "Trending searches"}
-          </h6>
+            <h6 className="fw-semibold mb-3">
+              {selectedService ? "Available services" : "Trending searches"}
+            </h6>
 
-          {!selectedService && (
-            <div className="trending-list">
-              {trending.map((item, i) => (
-                <div
-                  key={i}
-                  className={`trending-item ${item.className}`}
-                  onClick={() => handleItemClick(item)}
-                >
-                  <FaArrowTrendUp className="trend-icon" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {selectedService && (
-            <div className="subservice-list">
-              {selectedService.subServices.map((srv, i) => (
-                <div key={i} className="subservice-item" onClick={() => handleSubServiceClick(srv)}>
-                  <img src={srv.image} alt={srv.name} />
-                  <div>
-                    <p>
-                      <strong>{srv.name.split(" ")[0]}</strong>{" "}
-                      {srv.name.replace(srv.name.split(" ")[0], "")}
-                    </p>
-                    <span>{srv.info}</span>
+            {!selectedService && (
+              <div className="trending-list">
+                {trending.map((item, i) => (
+                  <div
+                    key={i}
+                    className={`trending-item ${item.className}`}
+                    onClick={() => handleItemClick(item)}
+                  >
+                    <FaArrowTrendUp className="trend-icon" />
+                    <span>{item.text}</span>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            )}
 
-              <button
-                className="btn btn-outline-dark btn-sm mt-3"
-                onClick={() => setSelectedService(null)}
-              >
-                ← Back
-              </button>
-            </div>
-          )}
+            {selectedService && (
+              <div className="subservice-list">
+                {selectedService.subServices.map((srv, i) => (
+                  <div key={i} className="subservice-item" onClick={() => handleSubServiceClick(srv)}>
+                    <img src={srv.image} alt={srv.name} />
+                    <div>
+                      <p>
+                        <strong>{srv.name.split(" ")[0]}</strong>{" "}
+                        {srv.name.replace(srv.name.split(" ")[0], "")}
+                      </p>
+                      <span>{srv.info}</span>
+                    </div>
+                  </div>
+                ))}
 
-        </div>
-      )}}
+                <button
+                  className="btn btn-outline-dark btn-sm mt-3"
+                  onClick={() => setSelectedService(null)}
+                >
+                  ← Back
+                </button>
+              </div>
+            )}
+
+          </div>
+        )
+      }}
     </Overlay>
   );
 }

@@ -29,6 +29,7 @@ import Sofacleaning from "./pages/Sofacleaning.jsx";
 import Salonpackages from "./pages/Salonpackages.jsx";
 import SalonPage from "./pages/SalonPage.jsx";
 import Salonforwomen from "./pages/Salonforwomen.jsx";
+import SalonLuxe from "./pages/Salonluxe.jsx";
 
 export default function AppContent({
   setHideNavbar,
@@ -101,13 +102,14 @@ export default function AppContent({
         <Route path="/Newnote" element={<Newnote />} />
         <Route path="/Mostbook" element={<Mostbook />} />
         <Route path="/Walls" element={<Walls />} />
-        <Route path="/salon" element={<SalonPage />} /> {/* FIXED: only one salon route */}
+        <Route path="/salon" element={<SalonPage />} />
         <Route path="/Wallpannel" element={<Wallpannel />} />
         <Route path="/Cleaningpest" element={<CleaningPest />} />
         <Route path="/Wallpannels" element={<Wallpannels />} />
         <Route path="/Salonmen" element={<Salonmen />} />
         <Route path="/Wal" element={<Wal />} />
         <Route path="/homerepair" element={<Homerepair />} />
+
 
         {/* CLEANING SERVICES */}
         <Route path="/bathroom-cleaning" element={<BathroomCleaning />} />
@@ -123,6 +125,10 @@ export default function AppContent({
           path="/salonpackages"
           element={<Salonpackages setHideNavbar={setHideNavbar} />}
         />
+
+        {/* pages */}
+        <Route path="/salon/luxe" element={<SalonLuxe />} />
+
 
         {/* CART */}
         <Route path="/cart" element={<CardPage />} />

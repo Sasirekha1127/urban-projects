@@ -22,7 +22,6 @@ function BathroomCleaning() {
   const comboRef = useRef(null);
   const bathroomRef = useRef(null);
 
-  const [selectedService, setSelectedService] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [popupData, setPopupData] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -30,6 +29,7 @@ function BathroomCleaning() {
   const [showMoreOffers, setShowMoreOffers] = useState(false);
   const [activeService, setActiveService] = useState("bathroom");
 
+  // OPEN POPUP
   const handleOpenPopup = (item) => {
     const existing = cartItems.find((i) => i.title === item.title);
     setPopupData({ ...item, qty: existing ? existing.quantity : 1 });
@@ -38,22 +38,32 @@ function BathroomCleaning() {
 
   const handleClosePopup = () => setShowPopup(false);
 
+  // ADD OR UPDATE CART
   const handleAdd = (serviceDetails) => {
+    const total = serviceDetails.qty * Number(serviceDetails.price);
+
     setCartItems((prev) => {
       const existing = prev.find((item) => item.title === serviceDetails.title);
+
       if (existing) {
         return prev.map((item) =>
-          item.title === serviceDetails.title ? { ...item, quantity: serviceDetails.qty } : item
+          item.title === serviceDetails.title
+            ? { ...item, quantity: serviceDetails.qty, totalPrice: total }
+            : item
         );
       }
-      return [...prev, { ...serviceDetails, quantity: serviceDetails.qty }];
+
+      return [
+        ...prev,
+        { ...serviceDetails, quantity: serviceDetails.qty, totalPrice: total },
+      ];
     });
   };
 
   const handleServiceClick = (service) => {
     setActiveService(service);
-    if (service === "combos" && comboRef.current) comboRef.current.scrollIntoView({ behavior: "smooth" });
-    if (service === "bathroom" && bathroomRef.current) bathroomRef.current.scrollIntoView({ behavior: "smooth" });
+    if (service === "combos") comboRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (service === "bathroom") bathroomRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleVideoClick = () => {
@@ -76,10 +86,14 @@ function BathroomCleaning() {
       <NavbarUC hideSearch={false} hideLocation={false} />
 
       <div className="bathroom-wrapper" style={{ paddingTop: "100px" }}>
+        
         {/* LEFT SIDE */}
         <div className="bathroom-left">
           <h2 className="bathroom-title">Bathroom Cleaning</h2>
-          <div className="rating-box"><FaStar /> <span>4.78 (8.6 M bookings)</span></div>
+
+          <div className="rating-box">
+            <FaStar /> <span>4.78 (8.6 M bookings)</span>
+          </div>
 
           <div className="service-container">
             <div className="service-heading-wrapper">
@@ -94,7 +108,11 @@ function BathroomCleaning() {
                 { id: "kitchen", img: kitchenIcon, name: "Kitchen cleaning" },
                 { id: "mini", img: miniIcon, name: "Mini services" },
               ].map((item) => (
-                <div key={item.id} className={`service-item ${activeService === item.id ? "active" : ""}`} onClick={() => handleServiceClick(item.id)}>
+                <div
+                  key={item.id}
+                  className={`service-item ${activeService === item.id ? "active" : ""}`}
+                  onClick={() => handleServiceClick(item.id)}
+                >
                   <img src={item.img} alt={item.name} className="service-img1" />
                   <p className="service-name">{item.name}</p>
                 </div>
@@ -105,7 +123,6 @@ function BathroomCleaning() {
 
         {/* RIGHT SIDE */}
         <div className="bathroom-right">
-          {/* VIDEO */}
           <div className="video-box">
             <video ref={videoRef} onClick={handleVideoClick} loop muted playsInline>
               <source src={bathroomVideo} type="video/mp4" />
@@ -113,11 +130,14 @@ function BathroomCleaning() {
           </div>
 
           <div className="bottom-section">
+
             {/* COMBOS */}
             <div className="combos-section" ref={comboRef}>
               <h3 className="combo-heading">Combos</h3>
 
               <div className="combo-cards">
+
+                {/* Combo 1 */}
                 <div className="combo-card">
                   <div className="combo-info">
                     <h4>Classic cleaning (2 bathrooms)</h4>
@@ -125,18 +145,27 @@ function BathroomCleaning() {
                     <p className="combo-price">₹868 • 2 hrs</p>
                     <p className="bathroom-view">View details</p>
 
-                    <button className="add-btn" onClick={() => handleOpenPopup({
-                      title: "Classic cleaning (2 bathrooms)",
-                      rating: "4.82",
-                      reviews: "1.5M reviews",
-                      price: "868",
-                      duration: "2 hrs",
-                      offer: "434",
-                      beforeafter: beforeafter,
-                    })}>Add</button>
+                    <button
+                      className="add-btn"
+                      onClick={() =>
+                        handleOpenPopup({
+                          title: "Classic cleaning (2 bathrooms)",
+                          rating: "4.82",
+                          reviews: "1.5M reviews",
+                          price: 868,
+                          duration: "2 hrs",
+                          offer: 434,
+                          beforeafter: beforeafter,
+                        })
+                      }
+                    >
+                      Add
+                    </button>
                   </div>
 
-                  <div className="combo-img"><img src={combobathrrom} alt="" /></div>
+                  <div className="combo-img">
+                    <img src={combobathrrom} alt="" />
+                  </div>
                 </div>
 
                 <hr />
@@ -148,9 +177,17 @@ function BathroomCleaning() {
                   <div className="bathroom-card">
                     <div className="bathroom-left-info">
                       <p className="bestseller">BESTSELLER</p>
+
                       <h4>Intense bathroom cleaning</h4>
-                      <p className="bathroom-rating"><FaStar /> 4.79 (4.2M reviews)</p>
-                      <p className="bathroom-price">Starts at <b>₹549</b> • 1 hr 20 mins</p>
+
+                      <p className="bathroom-rating">
+                        <FaStar /> 4.79 (4.2M reviews)
+                      </p>
+
+                      <p className="bathroom-price">
+                        Starts at <b>₹549</b> • 1 hr 20 mins
+                      </p>
+
                       <ul className="bathroom-points">
                         <li>Floor & tile cleaning with scrubbing machine</li>
                         <li>Recommended for deep-cleaning and tough stains</li>
@@ -159,15 +196,23 @@ function BathroomCleaning() {
 
                     <div className="bathroom-right-img">
                       <img src={intense} alt="" />
-                      <button className="add-btn2" onClick={() => handleOpenPopup({
-                        title: "Intense bathroom cleaning",
-                        rating: "4.79",
-                        reviews: "4.2M reviews",
-                        price: 549,
-                        duration: "1 hr 20 mins",
-                        offer: "549",
-                        beforeafter: beforeafter,
-                      })}>Add</button>
+
+                      <button
+                        className="add-btn2"
+                        onClick={() =>
+                          handleOpenPopup({
+                            title: "Intense bathroom cleaning",
+                            rating: "4.79",
+                            reviews: "4.2M reviews",
+                            price: 549,
+                            duration: "1 hr 20 mins",
+                            offer: 549,
+                            beforeafter: beforeafter,
+                          })
+                        }
+                      >
+                        Add
+                      </button>
                     </div>
                   </div>
 
@@ -176,24 +221,51 @@ function BathroomCleaning() {
               </div>
             </div>
 
-            {/* RIGHT SIDEBAR */}
+            {/* RIGHT SIDEBAR — CART */}
             <div className="right-info">
               {cartItems.length === 0 ? (
-                <div className="no-card-box"><LuShoppingCart size={45} className="cart-icon" /><h4>No items in your cart</h4></div>
+                <div className="no-card-box">
+                  <LuShoppingCart size={45} className="cart-icon" />
+                  <h4>No items in your cart</h4>
+                </div>
               ) : (
-                <div className="cart-box">
-                  <h4>Your Cart</h4>
+                <div className="uc-cart-box">
                   {cartItems.map((item) => (
-                    <div key={item.title} className="cart-item">
-                      <p>{item.title}</p>
-                      <p>Qty: {item.quantity}</p>
-                      <p>₹{item.price}</p>
+                    <div key={item.title} className="uc-cart-item">
+
+                      <div className="uc-cart-left">
+                        <p className="uc-cart-title">{item.title}</p>
+
+                        <div className="uc-qty-box">
+                          <button
+                            className="uc-qty-btn"
+                            onClick={() =>
+                              handleAdd({ ...item, qty: Math.max(1, item.quantity - 1) })
+                            }
+                          >
+                            –
+                          </button>
+
+                          <span className="uc-qty-number">{item.quantity}</span>
+
+                          <button
+                            className="uc-qty-btn"
+                            style={{ opacity: 0.4, cursor: "not-allowed" }}
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        <div className="uc-cart-price">₹{item.totalPrice}</div>
+                      </div>
                     </div>
                   ))}
-                  <button className="checkout-btn">Go to Cart</button>
+
+                  <button className="uc-view-cart-btn">View Cart</button>
                 </div>
               )}
 
+              {/* OFFERS */}
               <div className="offer-box">
                 {visibleOffers.map((offer) => (
                   <div key={offer.id} className="offer-item">
@@ -204,11 +276,16 @@ function BathroomCleaning() {
                     </div>
                   </div>
                 ))}
-                <button className="view-more-btn" onClick={() => setShowMoreOffers(!showMoreOffers)}>
+
+                <button
+                  className="view-more-btn"
+                  onClick={() => setShowMoreOffers(!showMoreOffers)}
+                >
                   {showMoreOffers ? "View Less Offers ↑" : "View More Offers ↓"}
                 </button>
               </div>
 
+              {/* UC PROMISE */}
               <div className="uc-promise">
                 <div className="uc-text">
                   <h4>UC Promise</h4>
@@ -218,36 +295,33 @@ function BathroomCleaning() {
                     <li><IoMdCheckmark /> Superior Stain Removal</li>
                   </ul>
                 </div>
-                <div className="uc-img"><img src={ucImg} alt="UC Promise" /></div>
+
+                <div className="uc-img">
+                  <img src={ucImg} alt="UC Promise" />
+                </div>
               </div>
             </div>
+
           </div>
         </div>
-
-        {/* POPUP */}
-        <Popup show={showPopup} onClose={handleClosePopup} data={popupData} onAdd={handleAdd} />
       </div>
+
+      {/* POPUP */}
+      <Popup show={showPopup} onClose={handleClosePopup} data={popupData} onAdd={handleAdd} />
     </div>
   );
 }
+
+
 /* ------------------ POPUP COMPONENT ------------------- */
 function Popup({ show, onClose, data, onAdd }) {
   const [added, setAdded] = useState(false);
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   if (!show || !data) return null;
 
   const increase = () => setQty(qty + 1);
-  const decrease = () => qty > 0 && setQty(qty - 1);
-
-  const handleAdd = () => {
-    // Start with qty = 1 on first add
-    if (!added) {
-      setQty(1);
-      setAdded(true);
-      // onAdd({ ...data, qty: 1 });
-    }
-  };
+  const decrease = () => qty > 1 && setQty(qty - 1);
 
   const totalAmount = qty * Number(data.price);
 
@@ -268,10 +342,12 @@ function Popup({ show, onClose, data, onAdd }) {
             <p className="uc-offer">₹{data.offer} per bathroom</p>
           </div>
 
-          {/* ADD turns into QTY */}
           <div className="add-or-qty-wrapper">
             {!added ? (
-              <button className="uc-add-final-btn" onClick={handleAdd}>
+              <button
+                className="uc-add-final-btn"
+                onClick={() => setAdded(true)}
+              >
                 Add
               </button>
             ) : (
@@ -283,25 +359,28 @@ function Popup({ show, onClose, data, onAdd }) {
             )}
           </div>
 
-          {/* Bottom Amount + Done */}
           {added && (
             <div className="uc-bottom-controls">
               <div className="uc-amount-box">
                 <h4>₹{totalAmount}</h4>
                 <p>Total Amount</p>
               </div>
-              <button className="uc-done-btn" onClick={onClose}>
+
+              <button
+                className="uc-done-btn"
+                onClick={() => {
+                  onAdd({ ...data, qty });
+                  onClose();
+                }}
+              >
                 Done
               </button>
             </div>
           )}
-
         </div>
       </div>
     </div>
   );
 }
-
-
 
 export default BathroomCleaning;
