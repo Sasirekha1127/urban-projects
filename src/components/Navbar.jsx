@@ -15,7 +15,7 @@ import Loading from "../components/Loading.jsx";
 import logo from "../assets/logo.png";
 import "./navbar.css";
 
-function NavbarUC({ hideSearch, hideLocation, hideIcons }) {
+function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink}) {
   const [showLocation, setShowLocation] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -88,20 +88,25 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons }) {
                     <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
                       <RiAccountCircleLine size={22} className="ms-1 text-dark" />
                     </div>
-                  </>
-                )}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                  </>
+              )}
               </div>
-
+              
               <Navbar.Collapse id="basic-navbar-nav">
+                {!hideLink && (
                 <Nav className="me-auto mx-3 gap-4">
                   <NavLink to="/beauty" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Beauty</NavLink>
                   <NavLink to="/revamp" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Revamp</NavLink>
                   <NavLink to="/native" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Native</NavLink>
                 </Nav>
+                )}
+
               </Navbar.Collapse>
 
               {/* Search + Location */}
+              {(!hideSearch || !hideLocation) && (
+
               <div className="search-wrapper w-100">
                 <Form className="mt-2 search-section d-flex gap-2">
                   {!hideLocation && (
@@ -136,6 +141,7 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons }) {
                   )}
                 </Form>
               </div>
+              )}
             </Container>
           </Navbar>
 

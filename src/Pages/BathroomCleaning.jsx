@@ -169,6 +169,51 @@ function BathroomCleaning() {
                 </div>
 
                 <hr />
+                {/* ---------------- SECOND COMBOS SECTION ---------------- */}
+<div className="combos-section">
+  <h3 className="combo-heading">More Combos</h3>
+
+  <div className="combo-cards">
+
+    {/* Combo 2 */}
+    <div className="combo-card">
+      <div className="combo-info">
+        <h4>Premium cleaning (3 bathrooms)</h4>
+        <p className="combo-rating"><FaStar /> 4.85 (98K reviews)</p>
+        <p className="combo-price">₹1299 • 3 hrs</p>
+        <p className="bathroom-view">View details</p>
+
+        <button
+          className="add-btn"
+          onClick={() =>
+            handleOpenPopup({
+              title: "Premium cleaning (3 bathrooms)",
+              rating: "4.85",
+              reviews: "98K reviews",
+              price: 1299,
+              duration: "3 hrs",
+              offer: 433,
+              beforeafter: beforeafter,
+            })
+          }
+        >
+          Add
+        </button>
+      </div>
+
+      <div className="combo-img">
+        <img src={combobathrrom} alt="" />
+      </div>
+    </div>
+
+
+   
+
+  </div>
+</div>
+    <hr />
+
+
 
                 {/* Bathroom Section */}
                 <div className="bathroom-cleaning-section" ref={bathroomRef}>
