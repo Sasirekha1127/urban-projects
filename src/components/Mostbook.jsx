@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import "../components/Mostbook.css";
@@ -11,6 +11,8 @@ import most5 from "../assets/most5.png";
 import most6 from "../assets/most6.png";
 
 const MostBooked = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const mostBooked = [
     { img: most1, text: "Intense bathroom cleaning", rating: 4.9, reviews: "3.5M", price: "₹449" },
     { img: most2, text: "Intense cleaning (2 bathrooms)", rating: 4.49, reviews: "3.5M", price: "₹1200" },
@@ -20,40 +22,45 @@ const MostBooked = () => {
     { img: most6, text: "Roll-on waxing (full arms, legs & underarms)", rating: 4.4, reviews: "155k", price: "₹899" },
   ];
 
-  const NextArrow = ({ onClick }) => (
-    <div className="mostbooked-arrow right" onClick={onClick}>
-      <FaArrowRight />
-    </div>
-  );
+  const slidesToShowDefault = 5;
 
-  const PrevArrow = ({ onClick }) => (
-    <div className="mostbooked-arrow left" onClick={onClick}>
-      <FaArrowLeft />
-    </div>
-  );
+  // Custom left arrow
+  const PrevArrow = ({ onClick }) => {
+    if (currentSlide === 0) return null; // hide on first slide
+    return (
+      <div className="mostbooked-arrow left" onClick={onClick}>
+        <FaArrowLeft />
+      </div>
+    );
+  };
+
+  // Custom right arrow
+  const NextArrow = ({ onClick }) => {
+    if (currentSlide + slidesToShowDefault >= mostBooked.length) return null; // hide on last slide
+    return (
+      <div className="mostbooked-arrow right" onClick={onClick}>
+        <FaArrowRight />
+      </div>
+    );
+  };
 
   const settings = {
     dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1, // scroll one item per click
+    infinite: true, 
+    speed: 700,
+    slidesToShow: slidesToShowDefault,
+    slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex), // track current slide
     responsive: [
       {
         breakpoint: 768, // tablet
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
+        settings: { slidesToShow: 4, slidesToScroll: 1 },
       },
       {
         breakpoint: 480, // mobile
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
+        settings: { slidesToShow: 1, slidesToScroll: 1 },
       },
     ],
   };
@@ -65,7 +72,7 @@ const MostBooked = () => {
       <Slider {...settings} className="mostbooked-carousel">
         {mostBooked.map((item, index) => (
           <div key={index} className="mostbooked-item">
-            <img src={item.img} alt={item.text} className="mostbooked-image"/>
+            <img src={item.img} alt={item.text} className="mostbooked-image" />
             <p className="mostbooked-text">{item.text}</p>
             <p className="mostbooked-rating">{item.rating} ({item.reviews})</p>
             <p className="mostbooked-price">{item.price}</p>

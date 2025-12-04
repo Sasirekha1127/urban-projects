@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import "../components/homerepair.css";
@@ -11,6 +11,10 @@ import cupboard from "../assets/cupboard.png";
 import decors from "../assets/decors.png";
 
 const HomeRepairs = () => {
+  const sliderRef = useRef();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(5);
+
   const homeRepairs = [
     { img: decors, text: "Drill & hang (wall decor)", rating: 4.9, reviews: "100K", price: "₹129" },
     { img: cupboard, text: "Cupboard hinge installation", rating: 4.49, reviews: "52K", price: "₹199" },
@@ -20,43 +24,62 @@ const HomeRepairs = () => {
     { img: fan, text: "Fan repair", rating: 4.4, reviews: "155k", price: "₹199" },
   ];
 
-  const NextArrow = ({ onClick }) => (
-    <div className="repair-arrow right" onClick={onClick}>
-      <FaArrowRight />
-    </div>
-  );
+  // Update slidesToShow on window resize
+  const handleResize = () => {
+    const width = window.innerWidth;
+    if (width <= 480) setSlidesToShow(1);
+    else if (width <= 768) setSlidesToShow(2);
+    else if (width <= 1024) setSlidesToShow(3);
+    else setSlidesToShow(5);
+  };
 
-  const PrevArrow = ({ onClick }) => (
-    <div className="repair-arrow left" onClick={onClick}>
-      <FaArrowLeft />
-    </div>
-  );
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Custom Left Arrow
+  const PrevArrow = ({ onClick }) => {
+    if (currentSlide === 0) return null; // hide initially
+    return (
+      <div className="repair-arrow left" onClick={onClick}>
+        <FaArrowLeft />
+      </div>
+    );
+  };
+
+  // Custom Right Arrow
+  const NextArrow = ({ onClick }) => {
+    // hide only if last fully visible slide reached
+    if (currentSlide >= homeRepairs.length - slidesToShow) return null;
+    return (
+      <div className="repair-arrow right" onClick={onClick}>
+        <FaArrowRight />
+      </div>
+    );
+  };
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false, // not infinite
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
     responsive: [
-      {
-        breakpoint: 768,
-        settings: { slidesToShow: 4 }
-      },
-      {
-        breakpoint: 480,
-        settings: { slidesToShow: 1 }
-      }
-    ]
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
+    ],
   };
 
   return (
     <div className="repair-wrapper">
       <h2 className="repair-heading">Home Repairs</h2>
-
-      <Slider {...settings} className="repair-carousel">
+      <Slider ref={sliderRef} {...settings}>
         {homeRepairs.map((item, index) => (
           <div key={index} className="repair-item">
             <img src={item.img} alt={item.text} className="repair-image" />
