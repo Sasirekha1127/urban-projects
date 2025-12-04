@@ -15,19 +15,20 @@ import intense from "../assets/intense.png";
 
 import uc from "../assets/ucpromise.png";
 import miniservice from "../assets/mini-services.png";
-import popup from "../assets/popup.mp4"
+import popup from "../assets/popup.mp4";
 
 const SalonLuxe = () => {
   const [selectedService, setSelectedService] = useState(null);
-const [showPopup, setShowPopup] = useState(false);
-const [qty, setQty] = useState(1);
-const [showAllOffers, setShowAllOffers] = useState(false);  
+  const [showPopup, setShowPopup] = useState(false);
+  const [qty, setQty] = useState(1);
+  const [showAllOffers, setShowAllOffers] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const openPopup = (data) => {
     setSelectedService(data);
     setShowPopup(true);
+    setQty(1);
   };
-
 
   const combos = [
     {
@@ -36,7 +37,6 @@ const [showAllOffers, setShowAllOffers] = useState(false);
       oldPrice: 1030,
       duration: "2 hrs 40 mins",
       perBathroom: 395,
-      tag: "2 BATHROOMS",
       rating: "4.79 (3.7M reviews)",
       img: bathroom,
       desc: "Floor & tile cleaning with a scrub machine",
@@ -47,7 +47,6 @@ const [showAllOffers, setShowAllOffers] = useState(false);
       oldPrice: 1557,
       duration: "4 hrs",
       perBathroom: 386,
-      tag: "3 BATHROOMS",
       rating: "4.79 (3.7M reviews)",
       img: bathroom,
       desc: "Floor & tile cleaning with a scrub machine",
@@ -82,56 +81,53 @@ const [showAllOffers, setShowAllOffers] = useState(false);
     { id: 4, title: "Up to ₹150 cashback", desc: "Valid for Paytm UPI only" },
   ];
 
+  const addToCart = () => {
+    if (qty === 0) return;
 
+    const existingIndex = cart.findIndex(item => item.title === selectedService.title);
+    if (existingIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingIndex].qty += qty;
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, { ...selectedService, qty }]);
+    }
+
+    setShowPopup(false);
+    setQty(0);
+  };
 
   return (
     <div className="page-wrapper">
       <NavbarUC />
+
+      {/* POPUP */}
       {showPopup && selectedService && (
         <div className="popup-overlay">
-
-          {/* CLOSE BUTTON */}
           <span className="close-btn" onClick={() => setShowPopup(false)}>✕</span>
 
           <div className="popup-box">
-
-            {/* VIDEO */}
             <video src={popup} className="popup-full-img" autoPlay loop muted />
 
-            {/* DETAILS */}
             <div className="popup-details">
-
-              {/* LEFT SIDE */}
               <div className="details-left">
                 <h2 className="popup-title">{selectedService.title}</h2>
-
                 <p className="popup-rating">
                   <FaStar className="star-icon" /> {selectedService.rating}
                 </p>
 
                 <div className="popup-price-row">
                   <span className="new-price">₹{selectedService.price}</span>
-
-                  {selectedService.oldPrice && (
-                    <span className="old-price">₹{selectedService.oldPrice}</span>
-                  )}
-
-                  {selectedService.time && (
-                    <span className="service-time">• {selectedService.time}</span>
-                  )}
+                  {selectedService.oldPrice && <span className="old-price">₹{selectedService.oldPrice}</span>}
+                  {selectedService.time && <span className="service-time">• {selectedService.time}</span>}
                 </div>
 
-                <p className="per-bath">
-                  ₹{selectedService.price / 2} per bathroom
-                </p>
+                {selectedService.desc && <p className="desc">{selectedService.desc}</p>}
               </div>
 
-              {/* RIGHT SIDE BUTTON / QTY */}
               <div className="details-right">
                 {qty === 0 ? (
-                  <button className="popup-add-btn" onClick={() => setQty(1)}>
-                    Add
-                  </button>
+                  <button className="popup-add-btn" onClick={() => setQty(1)}>Add</button>
                 ) : (
                   <div className="qty-box">
                     <button onClick={() => setQty(prev => Math.max(prev - 1, 0))}>−</button>
@@ -140,59 +136,40 @@ const [showAllOffers, setShowAllOffers] = useState(false);
                   </div>
                 )}
               </div>
-
             </div>
 
-            {/* BOTTOM TOTAL + DONE BUTTON */}
-            {qty > 0 && (
-              <div className="popup-bottom">
-                <div className="popup-total">
-                  <span>₹{selectedService.price * qty}</span>
-                </div>
+            {/* Always show amount even when qty=0 */}
+            <div className="popup-bottom">
+              <div className="popup-total">₹{selectedService.price * qty}</div>
 
-                <button className="popup-done-btn">
-                  Done
-                </button>
-              </div> 
-            )}
-
+              {qty === 0 ? (
+                <button className="popup-done-btn disabled">Add qty</button>
+              ) : (
+                <button className="popup-done-btn" onClick={addToCart}>Done</button>
+              )}
+            </div>
           </div>
         </div>
       )}
 
-      const [showAllOffers, setShowAllOffers] = useState(false);
-
+      {/* MAIN LAYOUT */}
       <div className="uc-main-layout">
+
         {/* LEFT SIDE */}
         <div className="uc-left">
           <h1>Bathroom & Kitchen Cleaning</h1>
-
           <p className="rating">
-            <FaStar style={{ color: "blue", display: "inline" }} /> 4.79{" "}
-            <span>(8.7M bookings)</span>
+            <FaStar style={{ color: "blue", display: "inline" }} /> 4.79 <span>(8.7M bookings)</span>
           </p>
 
           <div className="service-wrapper">
             <h4 className="service-title">Select a service</h4>
             <div className="headings-line"></div>
-
             <div className="service-grid">
-              <div className="service-box">
-                <img src={comboIcon} alt="combo" />
-                <p>Combos</p>
-              </div>
-              <div className="service-box">
-                <img src={combobathrrom} alt="bathroom" />
-                <p>Bathroom cleaning</p>
-              </div>
-              <div className="service-box">
-                <img src={kitchenIcon} alt="kitchen" />
-                <p>Kitchen cleaning</p>
-              </div>
-              <div className="service-box">
-                <img src={miniIcon} alt="mini" />
-                <p>Mini services</p>
-              </div>
+              <div className="service-box"><img src={comboIcon} alt="" /><p>Combos</p></div>
+              <div className="service-box"><img src={combobathrrom} alt="" /><p>Bathroom cleaning</p></div>
+              <div className="service-box"><img src={kitchenIcon} alt="" /><p>Kitchen cleaning</p></div>
+              <div className="service-box"><img src={miniIcon} alt="" /><p>Mini services</p></div>
             </div>
           </div>
         </div>
@@ -205,20 +182,18 @@ const [showAllOffers, setShowAllOffers] = useState(false);
         {/* BOTTOM SECTION */}
         <div className="bottom-layout-wrapper">
           <div className="bottom-layout">
+
             {/* LEFT COLUMN */}
             <div className="bottom-left">
-              {/* COMBOS */}
               <h2 className="combos-heading">Combos</h2>
 
               {combos.map((combo, idx) => (
                 <div key={idx} className="combo-card">
                   <div>
                     <h4 className="combo-title">{combo.title}</h4>
-                    <p className="ratingss m-1">
-                      <FaStar style={{ color: "blue" }} /> {combo.rating}
-                    </p>
+                    <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> {combo.rating}</p>
                     <p className="price m-1">
-                      <span style={{ color: "green", fontWeight: "600" }}>₹{combo.price}</span>{" "}
+                      <span style={{ color: "green", fontWeight: "600" }}>₹{combo.price}</span>
                       <span className="old">₹{combo.oldPrice}</span> • {combo.duration}
                     </p>
                     <p className="green">₹{combo.perBathroom} per bathroom</p>
@@ -234,19 +209,15 @@ const [showAllOffers, setShowAllOffers] = useState(false);
 
               <hr />
 
-              {/* BATHROOM CLEANING */}
-              <h2 className="combos-heading" style={{ marginTop: "40px" }}>
-                Bathroom cleaning
-              </h2>
+              {/* Bathroom cleaning */}
+              <h2 className="combos-heading" style={{ marginTop: "40px" }}>Bathroom cleaning</h2>
 
               <div className="combo-card">
                 <div>
                   <h4 className="combo-title">Intense bathroom cleaning</h4>
-                  <p className="ratingss m-1">
-                    <FaStar style={{ color: "blue" }} /> 4.79 (3.7M reviews)
-                  </p>
+                  <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> 4.79 (3.7M reviews)</p>
                   <p className="price m-1">
-                    <span style={{ color: "green", fontWeight: "600" }}>Starts at ₹419</span>{" "}
+                    <span style={{ color: "green", fontWeight: "600" }}>Starts at ₹419</span>
                     <span className="old">₹519</span>
                   </p>
                   <p className="desc">Floor & tile cleaning with scrubbing machine</p>
@@ -272,15 +243,12 @@ const [showAllOffers, setShowAllOffers] = useState(false);
                 </div>
               </div>
 
-              {/* MOVE-in card */}
               <div className="combo-card">
                 <div>
                   <h4 className="combo-title">Move-in bathroom cleaning</h4>
-                  <p className="ratingss m-1">
-                    <FaStar style={{ color: "blue" }} /> 4.81 (1.1M reviews)
-                  </p>
+                  <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> 4.81 (1.1M reviews)</p>
                   <p className="price m-1">
-                    <span style={{ color: "green", fontWeight: "600" }}>Starts at ₹479</span>{" "}
+                    <span style={{ color: "green", fontWeight: "600" }}>Starts at ₹479</span>
                     <span className="old">₹579</span>
                   </p>
                   <p className="desc">Extra machine scrubbing included</p>
@@ -308,18 +276,14 @@ const [showAllOffers, setShowAllOffers] = useState(false);
 
               <hr />
 
-              {/* MINI SERVICES */}
-              <h2 className="combos-heading" style={{ marginTop: "40px" }}>
-                Mini services
-              </h2>
+              {/* Mini services */}
+              <h2 className="combos-heading" style={{ marginTop: "40px" }}>Mini services</h2>
 
               {miniServices.map((item, i) => (
                 <div key={i} className="combo-card">
                   <div>
                     <h4 className="combo-title">{item.title}</h4>
-                    <p className="ratingss m-1">
-                      <FaStar style={{ color: "blue" }} /> {item.rating} ({item.reviews} reviews)
-                    </p>
+                    <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> {item.rating} ({item.reviews} reviews)</p>
                     <p className="price m-1">
                       <span style={{ fontWeight: "600" }}>₹{item.price}</span> • {item.time}
                     </p>
@@ -336,11 +300,65 @@ const [showAllOffers, setShowAllOffers] = useState(false);
             {/* RIGHT SIDEBAR */}
             <div className="bottom-right-wrapper">
               <div className="bottom-right">
-                <div className="empty-cart">
-                  <LuShoppingCart size={45} className="cart-icon" />
-                  <p>No items in your cart</p>
-                </div>
 
+               {cart.length === 0 ? (
+  <div className="empty-cart">
+    <LuShoppingCart size={45} className="cart-icon" />
+    <p>No items in your cart</p>
+  </div>
+) : (
+
+  <div className="cart-box">   {/* ONLY ONE cart-box */}
+
+    {cart.map((item, idx) => (
+      <div key={idx} className="cart-row">
+
+        <p className="cart-title">{item.title}</p>
+
+        <div className="qty-box">
+          <button
+            className="qty-btn"
+            onClick={() => {
+              const updated = [...cart];
+              updated[idx].qty = Math.max(0, updated[idx].qty - 1);
+              const filtered = updated.filter(it => it.qty > 0);
+              setCart(filtered);
+            }}
+          >
+            −
+          </button>
+
+          <span className="qty-count">{item.qty}</span>
+
+          <button
+            className="qty-btn"
+            onClick={() => {
+              const updated = [...cart];
+              updated[idx].qty += 1;
+              setCart(updated);
+            }}
+          >
+            +
+          </button>
+        </div>
+
+        <p className="cart-price">₹{item.price * item.qty}</p>
+      </div>
+    ))}
+
+    <div className="cart-bottom-bar">
+      <span className="cart-total">
+        ₹{cart.reduce((sum, item) => sum + item.price * item.qty, 0)}
+      </span>
+      <button className="view-cart-btn">View Cart</button>
+    </div>
+
+  </div>
+)}
+
+
+
+                {/* OFFERS */}
                 <div className={`offers-container ${showAllOffers ? "expanded" : ""}`}>
                   {offers.slice(0, showAllOffers ? offers.length : 1).map((offer) => (
                     <div key={offer.id} className="offer-item">
@@ -369,11 +387,13 @@ const [showAllOffers, setShowAllOffers] = useState(false);
                     <li>✔ Transparent Pricing</li>
                   </ul>
                 </div>
+
               </div>
             </div>
 
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export default function CartPage() {
 
   return (
     <div className="cart-page-container">
-      <div className="cart-content">
+      <div className="cart-contents">
         <img
           src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
           alt="Empty cart"
@@ -17,7 +17,7 @@ export default function CartPage() {
         <p>Let’s add some services</p>
         <button
           className="explore-btn"
-          onClick={() => navigate("/services")}
+          onClick={() => navigate("/")}
         >
           Explore services
         </button>
