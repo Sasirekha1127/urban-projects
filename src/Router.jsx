@@ -23,13 +23,13 @@ import Beauty from './pages/Beauty.jsx';
 import Revamp from './pages/Revamp.jsx';
 import Native from './pages/Native.jsx';
 import BathroomCleaning from './pages/BathroomCleaning.jsx';
-import CardPage from './pages/CardPage.jsx';
+import CardPage from './Pages/CardPage.jsx';
 import Wallmakeover from "./pages/Wallmakeover.jsx";
 import Sofacleaning from "./pages/Sofacleaning.jsx";
 import Salonpackages from "./pages/Salonpackages.jsx";
 import SalonPage from "./pages/SalonPage.jsx";
 import Salonforwomen from "./pages/Salonforwomen.jsx";
-import SalonLuxe from "./pages/Salonluxe.jsx";
+import SalonLuxe from "./Pages/Salonluxe.jsx";
 
 export default function AppContent({
   setHideNavbar,

@@ -146,7 +146,6 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 @media screen and (max-width: 600px) {
   .uc-left h1 {
     font-size: 24px;
@@ -159,12 +158,12 @@
   .rating {
     font-size: 14px;
   }
-
-
+  
   .hero-video {
     height: 200px;
     width: 95%;
   }
+  
 
   .service-box img {
     height: 50px;
@@ -293,14 +292,21 @@
 @media (max-width: 768px) {
 
   .bottom-layout {
-    grid-template-columns: 1fr;   /* one column */
+    grid-template-columns: 1fr;   
     margin-left: 0;
   }
 
   .bottom-left {
     width: 100%;
     margin-left: 0;
+    
   }
+  .combos-heading {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 20%;
+  }
+
 
   .combo-card {
     width: 100%;
@@ -314,18 +320,23 @@
     width: 100px;
     margin-left: 0;
   }
+  .service-wrapper{
+        margin-top: 20%;
+
+  }
 
   .add-btn {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
-    align-self: flex-end;
-    margin-top: 10px;
+   font-size: 0.85rem;
+    padding: 5px 12px;  
+    position: absolute !important;
+    top: 80%;
+    /* left: px; */
+
   }
 
   .combos-heading {
     font-size: 1.5rem;
+
   }
 }
 
@@ -334,6 +345,8 @@
 
   .combo-card {
     padding: 14px;
+    position: relative;
+    right: 8px;
   }
 
   .service-img-box img {
@@ -342,7 +355,10 @@
 
   .add-btn {
     font-size: 0.85rem;
-    padding: 5px 12px;
+    padding: 5px 12px;  
+    position: absolute ;
+    top: 60px;
+    left: 20px;
   }
 }
 
@@ -361,7 +377,6 @@
     overflow: visible; 
 
 }
-
 
 /* CART */
 .empty-cart {
@@ -477,6 +492,9 @@
   .uc-promise {
     padding: 15px;
     width: 100%;
+    position: relative;
+    right: 10px;
+
   }
 
   .offer-sub,
@@ -661,7 +679,53 @@
 .popup-box.closing {
   animation: slideDown 0.6s ease-in forwards; /* slower and smooth */
 }
+/* Tablets */
+@media (max-width: 992px) {
+  .popup-box {
+    width: 60%;
+  }
+}
 
+/* Large Mobiles */
+@media (max-width: 768px) {
+  .popup-box {
+    width: 80%;
+  }
+  .popup-full-img {
+    height: 220px;
+  }
+  .popup-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .details-right {
+    width: 100%;
+  }
+  .popup-add-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Small Mobiles */
+@media (max-width: 480px) {
+  .popup-box {
+    width: 100%;
+    padding-bottom: 15px;
+  }
+  .popup-full-img {
+    height: 200px;
+  }
+  .popup-title {
+    font-size: 18px;
+  }
+  .popup-add-btn {
+    padding: 10px 0;
+    font-size: 15px;
+    width: 100%;
+  }
+}
 .qty-box {
   display: flex;
   gap: 10px;
@@ -880,7 +944,7 @@
   font-weight: 500;
 }
 
-.qty-box {
+.qty-box1 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -918,4 +982,9 @@
   padding: 8px 16px;
   border-radius: 10px;
   cursor: pointer;
+}
+.cart-header{
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 15px;
 }

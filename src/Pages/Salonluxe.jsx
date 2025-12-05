@@ -24,6 +24,12 @@ const SalonLuxe = () => {
   const [showAllOffers, setShowAllOffers] = useState(false);
   const [cart, setCart] = useState([]);
 
+  // Get Quantity of an item
+  const getQty = (title) => {
+    const found = cart.find((c) => c.title === title);
+    return found ? found.qty : 0;
+  };
+
   const openPopup = (data) => {
     setSelectedService(data);
     setShowPopup(true);
@@ -84,17 +90,19 @@ const SalonLuxe = () => {
   const addToCart = () => {
     if (qty === 0) return;
 
-    const existingIndex = cart.findIndex(item => item.title === selectedService.title);
-    if (existingIndex !== -1) {
-      const updatedCart = [...cart];
-      updatedCart[existingIndex].qty += qty;
-      setCart(updatedCart);
+    const existing = cart.find((i) => i.title === selectedService.title);
+
+    if (existing) {
+      setCart(
+        cart.map((c) =>
+          c.title === selectedService.title ? { ...c, qty: c.qty + qty } : c
+        )
+      );
     } else {
       setCart([...cart, { ...selectedService, qty }]);
     }
 
     setShowPopup(false);
-    setQty(0);
   };
 
   return (
@@ -118,8 +126,12 @@ const SalonLuxe = () => {
 
                 <div className="popup-price-row">
                   <span className="new-price">₹{selectedService.price}</span>
-                  {selectedService.oldPrice && <span className="old-price">₹{selectedService.oldPrice}</span>}
-                  {selectedService.time && <span className="service-time">• {selectedService.time}</span>}
+                  {selectedService.oldPrice && (
+                    <span className="old-price">₹{selectedService.oldPrice}</span>
+                  )}
+                  {selectedService.time && (
+                    <span className="service-time">• {selectedService.time}</span>
+                  )}
                 </div>
 
                 {selectedService.desc && <p className="desc">{selectedService.desc}</p>}
@@ -130,15 +142,14 @@ const SalonLuxe = () => {
                   <button className="popup-add-btn" onClick={() => setQty(1)}>Add</button>
                 ) : (
                   <div className="qty-box">
-                    <button onClick={() => setQty(prev => Math.max(prev - 1, 0))}>−</button>
+                    <button onClick={() => setQty((prev) => Math.max(prev - 1, 0))}>−</button>
                     <span>{qty}</span>
-                    <button onClick={() => setQty(prev => prev + 1)}>+</button>
+                    <button onClick={() => setQty((prev) => prev + 1)}>+</button>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Always show amount even when qty=0 */}
             <div className="popup-bottom">
               <div className="popup-total">₹{selectedService.price * qty}</div>
 
@@ -152,29 +163,43 @@ const SalonLuxe = () => {
         </div>
       )}
 
-      {/* MAIN LAYOUT */}
+      {/* MAIN CONTENT */}
       <div className="uc-main-layout">
-
-        {/* LEFT SIDE */}
+        {/* LEFT SIDE MENU */}
         <div className="uc-left">
           <h1>Bathroom & Kitchen Cleaning</h1>
           <p className="rating">
-            <FaStar style={{ color: "blue", display: "inline" }} /> 4.79 <span>(8.7M bookings)</span>
+            <FaStar style={{ color: "blue" }} /> 4.79 <span>(8.7M bookings)</span>
           </p>
 
           <div className="service-wrapper">
             <h4 className="service-title">Select a service</h4>
             <div className="headings-line"></div>
             <div className="service-grid">
-              <div className="service-box"><img src={comboIcon} alt="" /><p>Combos</p></div>
-              <div className="service-box"><img src={combobathrrom} alt="" /><p>Bathroom cleaning</p></div>
-              <div className="service-box"><img src={kitchenIcon} alt="" /><p>Kitchen cleaning</p></div>
-              <div className="service-box"><img src={miniIcon} alt="" /><p>Mini services</p></div>
+              <div className="service-box">
+                <img src={comboIcon} alt="" />
+                <p>Combos</p>
+              </div>
+
+              <div className="service-box">
+                <img src={combobathrrom} alt="" />
+                <p>Bathroom cleaning</p>
+              </div>
+
+              <div className="service-box">
+                <img src={kitchenIcon} alt="" />
+                <p>Kitchen cleaning</p>
+              </div>
+
+              <div className="service-box">
+                <img src={miniIcon} alt="" />
+                <p>Mini services</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* RIGHT SIDE VIDEO */}
+        {/* RIGHT VIDEO */}
         <div className="uc-right">
           <video src={bathroomVideo} autoPlay muted loop className="hero-video" />
         </div>
@@ -183,7 +208,7 @@ const SalonLuxe = () => {
         <div className="bottom-layout-wrapper">
           <div className="bottom-layout">
 
-            {/* LEFT COLUMN */}
+            {/* LEFT LIST */}
             <div className="bottom-left">
               <h2 className="combos-heading">Combos</h2>
 
@@ -191,107 +216,276 @@ const SalonLuxe = () => {
                 <div key={idx} className="combo-card">
                   <div>
                     <h4 className="combo-title">{combo.title}</h4>
-                    <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> {combo.rating}</p>
+                    <p className="ratingss m-1">
+                      <FaStar style={{ color: "blue" }} /> {combo.rating}
+                    </p>
+
                     <p className="price m-1">
-                      <span style={{ color: "green", fontWeight: "600" }}>₹{combo.price}</span>
+                      <span className="green-price">₹{combo.price}</span>
                       <span className="old">₹{combo.oldPrice}</span> • {combo.duration}
                     </p>
+
                     <p className="green">₹{combo.perBathroom} per bathroom</p>
                     <p className="desc">{combo.desc}</p>
                   </div>
 
                   <div className="service-img-box">
                     <img src={combo.img} alt="" />
-                    <button className="add-btn" onClick={() => openPopup(combo)}>Add</button>
+
+                    {/* Dynamic Button */}
+                    {getQty(combo.title) === 0 ? (
+                      <button className="add-btn" onClick={() => openPopup(combo)}>
+                        Add
+                      </button>
+                    ) : (
+                      <div className="qty-box">
+                        <button
+                          onClick={() =>
+                            setCart(
+                              cart
+                                .map((c) =>
+                                  c.title === combo.title
+                                    ? { ...c, qty: c.qty - 1 }
+                                    : c
+                                )
+                                .filter((c) => c.qty > 0)
+                            )
+                          }
+                        >
+                          −
+                        </button>
+                        <span>{getQty(combo.title)}</span>
+                        <button
+                          onClick={() =>
+                            setCart(
+                              cart.map((c) =>
+                                c.title === combo.title
+                                  ? { ...c, qty: c.qty + 1 }
+                                  : c
+                              )
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
 
               <hr />
 
-              {/* Bathroom cleaning */}
-              <h2 className="combos-heading" style={{ marginTop: "40px" }}>Bathroom cleaning</h2>
+              {/* BATHROOM CLEANING */}
+              <h2 className="combos-heading" style={{ marginTop: "40px" }}>
+                Bathroom cleaning
+              </h2>
 
+              {/* ITEM 1 */}
               <div className="combo-card">
                 <div>
                   <h4 className="combo-title">Intense bathroom cleaning</h4>
-                  <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> 4.79 (3.7M reviews)</p>
+                  <p className="ratingss m-1">
+                    <FaStar style={{ color: "blue" }} /> 4.79 (3.7M reviews)
+                  </p>
+
                   <p className="price m-1">
-                    <span style={{ color: "green", fontWeight: "600" }}>Starts at ₹419</span>
+                    <span className="green-price">Starts at ₹419</span>
                     <span className="old">₹519</span>
                   </p>
+
                   <p className="desc">Floor & tile cleaning with scrubbing machine</p>
                 </div>
 
                 <div className="service-img-box">
                   <img src={intense} alt="" />
-                  <button
-                    className="add-btn"
-                    onClick={() =>
-                      openPopup({
-                        title: "Intense bathroom cleaning",
-                        rating: "4.79 (3.7M reviews)",
-                        price: 419,
-                        oldPrice: 519,
-                        img: intense,
-                        desc: "Floor & tile cleaning with scrubbing machine",
-                      })
-                    }
-                  >
-                    Add
-                  </button>
+
+                  {getQty("Intense bathroom cleaning") === 0 ? (
+                    <button
+                      className="add-btn"
+                      onClick={() =>
+                        openPopup({
+                          title: "Intense bathroom cleaning",
+                          rating: "4.79 (3.7M reviews)",
+                          price: 419,
+                          oldPrice: 519,
+                          img: intense,
+                          desc: "Floor & tile cleaning with scrubbing machine",
+                        })
+                      }
+                    >
+                      Add
+                    </button>
+                  ) : (
+                    <div className="qty-box">
+                      <button
+                        onClick={() =>
+                          setCart(
+                            cart
+                              .map((c) =>
+                                c.title === "Intense bathroom cleaning"
+                                  ? { ...c, qty: c.qty - 1 }
+                                  : c
+                              )
+                              .filter((c) => c.qty > 0)
+                          )
+                        }
+                      >
+                        −
+                      </button>
+                      <span>{getQty("Intense bathroom cleaning")}</span>
+                      <button
+                        onClick={() =>
+                          setCart(
+                            cart.map((c) =>
+                              c.title === "Intense bathroom cleaning"
+                                ? { ...c, qty: c.qty + 1 }
+                                : c
+                            )
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
+              {/* ITEM 2 */}
               <div className="combo-card">
                 <div>
                   <h4 className="combo-title">Move-in bathroom cleaning</h4>
-                  <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> 4.81 (1.1M reviews)</p>
+                  <p className="ratingss m-1">
+                    <FaStar style={{ color: "blue" }} /> 4.81 (1.1M reviews)
+                  </p>
+
                   <p className="price m-1">
-                    <span style={{ color: "green", fontWeight: "600" }}>Starts at ₹479</span>
+                    <span className="green-price">Starts at ₹479</span>
                     <span className="old">₹579</span>
                   </p>
+
                   <p className="desc">Extra machine scrubbing included</p>
                 </div>
 
                 <div className="service-img-box">
                   <img src={intense} alt="" />
-                  <button
-                    className="add-btn"
-                    onClick={() =>
-                      openPopup({
-                        title: "Move-in bathroom cleaning",
-                        rating: "4.81 (1.1M reviews)",
-                        price: 479,
-                        oldPrice: 579,
-                        img: intense,
-                        desc: "Extra machine scrubbing included",
-                      })
-                    }
-                  >
-                    Add
-                  </button>
+
+                  {getQty("Move-in bathroom cleaning") === 0 ? (
+                    <button
+                      className="add-btn"
+                      onClick={() =>
+                        openPopup({
+                          title: "Move-in bathroom cleaning",
+                          rating: "4.81 (1.1M reviews)",
+                          price: 479,
+                          oldPrice: 579,
+                          img: intense,
+                          desc: "Extra machine scrubbing included",
+                        })
+                      }
+                    >
+                      Add
+                    </button>
+                  ) : (
+                    <div className="qty-box">
+                      <button
+                        onClick={() =>
+                          setCart(
+                            cart
+                              .map((c) =>
+                                c.title === "Move-in bathroom cleaning"
+                                  ? { ...c, qty: c.qty - 1 }
+                                  : c
+                              )
+                              .filter((c) => c.qty > 0)
+                          )
+                        }
+                      >
+                        −
+                      </button>
+                      <span>{getQty("Move-in bathroom cleaning")}</span>
+                      <button
+                        onClick={() =>
+                          setCart(
+                            cart.map((c) =>
+                              c.title === "Move-in bathroom cleaning"
+                                ? { ...c, qty: c.qty + 1 }
+                                : c
+                            )
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 
               <hr />
 
-              {/* Mini services */}
-              <h2 className="combos-heading" style={{ marginTop: "40px" }}>Mini services</h2>
+              {/* MINI SERVICES */}
+              <h2 className="combos-heading" style={{ marginTop: "40px" }}>
+                Mini services
+              </h2>
 
               {miniServices.map((item, i) => (
                 <div key={i} className="combo-card">
                   <div>
                     <h4 className="combo-title">{item.title}</h4>
-                    <p className="ratingss m-1"><FaStar style={{ color: "blue" }} /> {item.rating} ({item.reviews} reviews)</p>
+
+                    <p className="ratingss m-1">
+                      <FaStar style={{ color: "blue" }} /> {item.rating} ({item.reviews} reviews)
+                    </p>
+
                     <p className="price m-1">
-                      <span style={{ fontWeight: "600" }}>₹{item.price}</span> • {item.time}
+                      <span className="green-price">₹{item.price}</span> • {item.time}
                     </p>
                   </div>
 
                   <div className="service-img-box">
                     <img src={item.img} alt="" />
-                    <button className="add-btn" onClick={() => openPopup(item)}>Add</button>
+
+                    {getQty(item.title) === 0 ? (
+                      <button className="add-btn" onClick={() => openPopup(item)}>
+                        Add
+                      </button>
+                    ) : (
+                      <div className="qty-box">
+                        <button
+                          onClick={() =>
+                            setCart(
+                              cart
+                                .map((c) =>
+                                  c.title === item.title
+                                    ? { ...c, qty: c.qty - 1 }
+                                    : c
+                                )
+                                .filter((c) => c.qty > 0)
+                            )
+                          }
+                        >
+                          −
+                        </button>
+
+                        <span>{getQty(item.title)}</span>
+
+                        <button
+                          onClick={() =>
+                            setCart(
+                              cart.map((c) =>
+                                c.title === item.title
+                                  ? { ...c, qty: c.qty + 1 }
+                                  : c
+                              )
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -300,74 +494,79 @@ const SalonLuxe = () => {
             {/* RIGHT SIDEBAR */}
             <div className="bottom-right-wrapper">
               <div className="bottom-right">
+                {cart.length === 0 ? (
+                  <div className="empty-cart">
+                    <LuShoppingCart size={45} className="cart-icon" />
+                    <p>No items in your cart</p>
+                    </div>
+                ) : (
+                  
+                  <div className="cart-box">
+                    <div className="cart-header">Cart </div>
+                    {cart.map((item, idx) => (
+                      <>
 
-               {cart.length === 0 ? (
-  <div className="empty-cart">
-    <LuShoppingCart size={45} className="cart-icon" />
-    <p>No items in your cart</p>
-  </div>
-) : (
+                      <div key={idx} className="cart-row">
+                        <p className="cart-title">{item.title}</p>
 
-  <div className="cart-box">   {/* ONLY ONE cart-box */}
+                        <div className="qty-box">
+                          <button
+                            className="qty-btn"
+                            onClick={() =>
+                              setCart(
+                                cart
+                                  .map((c, i2) =>
+                                    i2 === idx ? { ...c, qty: c.qty - 1 } : c
+                                  )
+                                  .filter((c) => c.qty > 0)
+                              )
+                            }
+                          >
+                            −
+                          </button>
 
-    {cart.map((item, idx) => (
-      <div key={idx} className="cart-row">
+                          <span className="qty-count">{item.qty}</span>
 
-        <p className="cart-title">{item.title}</p>
+                          <button
+                            className="qty-btn"
+                            onClick={() =>
+                              setCart(
+                                cart.map((c, i2) =>
+                                  i2 === idx ? { ...c, qty: c.qty + 1 } : c
+                                )
+                              )
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
 
-        <div className="qty-box">
-          <button
-            className="qty-btn"
-            onClick={() => {
-              const updated = [...cart];
-              updated[idx].qty = Math.max(0, updated[idx].qty - 1);
-              const filtered = updated.filter(it => it.qty > 0);
-              setCart(filtered);
-            }}
-          >
-            −
-          </button>
+                        <p className="cart-price">₹{item.price * item.qty}</p>
+                      </div>
+                      </>
+                    ))}
 
-          <span className="qty-count">{item.qty}</span>
-
-          <button
-            className="qty-btn"
-            onClick={() => {
-              const updated = [...cart];
-              updated[idx].qty += 1;
-              setCart(updated);
-            }}
-          >
-            +
-          </button>
-        </div>
-
-        <p className="cart-price">₹{item.price * item.qty}</p>
-      </div>
-    ))}
-
-    <div className="cart-bottom-bar">
-      <span className="cart-total">
-        ₹{cart.reduce((sum, item) => sum + item.price * item.qty, 0)}
-      </span>
-      <button className="view-cart-btn">View Cart</button>
-    </div>
-
-  </div>
-)}
-
-
+                    <div className="cart-bottom-bar">
+                      <span className="cart-total">
+                        ₹{cart.reduce((sum, item) => sum + item.price * item.qty, 0)}
+                      </span>
+                      <button className="view-cart-btn">View Cart</button>
+                    </div>
+                  </div>
+                )}
 
                 {/* OFFERS */}
                 <div className={`offers-container ${showAllOffers ? "expanded" : ""}`}>
-                  {offers.slice(0, showAllOffers ? offers.length : 1).map((offer) => (
-                    <div key={offer.id} className="offer-item">
-                      <div className="offer-text">
-                        <p className="offer-title">{offer.title}</p>
-                        <p className="offer-sub">{offer.desc}</p>
+                  {offers
+                    .slice(0, showAllOffers ? offers.length : 1)
+                    .map((offer) => (
+                      <div key={offer.id} className="offer-item">
+                        <div className="offer-text">
+                          <p className="offer-title">{offer.title}</p>
+                          <p className="offer-sub">{offer.desc}</p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
 
                   <p className="view-more" onClick={() => setShowAllOffers(!showAllOffers)}>
                     {showAllOffers ? "View less ^" : "View more"}
@@ -387,13 +586,11 @@ const SalonLuxe = () => {
                     <li>✔ Transparent Pricing</li>
                   </ul>
                 </div>
-
               </div>
             </div>
 
           </div>
         </div>
-
       </div>
     </div>
   );

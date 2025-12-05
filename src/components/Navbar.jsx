@@ -15,7 +15,7 @@ import Loading from "../components/Loading.jsx";
 import logo from "../assets/logo.png";
 import "./navbar.css";
 
-function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink}) {
+function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cartCount }) {
   const [showLocation, setShowLocation] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
@@ -82,24 +82,29 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink}) {
               <div className="d-flex align-items-center d-lg-none gap-2">
                 {!hideIcons && (
                   <>
-                    <div className="icon-outline" onClick={() => navigate("/cart")} style={{ cursor: "pointer" }}>
+                    <div className="icon-outline cart-icon-wrapper" onClick={() => navigate("/cart")} style={{ cursor: "pointer" }}>
                       <LuShoppingCart size={20} className="text-dark" />
+
+                      {cartCount > 0 && (
+                        <span className="cart-badge">{cartCount}</span>
+                      )}
                     </div>
+
                     <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
                       <RiAccountCircleLine size={22} className="ms-1 text-dark" />
                     </div>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   </>
-              )}
+                )}
               </div>
-              
+
               <Navbar.Collapse id="basic-navbar-nav">
                 {!hideLink && (
-                <Nav className="me-auto mx-3 gap-4">
-                  <NavLink to="/beauty" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Beauty</NavLink>
-                  <NavLink to="/revamp" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Revamp</NavLink>
-                  <NavLink to="/native" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Native</NavLink>
-                </Nav>
+                  <Nav className="me-auto mx-3 gap-4">
+                    <NavLink to="/beauty" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Beauty</NavLink>
+                    <NavLink to="/revamp" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Revamp</NavLink>
+                    <NavLink to="/native" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Native</NavLink>
+                  </Nav>
                 )}
 
               </Navbar.Collapse>
@@ -107,40 +112,45 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink}) {
               {/* Search + Location */}
               {(!hideSearch || !hideLocation) && (
 
-              <div className="search-wrapper w-100">
-                <Form className="mt-2 search-section d-flex gap-2">
-                  {!hideLocation && (
-                    <div className="d-flex align-items-center px-2 ms-auto py-2 border border-secondary-subtle rounded cursor-pointer location-box"
-                         onClick={() => setShowLocation(true)}>
-                      <SlLocationPin size={22} />
-                      <FormControl type="text" placeholder="Connaught Place, New..." className="border-0 bg-transparent shadow-none" readOnly />
-                      <IoIosArrowDown className="ms-2" />
-                    </div>
-                  )}
+                <div className="search-wrapper w-100">
+                  <Form className="mt-2 search-section d-flex gap-2">
+                    {!hideLocation && (
+                      <div className="d-flex align-items-center px-2 ms-auto py-2 border border-secondary-subtle rounded cursor-pointer location-box"
+                        onClick={() => setShowLocation(true)}>
+                        <SlLocationPin size={22} />
+                        <FormControl type="text" placeholder="Connaught Place, New..." className="border-0 bg-transparent shadow-none" readOnly />
+                        <IoIosArrowDown className="ms-2" />
+                      </div>
+                    )}
 
-                  {!hideSearch && (
-                    <div className="search-icons d-flex">
-                      <div ref={searchRef} className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
-                           onClick={() => setShowSearch(true)} style={{ cursor: "pointer" }}>
-                        <FaSearch />
-                        <FormControl type="text" placeholder={`Search for '${placeholder}'`} className="border-0 bg-transparent shadow-none cursor-pointer" readOnly />
+                    {!hideSearch && (
+                      <div className="search-icons d-flex">
+                        <div ref={searchRef} className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
+                          onClick={() => setShowSearch(true)} style={{ cursor: "pointer" }}>
+                          <FaSearch />
+                          <FormControl type="text" placeholder={`Search for '${placeholder}'`} className="border-0 bg-transparent shadow-none cursor-pointer" readOnly />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {/* Desktop icons */}
-                  {!hideIcons && (
-                    <div className="d-none d-lg-flex align-items-center ms-auto icon-wrapper">
-                      <div className="icon-outline me-2" onClick={() => navigate("/cart")} style={{ cursor: "pointer" }}>
-                        <LuShoppingCart size={20} className="text-dark " />
+                    {/* Desktop icons */}
+                    {!hideIcons && (
+                      <div className="d-none d-lg-flex align-items-center ms-auto icon-wrapper">
+                        <div className="icon-outline cart-icon-wrapper" onClick={() => navigate("/cart")} style={{ cursor: "pointer" }}>
+                          <LuShoppingCart size={20} className="text-dark" />
+
+                          {cartCount > 0 && (
+                            <span className="cart-badge">{cartCount}</span>
+                          )}
+                        </div>
+
+                        <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
+                          <RiAccountCircleLine size={22} className="ms-2 text-dark" />
+                        </div>
                       </div>
-                      <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
-                        <RiAccountCircleLine size={22} className="ms-2 text-dark" />
-                      </div>
-                    </div>
-                  )}
-                </Form>
-              </div>
+                    )}
+                  </Form>
+                </div>
               )}
             </Container>
           </Navbar>
