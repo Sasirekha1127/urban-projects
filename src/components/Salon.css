@@ -67,8 +67,8 @@
     display: flex;
     justify-content: center; 
     align-items: center;
-    margin-left: 30px;
-    width: 100%;
+    margin-left: 12%;
+    width: 95%;
   }
 
   .salon-card {
@@ -219,7 +219,7 @@ right: 20px;
 
   .spa-card {
     flex: 1 1 100%;  
-    max-width: 90%; /* Full width card */
+    max-width: 100%; /* Full width card */
   }
 
   .spa-card img {

@@ -15,11 +15,13 @@ import Loading from "../components/Loading.jsx";
 import logo from "../assets/logo.png";
 import "./navbar.css";
 
-function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cartCount }) {
+function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) {
   const [showLocation, setShowLocation] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+
+  const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
 
   const word = ["Facial", "Kitchen cleaning", "AC cleaning"];
   const [placeholder, setPlaceholder] = useState("service");
@@ -82,13 +84,18 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cartCount }) 
               <div className="d-flex align-items-center d-lg-none gap-2">
                 {!hideIcons && (
                   <>
-                    <div className="icon-outline cart-icon-wrapper" onClick={() => navigate("/cart")} style={{ cursor: "pointer" }}>
-                      <LuShoppingCart size={20} className="text-dark" />
+                    <div
+                      className="uc-cart-wrapper"
+                      onClick={() => navigate("/cart")}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <LuShoppingCart size={22} className="text-dark" />
 
                       {cartCount > 0 && (
-                        <span className="cart-badge">{cartCount}</span>
+                        <span className="uc-cart-badge">{cartCount}</span>
                       )}
                     </div>
+
 
                     <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
                       <RiAccountCircleLine size={22} className="ms-1 text-dark" />
@@ -106,12 +113,10 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cartCount }) 
                     <NavLink to="/native" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Native</NavLink>
                   </Nav>
                 )}
-
               </Navbar.Collapse>
 
               {/* Search + Location */}
               {(!hideSearch || !hideLocation) && (
-
                 <div className="search-wrapper w-100">
                   <Form className="mt-2 search-section d-flex gap-2">
                     {!hideLocation && (
@@ -136,13 +141,18 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cartCount }) 
                     {/* Desktop icons */}
                     {!hideIcons && (
                       <div className="d-none d-lg-flex align-items-center ms-auto icon-wrapper">
-                        <div className="icon-outline cart-icon-wrapper" onClick={() => navigate("/cart")} style={{ cursor: "pointer" }}>
-                          <LuShoppingCart size={20} className="text-dark" />
+                        <div
+                          className="uc-cart-wrapper"
+                          onClick={() => navigate("/cart")}
+                          style={{ cursor: "pointer", marginLeft: "15px" }}
+                        >
+                          <LuShoppingCart size={22} className="text-dark " />
 
                           {cartCount > 0 && (
-                            <span className="cart-badge">{cartCount}</span>
+                            <span className="uc-cart-badge">{cartCount}</span>
                           )}
                         </div>
+
 
                         <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
                           <RiAccountCircleLine size={22} className="ms-2 text-dark" />
@@ -159,6 +169,7 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cartCount }) 
           <SearchDropdown target={searchRef.current} show={showSearch} handleClose={() => setShowSearch(false)} onServices={(name) => setPlaceholder(name)} />
           <LoginPopup show={showLogin} handleClose={() => setShowLogin(false)} />
         </>
+        
       )}
     </>
   );

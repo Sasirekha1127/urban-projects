@@ -17,12 +17,11 @@ import uc from "../assets/ucpromise.png";
 import miniservice from "../assets/mini-services.png";
 import popup from "../assets/popup.mp4";
 
-const SalonLuxe = () => {
+const SalonLuxe = ({cart,setCart}) => {
   const [selectedService, setSelectedService] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [qty, setQty] = useState(1);
   const [showAllOffers, setShowAllOffers] = useState(false);
-  const [cart, setCart] = useState([]);
 
   // Get Quantity of an item
   const getQty = (title) => {
@@ -88,22 +87,25 @@ const SalonLuxe = () => {
   ];
 
   const addToCart = () => {
-    if (qty === 0) return;
+  if (qty === 0) return;
 
-    const existing = cart.find((i) => i.title === selectedService.title);
+  // Add unique id if not already present
+  const itemToAdd = { ...selectedService, qty, id: selectedService.title };
 
-    if (existing) {
-      setCart(
-        cart.map((c) =>
-          c.title === selectedService.title ? { ...c, qty: c.qty + qty } : c
-        )
-      );
-    } else {
-      setCart([...cart, { ...selectedService, qty }]);
-    }
+  const existing = cart.find((i) => i.title === selectedService.title);
 
-    setShowPopup(false);
-  };
+  if (existing) {
+    setCart(
+      cart.map((c) =>
+        c.title === selectedService.title ? { ...c, qty: c.qty + qty } : c
+      )
+    );
+  } else {
+    setCart([...cart, itemToAdd]);
+  }
+
+  setShowPopup(false);
+};
 
   return (
     <div className="page-wrapper">
@@ -592,6 +594,8 @@ const SalonLuxe = () => {
           </div>
         </div>
       </div>
+      <NavbarUC cart={cart} setCart={setCart} />
+
     </div>
   );
 };
