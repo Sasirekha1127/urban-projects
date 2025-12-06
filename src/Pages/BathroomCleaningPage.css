@@ -1,0 +1,143 @@
+.mini-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.mini-header-right img.mini-logo {
+  height: 40px;
+}
+
+/* Center wrapper */
+.mini-header-center {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Location input wrapper */
+.location-box-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* flex: 1 1 200px; */
+  max-width: 300px;
+}
+
+.location-boxs {
+  padding: 0.7rem 2rem 0.5rem 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.location-icon {
+  position: absolute;
+  left: 8px;
+  color: #888;
+}
+
+.arrow-icon {
+  position: absolute;
+  right: 8px;
+  color: #888;
+  cursor: pointer;
+}
+
+/* Search input wrapper */
+.search-box-wrapper {
+  position: relative;
+  /* flex: 1 1 200px; */
+  max-width: 250px;
+}
+
+.search-boxs {
+  padding: 0.7rem 1rem 0.5rem 2.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+/* Responsive: Tablet & Mobile */
+@media screen and (max-width: 768px) {
+  .mini-header {
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+    align-items: stretch;
+  }
+
+  .mini-header-right {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .mini-header-center {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .location-box-wrapper,
+  .search-box-wrapper {
+    max-width: 100%;
+  }
+
+  .location-boxs,
+  .search-boxs {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+/* Responsive: Mobile phones */
+@media screen and (max-width: 480px) {
+  .mini-header {
+    padding: 0.5rem;
+  }
+
+  .mini-logo {
+    height: 35px;
+  }
+
+  .location-boxs,
+  .search-boxs {
+    font-size: 0.85rem;
+    padding: 0.6rem 2rem 0.5rem 2rem;
+  }
+  .location-box-wrapper{
+    width: 100%;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .arrow-icon,
+  .location-icon,
+  .search-icon {
+    left: 8px;
+    right: 8px;
+  }
+  .mini-header-center {
+    margin: 0;
+    padding: 0;
+  }
+}

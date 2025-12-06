@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-
-// Components
 import NavbarUC from "./components/Navbar.jsx";
 
 // Pages
@@ -9,12 +7,13 @@ import Home from './pages/Home.jsx';
 import Beauty from './pages/Beauty.jsx';
 import Revamp from './pages/Revamp.jsx';
 import Native from './pages/Native.jsx';
-import BathroomCleaning from './pages/BathroomCleaning.jsx';
+import BathroomCleaningPage from "./Pages/BathroomCleaningPage.jsx";
 import CartPage from './Pages/CardPage.jsx';
 import Wallmakeover from "./pages/Wallmakeover.jsx";
 import Sofacleaning from "./pages/Sofacleaning.jsx";
 import Salonpackages from "./pages/Salonpackages.jsx";
 import SalonLuxe from "./Pages/Salonluxe.jsx";
+import ViewCartPage from "./Pages/ViewCartPage.jsx";
 
 // Other components
 import CarouselPage from "./components/Carouselpage.jsx";
@@ -30,32 +29,23 @@ import Wal from "./components/Wal.jsx";
 import Homerepair from "./components/Homerepair.jsx";
 import Load from "./components/Loading.jsx";
 
-export default function AppContent({
-  setHideNavbar,
-  hideNavbar,
-  setHideSearch,
-  hideSearch,
-  cart,
-  setCart,
-}) {
+export default function AppContent({ cart, setCart }) {
   const location = useLocation();
 
+  // Routes where navbar or search should be hidden
+const hideNavbarRoutes = ["/cart", "/view-cart", "/salon/luxe", "/bathroom-cleaning"];
   const hideSearchRoutes = ["/beauty", "/native", "/revamp"];
-  const alwaysHideNavbarRoutes = ["/cart"];
 
-  useEffect(() => {
-    setHideSearch(hideSearchRoutes.includes(location.pathname));
-    setHideNavbar(alwaysHideNavbarRoutes.includes(location.pathname));
-  }, [location.pathname, setHideSearch, setHideNavbar]);
-
-  const shouldHideNavbar =
-    alwaysHideNavbarRoutes.includes(location.pathname) || hideNavbar;
+  // Current path, lowercase & trailing slash removed
+  const currentPath = location.pathname.replace(/\/$/, "").toLowerCase();
+  const shouldHideNavbar = hideNavbarRoutes.includes(currentPath);
+  const shouldHideSearch = hideSearchRoutes.includes(currentPath);
 
   return (
     <>
       {!shouldHideNavbar && (
         <NavbarUC
-          hideSearch={hideSearch}
+          hideSearch={shouldHideSearch}
           hideLocation={false}
           hideIcons={false}
           hideLink={false}
@@ -67,14 +57,15 @@ export default function AppContent({
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Load" element={<Load />} />
-        <Route path="/beauty" element={<Beauty setHideNavbar={setHideNavbar} setHideSearch={setHideSearch} />} />
-        <Route path="/revamp" element={<Revamp setHideNavbar={setHideNavbar} setHideSearch={setHideSearch} />} />
-        <Route path="/native" element={<Native setHideNavbar={setHideNavbar} setHideSearch={setHideSearch} />} />
+        <Route path="/beauty" element={<Beauty />} />
+        <Route path="/revamp" element={<Revamp />} />
+        <Route path="/native" element={<Native />} />
         <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
         <Route path="/salon/luxe" element={<SalonLuxe cart={cart} setCart={setCart} />} />
-        <Route path="/wallmakeover" element={<Wallmakeover setHideNavbar={setHideNavbar} />} />
-        <Route path="/sofacleaning" element={<Sofacleaning setHideNavbar={setHideNavbar} />} />
-        <Route path="/salonpackages" element={<Salonpackages setHideNavbar={setHideNavbar} />} />
+        <Route path="/wallmakeover" element={<Wallmakeover />} />
+        <Route path="/sofacleaning" element={<Sofacleaning />} />
+        <Route path="/salonpackages" element={<Salonpackages />} />
+        <Route path="/view-cart" element={<ViewCartPage />} />
 
         {/* Other component routes */}
         <Route path="/carouselpage" element={<CarouselPage />} />
@@ -88,7 +79,7 @@ export default function AppContent({
         <Route path="/Salonmen" element={<Salonmen />} />
         <Route path="/Wal" element={<Wal />} />
         <Route path="/homerepair" element={<Homerepair />} />
-        <Route path="/bathroom-cleaning" element={<BathroomCleaning />} />
+        <Route path="/bathroom-cleaning" element={<BathroomCleaningPage />} />
       </Routes>
     </>
   );

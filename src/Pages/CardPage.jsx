@@ -82,7 +82,8 @@ export default function CartPage({ cart = [], setCart = () => { } }) {
     >
       Add Services
     </button>
-    <button className="uc-checkout-btn">
+    <button className="uc-checkout-btn"   onClick={() => navigate("/view-cart")}>
+
       Checkout
     </button>
   </div>

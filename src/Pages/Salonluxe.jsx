@@ -4,6 +4,8 @@ import "../pages/salonluxe.css";
 import NavbarUC from "../components/Navbar";
 import { LuShoppingCart } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 
 import bathroomVideo from "../assets/bathroomvideo.mp4";
 import comboIcon from "../assets/combo.png";
@@ -17,7 +19,8 @@ import uc from "../assets/ucpromise.png";
 import miniservice from "../assets/mini-services.png";
 import popup from "../assets/popup.mp4";
 
-const SalonLuxe = ({cart,setCart}) => {
+const SalonLuxe = ({ cart, setCart }) => {
+  const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [qty, setQty] = useState(1);
@@ -87,29 +90,28 @@ const SalonLuxe = ({cart,setCart}) => {
   ];
 
   const addToCart = () => {
-  if (qty === 0) return;
+    if (qty === 0) return;
 
-  // Add unique id if not already present
-  const itemToAdd = { ...selectedService, qty, id: selectedService.title };
+    // Add unique id if not already present
+    const itemToAdd = { ...selectedService, qty, id: selectedService.title };
 
-  const existing = cart.find((i) => i.title === selectedService.title);
+    const existing = cart.find((i) => i.title === selectedService.title);
 
-  if (existing) {
-    setCart(
-      cart.map((c) =>
-        c.title === selectedService.title ? { ...c, qty: c.qty + qty } : c
-      )
-    );
-  } else {
-    setCart([...cart, itemToAdd]);
-  }
+    if (existing) {
+      setCart(
+        cart.map((c) =>
+          c.title === selectedService.title ? { ...c, qty: c.qty + qty } : c
+        )
+      );
+    } else {
+      setCart([...cart, itemToAdd]);
+    }
 
-  setShowPopup(false);
-};
+    setShowPopup(false);
+  };
 
   return (
     <div className="page-wrapper">
-      <NavbarUC />
 
       {/* POPUP */}
       {showPopup && selectedService && (
@@ -500,51 +502,51 @@ const SalonLuxe = ({cart,setCart}) => {
                   <div className="empty-cart">
                     <LuShoppingCart size={45} className="cart-icon" />
                     <p>No items in your cart</p>
-                    </div>
+                  </div>
                 ) : (
-                  
+
                   <div className="cart-box">
                     <div className="cart-header">Cart </div>
                     {cart.map((item, idx) => (
                       <>
 
-                      <div key={idx} className="cart-row">
-                        <p className="cart-title">{item.title}</p>
+                        <div key={idx} className="cart-row">
+                          <p className="cart-title">{item.title}</p>
 
-                        <div className="qty-box">
-                          <button
-                            className="qty-btn"
-                            onClick={() =>
-                              setCart(
-                                cart
-                                  .map((c, i2) =>
-                                    i2 === idx ? { ...c, qty: c.qty - 1 } : c
-                                  )
+                          <div className="qty-box">
+                            <button
+                              className="qty-btn"
+                              onClick={() =>
+                                setCart(
+                                  cart
+                                    .map((c, i2) =>
+                                      i2 === idx ? { ...c, qty: c.qty - 1 } : c
+                                    )
                                   .filter((c) => c.qty > 0)
-                              )
-                            }
-                          >
-                            −
-                          </button>
-
-                          <span className="qty-count">{item.qty}</span>
-
-                          <button
-                            className="qty-btn"
-                            onClick={() =>
-                              setCart(
-                                cart.map((c, i2) =>
-                                  i2 === idx ? { ...c, qty: c.qty + 1 } : c
                                 )
-                              )
-                            }
-                          >
-                            +
-                          </button>
-                        </div>
+                              }
+                            >
+                              −
+                            </button>
 
-                        <p className="cart-price">₹{item.price * item.qty}</p>
-                      </div>
+                            <span className="qty-count">{item.qty}</span>
+
+                            <button
+                              className="qty-btn"
+                              onClick={() =>
+                                setCart(
+                                  cart.map((c, i2) =>
+                                    i2 === idx ? { ...c, qty: c.qty + 1 } : c
+                                  )
+                                )
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+
+                          <p className="cart-price">₹{item.price * item.qty}</p>
+                        </div>
                       </>
                     ))}
 
@@ -552,7 +554,12 @@ const SalonLuxe = ({cart,setCart}) => {
                       <span className="cart-total">
                         ₹{cart.reduce((sum, item) => sum + item.price * item.qty, 0)}
                       </span>
-                      <button className="view-cart-btn">View Cart</button>
+                      <button
+                        className="view-cart-btn"
+                        onClick={() => navigate("/view-cart")}
+                      >
+                        View Cart
+                      </button>
                     </div>
                   </div>
                 )}

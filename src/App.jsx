@@ -5,8 +5,6 @@ import AppContent from "./Router.jsx";
 export default function App() {
   const [hideNavbar, setHideNavbar] = useState(false);
   const [hideSearch, setHideSearch] = useState(false);
-
-  // Cart state create pannrom
   const [cart, setCart] = useState([]);
 
   return (
@@ -16,8 +14,8 @@ export default function App() {
         hideNavbar={hideNavbar}
         hideSearch={hideSearch}
         setHideSearch={setHideSearch}
-        cart={cart}       // pass pannrom
-        setCart={setCart} // pass pannrom
+        cart={cart}
+        setCart={setCart}
       />
     </Router>
   );

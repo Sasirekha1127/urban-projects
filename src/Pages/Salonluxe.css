@@ -65,7 +65,7 @@
 .service-grid {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* exactly 3 items per row */
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
 
@@ -928,6 +928,8 @@
   border-radius: 14px;
   border: 1px solid #e6e6e6;
   width: 260px;
+  position: relative;
+  z-index: 4000;
 }
 
 /* FIRST ROW */
@@ -964,24 +966,34 @@
   margin-top: 10px;
   padding-top: 14px;
   border-top: 1px solid #e6e6e6;
+    color: white;
+    position: relative;
+  z-index: 5000; 
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #5e22e6;
+  padding: 8px 16px;
+  border-radius: 10px;
 }
+.cart-bottom-bar:hover{
+    background: #4514cb;
 
+}
 .cart-total {
   font-size: 18px;
   font-weight: 700;
 }
 
 .view-cart-btn {
-  background: #4514cb;
-  color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 10px;
+  padding: 1px 16px;
+  background: #5e22e6;
   cursor: pointer;
+}
+.view-cart-btn:hover{
+    background: #4514cb;
 }
 .cart-header{
   font-size: 22px;
