@@ -1,0 +1,11 @@
+.viewcard-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.urban-logo {
+  height: 40px; 
+  margin-right: 10px;
+}
