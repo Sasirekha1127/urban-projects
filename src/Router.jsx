@@ -20,7 +20,7 @@ import SalonLuxe from "./Pages/Salonluxe.jsx";
 import ViewCartPage from "./Pages/ViewCartPage.jsx";
 
 // COMPONENTS
-import CarouselPage from "./components/Carouselpage.jsx";
+import Carouselpage from "./components/Carouselpage.jsx";
 import Newnote from "./components/Newnote.jsx";
 import Mostbook from "./components/Mostbook.jsx";
 import Walls from "./components/Walls.jsx";
@@ -103,7 +103,7 @@ export default function AppContent({ cart, setCart }) {
         />
 
         {/* OTHER COMPONENT ROUTES */}
-        <Route path="/carouselpage" element={<CarouselPage />} />
+        <Route path="/carouselpage" element={<Carouselpage />} />
         <Route path="/Newnote" element={<Newnote />} />
         <Route path="/Mostbook" element={<Mostbook />} />
         <Route path="/Walls" element={<Walls />} />
