@@ -11,7 +11,7 @@ import carosuelImg3 from "../assets/carouselimg-3.png";
 import carosuelImg4 from "../assets/carouselimg-4.png";
 import carosuelImg5 from "../assets/carouselimg-5.png";
 
-const CarouselPage = () => {
+const Carouselpage = () => {
   const navigate = useNavigate(); 
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -75,4 +75,4 @@ const CarouselPage = () => {
   );
 };
 
-export default CarouselPage;
+export default Carouselpage;
