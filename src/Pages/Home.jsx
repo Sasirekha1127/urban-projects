@@ -18,7 +18,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // ------- Components -------
-import ApplianceSection from "../pages/Appliance.jsx";
+import ApplianceSection from "../Pages/Appliance.jsx";
 import Footer from "./Footer.jsx";
 import CarouselPage from "../components/Carouselpage.jsx";
 import Newnote from "../components/Newnote.jsx";
