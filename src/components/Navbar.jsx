@@ -13,7 +13,7 @@ import LoginPopup from "./LoginHoverBox";
 import Loading from "../components/Loading.jsx";
 
 import logo from "../assets/logo.png";
-import "./navbar.css";
+import "./Navbar.css";
 
 function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) {
   const [showLocation, setShowLocation] = useState(false);

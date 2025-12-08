@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import "../components/homerepair.css";
+import "../components/Homerepair.css";
 
 import fan from "../assets/fan.png";
 import doors from "../assets/doors.png";

@@ -5,7 +5,7 @@ import { FiShare2 } from "react-icons/fi";
 import luxe from "../assets/luxe.png";
 import prime from "../assets/prime.png";
 
-import "../pages/salonforwomen.css"; 
+import "../pages/Salonforwomen.css"; 
 
 export default function SalonForWomen() {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import beforeafter from "../assets/before&after.jpg";
-import "../components/servicemodel.css"
+import "../components/Servicemodel.css"
 
 function ServiceModal({ service, closeModal, updateQuantity }) {
   if (!service) return null;

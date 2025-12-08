@@ -5,7 +5,7 @@ import kitchen from "../assets/kitchendeep.png";
 import bathroomfull from "../assets/bathroomfull.png";
 import sofa from "../assets/sofa.png";
 
-import "./cleaningpest.css";
+import "./Cleaningpest.css";
 
 const CleaningPest = () => {
   // Cleaning & Pest Control Data

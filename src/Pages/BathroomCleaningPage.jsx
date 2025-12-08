@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png"; 
-import "../Pages/bathroomCleaningPage.css";
+import "../Pages/BathroomCleaningPage.css";
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { SlLocationPin } from "react-icons/sl";

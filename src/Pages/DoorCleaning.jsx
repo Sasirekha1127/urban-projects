@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
 import doorImg from "../assets/door.png"; 
-import doorVideo from "../assets/doorcleaning.mp4"; 
+import doorVideo from "../assets/DoorCleaning.mp4"; 
 
 function DoorCleaning() {
   return (

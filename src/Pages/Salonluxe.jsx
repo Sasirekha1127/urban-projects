@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../pages/salonluxe.css";
+import "../pages/Salonluxe.css";
 
 import NavbarUC from "../components/Navbar";
 import { LuShoppingCart } from "react-icons/lu";
