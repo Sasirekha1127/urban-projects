@@ -354,7 +354,7 @@ function Beauty({ setHideNavbar,  }) {
         <h2 className="spa-heading">Salon for Men</h2>
         <div className="spa-cards">
           {SalonServices.map((item, index) => (
-            <div key={index} className="spa-card">
+            <div key={index} className="spa-card">  
               <img src={item.img} alt={item.title} />
               <p className="spa-title">{item.title}</p>
             </div>

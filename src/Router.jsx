@@ -39,6 +39,9 @@ export default function AppContent({ cart, setCart }) {
   // Addons State
   const [addons, setAddons] = useState([]);
 
+  // 🔥 NEW — Navbar hide state (needed for Beauty.jsx fade-out effect)
+  const [hideNavbar, setHideNavbar] = useState(false);
+
   // Navbar & Search hiding paths
   const hideNavbarRoutes = ["/cart", "/view-cart", "/salon/luxe", "/bathroom-cleaning"];
   const hideSearchRoutes = ["/beauty", "/native", "/revamp"];
@@ -51,7 +54,7 @@ export default function AppContent({ cart, setCart }) {
   return (
     <>
       {/* NAVBAR SHOW / HIDE */}
-      {!shouldHideNavbar && (
+      { !hideNavbar && !shouldHideNavbar && (
         <NavbarUC
           hideSearch={shouldHideSearch}
           hideLocation={false}
@@ -67,9 +70,15 @@ export default function AppContent({ cart, setCart }) {
         {/* MAIN ROUTES */}
         <Route path="/" element={<Home />} />
         <Route path="/Load" element={<Load />} />
-        <Route path="/beauty" element={<Beauty />} />
-        <Route path="/revamp" element={<Revamp />} />
-        <Route path="/native" element={<Native />} />
+
+        {/* Beauty now receives setHideNavbar only */}
+        <Route
+          path="/beauty"
+          element={<Beauty setHideNavbar={setHideNavbar} />}
+        />
+
+        <Route path="/revamp" element={<Revamp  setHideNavbar={setHideNavbar} />} />
+        <Route path="/native" element={<Native  setHideNavbar={setHideNavbar}/>} />
 
         {/* CART */}
         <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
@@ -80,7 +89,7 @@ export default function AppContent({ cart, setCart }) {
         <Route path="/sofacleaning" element={<Sofacleaning />} />
         <Route path="/salonpackages" element={<Salonpackages />} />
 
-        {/* VIEW CART → PASSES CART + ADDONS */}
+        {/* VIEW CART */}
         <Route
           path="/view-cart"
           element={
