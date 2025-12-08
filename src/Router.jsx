@@ -20,7 +20,7 @@ import SalonLuxe from "./Pages/Salonluxe.jsx";
 import ViewCartPage from "./Pages/ViewCartPage.jsx";
 
 // COMPONENTS
-import CarouselPage from "./components/Carouselpage.jsx";
+import CarouselPage from "./components/CarouselPage.jsx";
 import Newnote from "./components/Newnote.jsx";
 import Mostbook from "./components/Mostbook.jsx";
 import Walls from "./components/Walls.jsx";
@@ -39,7 +39,7 @@ export default function AppContent({ cart, setCart }) {
   // Addons State
   const [addons, setAddons] = useState([]);
 
-  // 🔥 NEW — Navbar hide state (needed for Beauty.jsx fade-out effect)
+  // NEW — Navbar hide state (needed for Beauty.jsx fade-out effect)
   const [hideNavbar, setHideNavbar] = useState(false);
 
   // Navbar & Search hiding paths
