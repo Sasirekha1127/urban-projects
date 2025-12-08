@@ -42,7 +42,8 @@ html, body {
   background-color: #fff;
   display: flex;
   align-items: center;
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.8rem;
+  height: 48px;
 }
 .location-dropdown {
   position: absolute;
@@ -166,8 +167,8 @@ html, body {
   justify-content: center;
   cursor: pointer;
   border: 1px solid rgb(211, 201, 201);
-  border-radius: 999px; 
-  padding: 8px 12px; 
+  padding: 8px;
+  border-radius: 50%;
   transition: all 0.2s ease;
 }
 

@@ -129,8 +129,8 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
                     )}
 
                     {!hideSearch && (
-                      <div className="search-icons d-flex">
-                        <div ref={searchRef} className="text-secondary d-flex align-items-center search-box px-2 py-2 border border-secondary-subtle rounded"
+                      <div className="search-icons d-flex ">
+                        <div ref={searchRef} className="text-secondary d-flex align-items-center search-box border border-secondary-subtle rounded"
                           onClick={() => setShowSearch(true)} style={{ cursor: "pointer" }}>
                           <FaSearch />
                           <FormControl type="text" placeholder={`Search for '${placeholder}'`} className="border-0 bg-transparent shadow-none cursor-pointer" readOnly />
@@ -142,11 +142,11 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
                     {!hideIcons && (
                       <div className="d-none d-lg-flex align-items-center ms-auto icon-wrapper">
                         <div
-                          className="uc-cart-wrapper"
+                          className="uc-cart-wrapper "
                           onClick={() => navigate("/cart")}
                           style={{ cursor: "pointer", marginLeft: "15px" }}
                         >
-                          <LuShoppingCart size={22} className="text-dark " />
+                          <LuShoppingCart size={22} className="text-dark" />
 
                           {cartCount > 0 && (
                             <span className="uc-cart-badge">{cartCount}</span>
