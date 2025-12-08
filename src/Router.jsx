@@ -20,7 +20,7 @@ import SalonLuxe from "./Pages/Salonluxe.jsx";
 import ViewCartPage from "./Pages/ViewCartPage.jsx";
 
 // COMPONENTS
-import CarouselPage from "./components/CarouselPage.jsx";
+import CarouselPage from "./components/Carouselpage.jsx";
 import Newnote from "./components/Newnote.jsx";
 import Mostbook from "./components/Mostbook.jsx";
 import Walls from "./components/Walls.jsx";

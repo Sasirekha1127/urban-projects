@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import "./CarouselPage.css"; 
+import "./Carouselpage.css"; 
 ;
 
 import carosuelImg1 from "../assets/carouselimg-1.png";
