@@ -20,7 +20,7 @@ import "slick-carousel/slick/slick-theme.css";
 // ------- Components -------
 import ApplianceSection from "../Pages/Appliance.jsx";
 import Footer from "./Footer.jsx";
-import CarouselPage from "../components/Carouselpage.jsx"; 
+import Carouselpage from "../components/Carouselpage.jsx"; 
 import Newnote from "../components/Newnote.jsx";
 import Mostbook from "../components/Mostbook.jsx";
 import Walls from "../components/Walls.jsx";
@@ -133,7 +133,7 @@ function Home() {
       </div>
 
       {/* COMPONENTS */}
-      <CarouselPage />
+      <Carouselpage />
       <Newnote />
       <Mostbook />
       <Walls />
