@@ -1,11 +1,78 @@
-.viewcard-header {
-  display: flex;
+.uc-card {
+  width: 100%;
+  padding: 10px;
+  height: 70px;
+  border-bottom: 1px solid #d7dadc;
+}
+.uc-logo {
+  width: 7%;
+  margin-left: 15%;
+}
+.uc-left {
+  padding: 20px;
   align-items: center;
-  padding: 1rem;
-  position: relative;
 }
 
-.urban-logo {
-  height: 40px; 
-  margin-right: 10px;
+.uc-right {
+  background: white;
+}
+
+.uc-logo {
+  width: 40px;
+}
+
+.account-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #7b0e0e;
+  margin-left: 6%;
+
+}
+
+.login-btn {
+  background-color: #7A43FF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+.login-btn:hover {
+  background-color: #6820f8;
+  color: white;
+}
+
+.small-card {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  height: 100px;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+.card{
+    background-color: red;
+    margin-right: 6%;
+    margin-top: 20px;
+}
+.saving {
+  color: rgb(10, 10, 10);
+  margin-top: 20px;
+  font-size: 13px;
+  margin-left: 10%;
+}
+.service-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.button2{
+  border-radius: 2px;
+  border: 1px solid #c6c5c8;
+  color: #7A43FF;
+  position: absolute;
+  margin-left: 15%;
+  transform: translateX(50px);
+
 }
