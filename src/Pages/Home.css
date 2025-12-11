@@ -257,6 +257,8 @@ body{
   .service-item1 {
     width: 65px;
     height: 65px;
+        background-color: red;
+
   }
 
   .service-item1 img {
