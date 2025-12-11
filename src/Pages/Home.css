@@ -266,6 +266,7 @@ body{
   .service-text p {
     margin-top: 10px;
     font-size: 0.75rem;
+    background-color: green;
   }
 
   .home-image-container {
