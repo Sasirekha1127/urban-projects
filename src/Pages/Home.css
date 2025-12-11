@@ -217,7 +217,7 @@ body{
 }
 
 /* Mobile (Below 600px) */
-@media (max-width: 600px) {
+@media (max-width: 576px) {
 
   .home-wrapper {
     padding: 30px 5%;
