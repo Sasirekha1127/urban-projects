@@ -216,7 +216,6 @@ body{
   }
 }
 
-/* Mobile (Below 600px) */
 @media (max-width: 576px) {
 
   .home-wrapper {
@@ -239,7 +238,7 @@ body{
     font-size: 1.6rem;
     margin-top: 20%; 
     line-height: 1.4;
-
+    background-color: red;
   }
 
   .home-box {
@@ -257,8 +256,6 @@ body{
   .service-item1 {
     width: 65px;
     height: 65px;
-        background-color: red;
-
   }
 
   .service-item1 img {
