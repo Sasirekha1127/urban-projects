@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from "react-router-dom";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import "./Carouselpage.css"; 
+import "../components/CarouselPage.css"; 
 ;
 
 import carosuelImg1 from "../assets/carouselimg-1.png";
