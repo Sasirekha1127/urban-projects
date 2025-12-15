@@ -1,11 +1,343 @@
-.viewcard-header {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  position: relative;
+.navbars {
+  width: 100%;
+  padding: 14px 30px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  margin-left: 8%;
 }
 
-.urban-logo {
-  height: 40px; 
-  margin-right: 10px;
+.navbars-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
+
+.logos {
+  width: 36px;
+  height: auto;
+}
+
+.navbars h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.checkout-wrapper {
+  display: flex;
+  gap: 40px;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+/* LEFT */
+.checkout-left {
+  width: 42%;
+  margin-left: 10%;
+
+}
+
+.account-card {
+  border: 1px solid #eee;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 5%;
+}
+.account-card h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.account-card p {
+  font-size: 0.8rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+.login-btn {
+  width: 100%;
+  background: #6f3cf6;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.text{
+  margin-top: 10%;
+  margin-left: 10%;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* RIGHT CONTAINER */
+.checkout-wrappers{
+  display: flex;
+}
+.checkout-right {
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+    margin-left: 3%;
+    margin-top: 2%;
+
+}
+
+/* ================= SERVICE CARD ================= */
+.service-cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.service-cards h5 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  max-width: 200px;
+  line-height: 1.4;
+}
+
+.service-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.qty-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d9d4ff;
+  border-radius: 10px;
+}
+
+.qty-box button {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  font-size: 18px;
+  color: #6f4ef6;
+  cursor: pointer;
+}
+
+.qty-box span {
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.prices {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ================= ADDON CARD ================= */
+.addon-card {
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid #eee;
+}
+
+.addon-card h5 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.carousel-wrappers {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addon-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: hidden;
+}
+
+.addon-slide {
+  min-width: 260px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addon-info p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.addon-info span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.addon-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.addon-right img {
+  width: 48px;
+}
+
+.addon-right button {
+  background: #fff;
+  color: #6f4ef6;
+  border: 1px solid #d9d4ff;
+  border-radius: 8px;
+  padding: 4px 14px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.arrows {
+  background: #f3f3f3;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* ================= CHECKBOX ================= */
+.addon-checkbox {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+/* ================= COUPON ================= */
+.coupon-card {
+  border-radius: 14px;
+  padding: 16px;
+    border: 1px solid #eee;
+
+}
+
+.coupon-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+}
+
+.coupon-icon {
+  background: #e6f4ea;
+  color: #1e8e3e;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 50%;
+}
+
+.coupon-card h5 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.coupon-card p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #666;
+}
+
+/* ================= PAYMENT SUMMARY ================= */
+.payment-card {
+  border-radius: 14px;
+  padding: 16px;
+    border: 1px solid #eee;
+    margin-bottom: 25%;
+
+}
+
+.payment-card h5 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  
+}
+
+.pay-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.pay-row del {
+  color: #888;
+  margin-right: 6px;
+}
+
+.payment-card hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.pay-row.total {
+  font-weight: 600;
+}
+
+.pay-row.pay {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.amount {
+  position: fixed;
+  background-color:white;
+  top: 85%;
+  border-radius: 16px;
+  padding: 20px 18px;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  width: 33%;
+}
+
+
+.amount-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.amount h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.amount-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+/* RIGHT SIDE (VALUE + BREAKUP) */
+.amount-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+.view-breakup {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6f4ef6;
+  font-weight: 500;
+  cursor: pointer;
+
+}
+
