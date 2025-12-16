@@ -70,7 +70,55 @@
   font-weight: bold;
   font-size: 0.8rem;
 }
+@media (max-width: 992px) {
+  .checkout-wrapper {
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+  }
 
+  .checkout-left {
+    width: 100%;
+    margin: 0;
+  }
+
+  .navbars {
+    padding: 12px 20px;
+  }
+  
+}
+
+/* ===================== MOBILE (≤ 600px) ===================== */
+@media (max-width: 600px) {
+  .navbars {
+    padding: 10px 15px;
+  }
+
+  .navbars h3 {
+    font-size: 16px;
+  }
+
+  .logos {
+    width: 30px;
+  }
+
+  .checkout-wrapper {
+    padding: 15px;
+  }
+
+  .account-card {
+    padding: 15px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+    padding: 7px;
+  }
+
+  .text {
+    font-size: 0.75rem;
+  }
+}
 /* RIGHT CONTAINER */
 .checkout-wrappers{
   display: flex;
@@ -242,17 +290,20 @@
   font-weight: 700;
   padding: 6px 10px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .coupon-card h5 {
   margin: 0;
   font-size: 15px;
+  cursor: pointer;
 }
 
 .coupon-card p {
   margin: 2px 0 0;
   font-size: 13px;
   color: #666;
+  cursor: pointer;
 }
 
 /* ================= PAYMENT SUMMARY ================= */
@@ -333,11 +384,87 @@
 
 
 .view-breakup {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 13px;
-  color: #6f4ef6;
-  font-weight: 500;
+  color: #0a090b;
+  font-weight: 600;
   cursor: pointer;
-
+  text-decoration:underline dotted;
+  text-underline-offset: 3px;
 }
 
+@media (max-width: 992px) {
+
+  .checkout-wrappers {
+    flex-direction: column;
+  }
+
+  .checkout-right {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .amount {
+    width: 100%;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .payment-card {
+    margin-bottom: 120px;
+  }
+}
+
+/* ================= MOBILE (≤ 600px) ================= */
+@media (max-width: 600px) {
+
+  /* Service card stack */
+  .service-cards {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .service-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Addon carousel scroll */
+  .addon-carousel {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+
+  .addon-slide {
+    min-width: 220px;
+  }
+
+  /* Cards padding reduce */
+  .service-cards,
+  .addon-card,
+  .coupon-card,
+  .payment-card {
+    padding: 14px;
+  }
+
+  /* Amount bar mobile */
+  .amount {
+    padding: 14px;
+  }
+
+  .amount h2 {
+    font-size: 0.9rem;
+  }
+
+  .amount-value {
+    font-size: 16px;
+  }
+
+  .view-breakup {
+    font-size: 12px;
+  }
+}

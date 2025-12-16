@@ -2,7 +2,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(13, 10, 10, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,35 +11,57 @@
 
 /* MODAL */
 .login-modal {
-  width: 420px;
+  width: 500px;
   background: #fff;
   border-radius: 16px;
   padding: 24px;
   position: relative;
+  height: 350px;
+  animation: slideUp 0.5s ease-out;
+
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 /* CLOSE */
-.close-btn {
+.close-btns {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: #f2f2f2;
-  border: none;
+  top: 55px;
+  margin-left: 35%;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  font-size: 20px;
+  border: none;
+  font-size: 22px;
   cursor: pointer;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+    animation: slideUp 0.5s ease-out;
+
 }
 
 /* HEADER */
 .login-head h2 {
   margin: 12px 0 6px;
-  font-size: 22px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .login-head p {
-  font-size: 14px;
+  font-size: 0.8rem;
   color: #666;
 }
 
@@ -90,7 +112,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .cloudflare {
@@ -99,7 +123,7 @@
 }
 
 /* CONTINUE */
-.continue-btn {
+/* .continue-btn {
   width: 100%;
   margin-top: 18px;
   padding: 12px;
@@ -108,12 +132,71 @@
   background: #eee;
   color: #aaa;
   font-size: 15px;
-}
+} */
 
 /* TERMS */
 .terms {
   font-size: 12px;
   margin-top: 12px;
   color: #555;
-  text-align: center;
+}
+
+/* CONTINUE BUTTON DEFAULT */
+.continue-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background: #e0e0e0;
+  color: #777;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: 0.3s;
+}
+
+/* ACTIVE (10 DIGITS) */
+.continue-btn.active {
+  background: #6f3cf6;
+  /* Urban Company blue */
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .login-modal {
+    border-radius: 12px;
+    padding: 20px;
+    width: 95%;
+    height: 350px;
+    margin-top: 40px;
+  }
+
+  .login-head h2 {
+    font-size: 1.3rem;
+  }
+
+  .phone-input {
+    margin: 16px 0;
+  }
+
+  .continue-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+  .close-btns{
+    /* top: 80px; */
+    right: 25px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .login-modal {
+    width: 90%;
+    /* height: 350px; */
+  }
+
+  .close-btns {
+    top: 90px;
+    right: 29px;
+  }
 }

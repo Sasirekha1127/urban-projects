@@ -1,8 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./ViewCartPage.css";
 import uc from "../assets/uc.png";
 import mini from "../assets/mini.png";
 import mirror from "../assets/mirror-img.png";
+import LoginModal from "../Pages/Loginmodel.jsx";
+
+
 
 /* FREQUENTLY ADDED PRODUCTS */
 const frequentlyAdded = [
@@ -12,6 +15,8 @@ const frequentlyAdded = [
 
 export default function ViewCartPage({ cart, setCart }) {
   const carouselRef = useRef(null);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+
 
   const scrollLeft = () => {
     carouselRef.current.scrollBy({ left: -220, behavior: "smooth" });
@@ -73,7 +78,12 @@ export default function ViewCartPage({ cart, setCart }) {
           <div className="account-card">
             <h4>Account</h4>
             <p>To book the service, please login or sign up</p>
-            <button className="login-btn">Login</button>
+            <button
+              className="login-btn"
+              onClick={() => setShowLoginPopup(true)}
+            >
+              Login
+            </button>
           </div>
         </div>
 
@@ -183,7 +193,12 @@ export default function ViewCartPage({ cart, setCart }) {
 
               <div className="amount-right">
                 <div className="amount-value">₹{totalAmount + 69}</div>
-                <p className="view-breakup">View breakup</p>
+                <p
+                  className="view-breakup"
+                  onClick={() => setShowLoginPopup(true)}
+                >
+                  View breakup
+                </p>
               </div>
             </div>
           </div>
@@ -192,6 +207,11 @@ export default function ViewCartPage({ cart, setCart }) {
 
         </div>
       </div>
+      <LoginModal
+        show={showLoginPopup}
+        onClose={() => setShowLoginPopup(false)}
+      />
+    
     </>
   );
 }
