@@ -28,6 +28,13 @@
   background-color: #7e22ce;
   color: white;
 }
+.cart-empty-box {
+  justify-content: center; /* horizontal center */
+  border-radius: 12px;
+  margin: 0 auto;         
+  text-align: center;  
+  padding: 10%;  
+} 
 
 
 /* EMPTY CART */
@@ -134,4 +141,62 @@
   cursor: pointer;
   margin-left: 30%;
   margin-top: 10%;
+}
+/* ================= RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .uc-cart-card,
+  .lines {
+    width: 70%;
+    margin-left: 15%;
+  }
+
+  .cart-header-row {
+    margin-left: 15%;
+  }
+
+  .uc-addservice-btn-outline,
+  .uc-checkout-btn {
+    width: 35%;
+    margin-left: 15%;
+  }
+
+  .uc-back-btn {
+    margin-left: 15%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .uc-cart-card,
+  .lines {
+    margin-left: 5%;
+    flex-direction: column;
+    text-align: center;
+  }
+  .cart-empty-box{
+    padding: 20%;
+  }
+
+  .cart-header-row {
+    margin-left: 5%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .uc-cart-img {
+    margin-bottom: 10px;
+  }
+
+  .uc-addservice-btn-outline,
+  .uc-checkout-btn {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10px;
+  }
+
+  .uc-back-btn {
+    margin-left: 10%;
+  }
 }

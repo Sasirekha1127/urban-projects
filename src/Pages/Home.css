@@ -238,7 +238,6 @@ body{
     font-size: 1.6rem;
     margin-top: 20%; 
     line-height: 1.4;
-    background-color: red;
   }
 
   .home-box {
@@ -266,7 +265,6 @@ body{
   .service-text p {
     margin-top: 10px;
     font-size: 0.75rem;
-    background-color: green;
   }
 
   .home-image-container {
@@ -347,7 +345,7 @@ body{
     flex-direction: row;
     align-items: center;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 
   .rating-box1 {
