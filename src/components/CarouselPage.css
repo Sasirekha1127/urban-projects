@@ -93,10 +93,20 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+
+  .slick-track {
+    display: flex !important;
+    background-color: red;
+    
+  }
+
+  .slick-slide {
+    width: 100% !important;
+  }
+
   .carousel-slide {
     padding: 0 !important;
-    box-sizing: border-box;
   }
 
   .carousel-image {
@@ -105,21 +115,10 @@
     object-fit: cover;
   }
 
-  .carousel-container {
-    padding: 0 !important;
+  .carousel-heading {
+    font-size: 1.6rem;
+    text-align: center;
   }
+}
 
-  .carousel-heading {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-}
-/* Mobile only (phones) */
-@media (max-width: 480px) {
-  .carousel-heading {
-    font-size: 1.8rem;
-    text-align: center;
-    background-color: red !important; 
-  }
-}
 
