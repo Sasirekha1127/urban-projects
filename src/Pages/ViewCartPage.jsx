@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import "./ViewCartPage.css";
-import uc from "../assets/uc.png";
+import uc from "../assets/UC.png";
 import mini from "../assets/mini.png";
 import mirror from "../assets/mirror-img.png";
 import LoginModal from "../Pages/Loginmodel.jsx";
