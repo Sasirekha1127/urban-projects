@@ -23,6 +23,12 @@ const Carouselpage = () => {
     { img: carosuelImg4, path: "/otherpage" },
     { img: carosuelImg5, path: "/otherpage2" },
   ];
+  useEffect(() => {
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 200);
+  }, []);
+
 
   const NextArrow = ({ onClick }) => (
     <div className="custom-arrow right" onClick={onClick}>

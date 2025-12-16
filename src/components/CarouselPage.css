@@ -114,3 +114,12 @@
     text-align: center;
   }
 }
+/* Mobile only (phones) */
+@media (max-width: 480px) {
+  .carousel-heading {
+    font-size: 1.8rem;
+    text-align: center;
+    background-color: red !important; 
+  }
+}
+
