@@ -1,91 +1,76 @@
 import React, { useState, useEffect } from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { useNavigate } from "react-router-dom";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import "../components/CarouselPage.css";
-
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import carosuelImg1 from "../assets/carouselimg-1.png";
 import carosuelImg2 from "../assets/carouselimg-2.png";
 import carosuelImg3 from "../assets/carouselimg-3.png";
 import carosuelImg4 from "../assets/carouselimg-4.png";
 import carosuelImg5 from "../assets/carouselimg-5.png";
+import "../components/CarouselPage.css"; // we will add CSS here
 
-const Carouselpage = () => {
-  const navigate = useNavigate();
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slides = [
-    { img: carosuelImg1, path: "/wallmakeover" },
-    { img: carosuelImg2, path: "/sofacleaning" },
-    { img: carosuelImg3, path: "/salonpackages" },
-    { img: carosuelImg4, path: "/otherpage" },
-    { img: carosuelImg5, path: "/otherpage2" },
+export default function CustomCarousel() {
+  const cards = [
+    { image: carosuelImg1 },
+    { image: carosuelImg2 },
+    { image: carosuelImg3 },
+    { image: carosuelImg4 },
+    { image: carosuelImg5 },
   ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  // responsive
   useEffect(() => {
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 200);
+    const handleResize = () => {
+      if (window.innerWidth < 768) setVisibleCount(1);
+      else setVisibleCount(3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const totalCards = cards.length;
 
-  const NextArrow = ({ onClick }) => (
-    <div className="custom-arrow right" onClick={onClick}>
-      <FaArrowRight />
-    </div>
-  );
-
-  const PrevArrow = ({ onClick }) =>
-    currentSlide !== 0 && (
-      <div className="custom-arrow left" onClick={onClick}>
-        <FaArrowLeft />
-      </div>
-    );
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    adaptiveHeight: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-      { breakpoint: 768, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-    ],
-  };
-
-  // Force Slick to recalc width after mount (Netlify + mobile fix)
-  useEffect(() => {
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 100);
-  }, []);
+  const scrollLeft = () => setCurrentIndex(Math.max(currentIndex - 1, 0));
+  const scrollRight = () =>
+    setCurrentIndex(Math.min(currentIndex + 1, totalCards - visibleCount));
 
   return (
+    <>
+    <div className="offer">Offers & discounts</div>
     <div className="carousel-container">
-      <h2 className="carousel-heading">Offers & Discounts</h2>
+      {currentIndex > 0 && (
+        <button className="arrow arrow-left" onClick={scrollLeft}>
+          <IoIosArrowBack />
+        </button>
+      )}
+
+      {currentIndex < totalCards - visibleCount && (
+        <button className="arrow arrow-right" onClick={scrollRight}>
+          <IoIosArrowForward />
+        </button>
+      )}
+
       <div className="carousel-wrapper">
-        <Slider {...settings}>
-          {slides.map((slide, index) => (
-            <div key={index} className="carousel-slide">
-              <img
-                src={slide.img}
-                alt={`Slide ${index + 1}`}
-                className="carousel-image"
-                onClick={() => slide.path && navigate(slide.path)}
-              />
+        <div
+          className="carousel-track"
+          style={{
+            transform: `translateX(-${(100 / visibleCount) * currentIndex}%)`,
+          }}
+        >
+          {cards.map((card, index) => (
+            <div
+              key={index}
+              className="carousel-card"
+              style={{ flex: `0 0 ${100 / visibleCount}%` }}
+            >
+              <img src={card.image} alt={`Slide ${index + 1}`} />
             </div>
           ))}
-        </Slider>
+        </div>
       </div>
     </div>
+    </>
   );
-};
-
-export default Carouselpage;
+}
