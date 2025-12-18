@@ -1,25 +1,21 @@
-import React from "react";
-import Slider from "react-slick";
+import React, { useState, useEffect, useRef } from "react";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-
-// Import slick-carousel default styles
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
 
 import "../components/Newnote.css";
 
 import furniture from "../assets/furniture.jpg";
 import wall from "../assets/wallmakeover.jpg";
 import smartlock from "../assets/smartlocks.jpg";
-import water from "../assets/waterpurifier.png";
+import water from "../assets/water.png";
 import kitchcleaning from "../assets/kitchen-cleaning.jpg";
 import laptop from "../assets/laptop.jpg";
 
-const Newnote = () => {
+const NewnoteCustomCarousel = () => {
   const navigate = useNavigate();
+  const trackRef = useRef(null);
 
-  const slides = [
+  const cards = [
     { img: furniture, text: "Furniture Wood Polish" },
     { img: water, text: "Native Water Purifier" },
     { img: wall, text: "Wall makeover by Rewamp" },
@@ -28,69 +24,120 @@ const Newnote = () => {
     { img: laptop, text: "Laptop" },
   ];
 
-  const NextArrow = ({ onClick }) => (
-    <div className="newnote-arrow right" onClick={onClick}>
-      <FaArrowRight />
-    </div>
-  );
+  const gap = 20;
 
-  const PrevArrow = ({ onClick }) => (
-    <div className="newnote-arrow left" onClick={onClick}>
-      <FaArrowLeft />
-    </div>
-  );
+  const [visibleCount, setVisibleCount] = useState(5);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [transition, setTransition] = useState(true);
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,   // tablet view shows 3
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 3,   // small tablets still 3
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,   // mobile shows 1
-        slidesToScroll: 1,
-      },
-    },
-    ],
+  const total = cards.length;
+
+  /* ---------- RESPONSIVE ---------- */
+  useEffect(() => {
+    const resize = () => {
+      if (window.innerWidth < 480) setVisibleCount(1);
+      else if (window.innerWidth < 768) setVisibleCount(2);
+      else if (window.innerWidth < 1024) setVisibleCount(3);
+      else setVisibleCount(5);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
+  /* ---------- CLONE SLIDES ---------- */
+  const slides = [
+    ...cards.slice(-visibleCount),
+    ...cards,
+    ...cards.slice(0, visibleCount),
+  ];
+
+  /* ---------- TRANSFORM ---------- */
+  useEffect(() => {
+    if (!trackRef.current) return;
+
+    const slideWidth =
+      trackRef.current.children[0].offsetWidth + gap;
+
+    const moveX = slideWidth * (currentIndex + visibleCount);
+
+    trackRef.current.style.transform = `translateX(-${moveX}px)`;
+    trackRef.current.style.transition = transition
+      ? "transform 0.4s ease"
+      : "none";
+  }, [currentIndex, visibleCount, transition]);
+
+  /* ---------- RESET WITHOUT USER KNOWING ---------- */
+  const handleTransitionEnd = () => {
+    if (currentIndex >= total) {
+      setTransition(false);
+      setCurrentIndex(0);
+    }
+
+    if (currentIndex < 0) {
+      setTransition(false);
+      setCurrentIndex(total - 1);
+    }
+  };
+
+  /* ---------- CONTROLS ---------- */
+  const next = () => {
+    setTransition(true);
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const prev = () => {
+    setTransition(true);
+    setCurrentIndex((prev) => prev - 1);
   };
 
   return (
     <div className="newnote-wrapper">
       <h2 className="newnote-heading">New & Noteworthy</h2>
-      <Slider {...settings} className="newnote-slider">
-        {slides.map((slide, index) => (
-          <div key={index} className="newnote-slide">
-            <img src={slide.img} alt={slide.text} className="newnote-image"
-            onClick={() => {
-              if(slide.path) navigate(slide.path);
-            }} />
-            <p className="newnote-text">{slide.text}</p>
+
+      <div className="newnote-carousel">
+        <button className="newnote-arrow left" onClick={prev}>
+          <FaArrowLeft />
+        </button>
+
+        <button className="newnote-arrow right" onClick={next}>
+          <FaArrowRight />
+        </button>
+
+        <div className="newnote-viewport">
+          <div
+            className="newnote-track"
+            ref={trackRef}
+            onTransitionEnd={handleTransitionEnd}
+          >
+            {slides.map((slide, index) => (
+              <div
+                key={index}
+                className="newnote-slide"
+                style={{
+                  flex: `0 0 calc((100% - ${
+                    (visibleCount - 1) * gap
+                  }px) / ${visibleCount})`,
+                  marginRight: gap,
+                }}
+              >
+                <img
+                  src={slide.img}
+                  alt={slide.text}
+                  className="newnote-image"
+                  onClick={() =>
+                    slide.path && navigate(slide.path)
+                  }
+                />
+                <p className="newnote-text">{slide.text}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </Slider>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Newnote;
+export default NewnoteCustomCarousel;

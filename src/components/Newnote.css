@@ -1,125 +1,115 @@
 .newnote-wrapper {
-  padding: 20px;
+  width: 95%;
+  margin: auto;
 }
 
 .newnote-heading {
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 2.3rem;
+  margin-top: 8%;
+}
+
+.newnote-carousel {
   position: relative;
-  top: 90px; /* REMOVE this for mobile */
-  left: 15px;
-  margin-bottom: 30px; /* controls spacing */
+}
+
+.newnote-viewport {
+  overflow: hidden;
+}
+
+.newnote-track {
+  display: flex;
+  transition: transform 0.4s ease;
 }
 
 .newnote-slide {
-  padding: 10px;
   text-align: center;
+  margin-top: 3%;
+
 }
 
 .newnote-image {
-  width: 104%;
-  height: 250px;
-  object-fit: cover;
+  width: 100%;
+  height: 180px;
   border-radius: 10px;
-  margin-top: 60%;
   cursor: pointer;
-  outline: none !important; 
-  border: none !important;
-}
-.newnote-slide:focus {
-  outline: none !important;   
-}
-.newnote-text {
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 20px;
+  object-fit: cover;
 }
 
-/* Custom arrows */
+.newnote-text {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* arrows */
 .newnote-arrow {
   position: absolute;
-  top: 55%;
-  transform: translateY(-50%);
+  top: 40%;
   background: white;
   border-radius: 50%;
   padding: 10px;
-  z-index: 10;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 10;
+  border: none;
 }
 
 .newnote-arrow.left {
-  left: -1px;
+  left: -10px;
 }
 
 .newnote-arrow.right {
-  right: -2px;
+  right: -10px;
 }
-
-/* Mobile */
-@media (max-width: 768px) {
-  .newnote-heading {
-    font-size: 1.6rem;
-    top: 0;
-    left: 0;
-    margin-top: 20px;
-    text-align: center !important;
+@media (max-width: 480px) {
+  .newnote-wrapper {
+    width: 95%;
   }
-  
+
+  .newnote-heading {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 12%;
+  }
 
   .newnote-image {
-    height: 180px;
-    margin-top: 10px;
-    width: 100%;
-  }
-  .newnote-wrapper{
-    padding: 0;
-  }
-
-
-  .newnote-text {
-    font-size: 14px;
+    /* height: 140px; */
   }
 
   .newnote-arrow {
-    top: 40%; 
-    transform: translateY(-50%);
+    padding: 6px;
+    top: 40%;
+  }
+
+  .newnote-arrow.left {
+    left: -5px;
+  }
+
+  .newnote-arrow.right {
+    right: -5px;
+  }
+}
+
+/* ================= TABLET ================= */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .newnote-heading {
+    font-size: 1.9rem;
+    text-align: center;
+    margin-top: 10%;
+  }
+
+  .newnote-image {
+    height: 160px;
+  }
+
+  .newnote-arrow {
     padding: 8px;
   }
 
   .newnote-arrow.left {
-    left: 5px;
+    left: 0;
   }
 
   .newnote-arrow.right {
-    right: 5px;
-  }
-
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-   .newnote-heading {
-    font-size: 1.4rem;
-    text-align: center;
-
-  }
-  .newnote-image {
-    height: 140px; 
-    margin-top: 10px; 
-    object-fit: cover; 
-  }
-
-  .newnote-text {
-    font-size: 13px;
-  }
-
-  .newnote-arrow {
-    top: 40%;                
-    transform: translateY(-50%); 
-    padding: 8px;
-    
+    right: 0;
   }
 }
