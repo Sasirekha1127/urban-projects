@@ -25,15 +25,22 @@ export default function CustomCarousel() {
   const gap = 20; // gap in px
 
   // responsive
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) setVisibleCount(1);
-      else setVisibleCount(3);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+ useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 480) {
+      setVisibleCount(1);      // Mobile
+    } else if (window.innerWidth <= 1024) {
+      setVisibleCount(2);      // Tablet ✅
+    } else {
+      setVisibleCount(3);      // Desktop
+    }
+  };
+
+  handleResize();
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
 
   // calculate transform whenever index changes
   useEffect(() => {
