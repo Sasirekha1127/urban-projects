@@ -71,7 +71,7 @@
     margin-top: 12%;
   }
   .newnote-image{
-    height: 200px;
+    height: 200px !important;
   }
   
   .newnote-arrow {
@@ -97,7 +97,7 @@
   }
 
   .newnote-image {
-    height: 250px;
+    height: 250px !important;
   }
 
   .newnote-arrow {
