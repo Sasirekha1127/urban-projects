@@ -71,10 +71,6 @@
     margin-top: 12%;
   }
 
-  .newnote-image {
-    /* height: 140px; */
-  }
-
   .newnote-arrow {
     padding: 6px;
     top: 40%;
@@ -93,7 +89,7 @@
 @media (min-width: 481px) and (max-width: 1024px) {
   .newnote-heading {
     font-size: 1.9rem;
-    text-align: center;
+    /* text-align: center; */
     margin-top: 10%;
   }
 
