@@ -1,6 +1,5 @@
-  /* SALON WAPPER */
-
-  .salon-wrapper {
+/* ================== SALON SECTION ================== */
+.salon-wrapper {
   padding: 60px 5%;
   background-color: #fff;
   font-family: "Poppins", sans-serif;
@@ -11,9 +10,8 @@
   font-size: 36px;
   font-weight: 600;
   color: #111;
-  position: relative;
-  top: 20px;
-  right: 30px; 
+  margin-bottom: 30px;
+  text-align: left;
 }
 
 /* ---------- CARD GRID ---------- */
@@ -22,10 +20,6 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
-  position: relative;
-  right: 30px;
-  top: 60px;
- 
 }
 
 .salon-card {
@@ -33,24 +27,25 @@
   border: 1px solid #eee;
   border-radius: 12px;
   overflow: hidden;
-  flex: 1 1 250px;
+  flex: 1 1 250px;   /* default width */
   max-width: 250px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border 0.3s ease;
   cursor: pointer;
+}
+
+.salon-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
 .salon-card:hover img {
   transform: scale(1.05);
 }
-.salon-card:hover{
-    border: #000 1px solid;
 
-}
-.salon-card img {
- width: 100%;
-  height: 220px;
-  object-fit: cover;
-  transition: transform 0.4s ease;
+.salon-card:hover {
+  border: 1px solid #000;
 }
 
 .salon-title {
@@ -60,15 +55,11 @@
   color: #222;
 }
 
-/* ---------- RESPONSIVE BREAKPOINTS ---------- */
-  @media (max-width: 767px) {
-
+/* ---------- RESPONSIVE ---------- */
+/* Mobile (1 card) */
+@media (max-width: 767px) {
   .salon-cards {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    margin-left: 12%;
-    width: 95%;
+    justify-content: center;
   }
 
   .salon-card {
@@ -81,61 +72,50 @@
   }
 
   .salon-heading {
-    text-align: center;
     font-size: 28px;
-    margin-left: 40px;
-  }
-  .salon-wrapper{
-    padding: 0;
+    text-align: center;
   }
 
+  .salon-wrapper {
+    padding: 30px 5%;
+  }
 }
 
-
-/* -----------------------------------------
-   📱 TABLET VIEW (768–1024px) → 2 cards
-------------------------------------------*/
+/* Tablet (2 cards) */
 @media (min-width: 768px) and (max-width: 1024px) {
   .salon-card {
-    flex: 1 1 calc(50% - 15px);
-    max-width: calc(50% - 15px);
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
   }
 
   .salon-card img {
     height: 210px;
   }
-  .salon-heading{
-        text-align: center;
 
+  .salon-heading {
+    text-align: center;
   }
 }
 
 
-          /* SPA SECTION */
-    
-  .spa-wrapper {
+/* ================== SPA SECTION ================== */
+.spa-wrapper {
   padding: 60px 5%;
-  /* background-color: #a1a0a0; */
   font-family: "Poppins", sans-serif;
   text-align: left;
- 
 }
 
 .spa-heading {
   font-size: 2.5rem;
+  font-weight: 600;
   color: #111;
-  /* margin-top: 50px; */
-  position: relative;
-  right: 20px;
-  top:40px;
-  font-weight:600;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 .spa-sub {
   color: #666;
-position: relative;
-top:40px;
-right: 20px;
+  margin-bottom: 30px;
 }
 
 /* Cards container */
@@ -144,9 +124,6 @@ right: 20px;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: flex-start;
-  margin-top: 85px;
-  position: relative;
-  right: 30px;
 }
 
 /* Each card */
@@ -157,16 +134,8 @@ right: 20px;
   overflow: hidden;
   flex: 1 1 250px;
   max-width: 300px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border 0.3s ease;
   cursor: pointer;
-}
-
-.spa-card:hover img {
-  transform: scale(1.05);
-}
-.spa-card:hover{
-    border: #000 1px solid;
-
 }
 
 .spa-card img {
@@ -176,25 +145,29 @@ right: 20px;
   transition: transform 0.4s ease;
 }
 
+.spa-card:hover img {
+  transform: scale(1.05);
+}
+
+.spa-card:hover {
+  border: 1px solid #000;
+}
+
 .spa-title {
   font-size: 1rem;
   padding: 15px;
   color: #111;
 }
 
-/* Responsive */
-
-
-/* ---------- Tablet View (2 Cards) ---------- */
-@media (max-width: 1024px) and (min-width: 768px) {
-
+/* ---------- RESPONSIVE ---------- */
+/* Tablet (2 cards) */
+@media (min-width: 768px) and (max-width: 1024px) {
   .spa-cards {
     justify-content: center;
-    right: 0; 
   }
 
   .spa-card {
-    flex: 1 1 calc(50% - 20px);   /* 2 per row */
+    flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
 
@@ -204,22 +177,19 @@ right: 20px;
 
   .spa-heading,
   .spa-sub {
-    right: 0;
+    text-align: center;
   }
 }
 
-
-/* ---------- Mobile View (1 Card) ---------- */
+/* Mobile (1 card) */
 @media (max-width: 767px) {
-
   .spa-cards {
-    justify-content: center;   
-    right: 0;
+    justify-content: center;
   }
 
   .spa-card {
-    flex: 1 1 100%;  
-    max-width: 100%; /* Full width card */
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 
   .spa-card img {
@@ -229,16 +199,14 @@ right: 20px;
   .spa-heading {
     font-size: 1.8rem;
     text-align: center;
-    right: 0;
-    top: 20px;
   }
 
   .spa-sub {
+    font-size: 1rem;
     text-align: center;
-    right: 0;
-    top: 20px;
   }
-  
+
+  .spa-wrapper {
+    padding: 30px 5%;
+  }
 }
-
-
