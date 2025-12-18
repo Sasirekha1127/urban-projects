@@ -70,6 +70,9 @@
     text-align: center;
     margin-top: 12%;
   }
+  .newnote-image{
+    height: 200px;
+  }
   
   .newnote-arrow {
     padding: 6px;
