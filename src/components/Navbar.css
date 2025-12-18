@@ -105,6 +105,9 @@ html, body {
     box-sizing: border-box;
     /* background-color: red; */
   }
+  .navbar-tall{
+    z-index: 9999;
+  }
 
   .container-fluid {
     padding-left: 0 !important;
@@ -119,6 +122,9 @@ html, body {
 
   .search-icons {
     width: 100% !important;
+  }
+  .navbar-tall{
+    z-index: 9999;
   }
 
   .search-box {
