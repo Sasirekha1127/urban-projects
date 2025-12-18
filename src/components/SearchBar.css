@@ -1,28 +1,27 @@
+/* ========== SEARCH BOX ========== */
 .search-box {
-  position: relative;   /* IMPORTANT */
+  position: relative; /* container for absolute dropdown */
 }
 
+/* Dropdown container */
 .search-dropdown-box {
   position: absolute;
   top: 100%; 
   left: 0;
-
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 16px;
-  width: 20% !important;       
-  min-width: 220px;  
+  width: 21% !important;
   transition: all 0.3s ease;
   z-index: 2000;
-
   display: flex;
   flex-direction: column;
   gap: 12px;
-
-  margin-top: 0;        
+  margin-top: 8px; /* slight spacing from input */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin: 0;
 }
-
 
 /* Trending list */
 .trending-list {
@@ -93,7 +92,7 @@
   color: #666;
 }
 
-/* ===== Tablet ===== */
+/* ================= TABLET (768px - 1024px) ================= */
 @media (max-width: 1024px) {
   .search-dropdown-box {
     width: 220px;
@@ -109,20 +108,15 @@
   }
 }
 
-/* ===== Mobile ===== */
-@media (max-width: 768px) {
+/* ================= MOBILE (max-width: 767px) ================= */
+@media (max-width: 767px) {
   .search-dropdown-box {
-    width: 84% !important;
-    transform: none !important;
-    max-width: none !important;
-    position: absolute !important;
-    top: 39% !important;
-    left: 25px !important;
+    width: 80% !important;          
+    /* transform: translateX(-50%); */
+    /* top: calc(100% + 8px);  */
+    max-width: none;
+    margin-right: 30px !important;
   }
-
-
-
-
 
   .trending-list,
   .subservice-list {
