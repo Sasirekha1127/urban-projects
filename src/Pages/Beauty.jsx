@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { HiArrowSmLeft, HiArrowSmRight } from "react-icons/hi";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "./Beauty.css";
-import Walls from "../components/Walls.jsx"
-import Wallpannels from "../components/Wallpannels.jsx"
-import Wallpannel from "../components/Wallpannel.jsx"
+import Walls from "../components/Walls.jsx";
+import Wallpannels from "../components/Wallpannels.jsx";
+import Wallpannel from "../components/Wallpannel.jsx";
 import Footer from "../Pages/Footer.jsx";
 
 // Images
@@ -43,7 +43,6 @@ import haircare from "../assets/salon3.png";
 import stress from "../assets/spa1.png";
 import pain from "../assets/spa2.png";
 
-
 import beautywall from "../assets/beautywall1.png";
 import wall2 from "../assets/wall2.png";
 import wall3 from "../assets/wall3.png";
@@ -55,22 +54,16 @@ import hair6 from "../assets/hair6.png";
 import hair7 from "../assets/hair7.png";
 import hair8 from "../assets/hair8.png";
 
-
-
-
 import men1 from "../assets/men1.png";
 import men2 from "../assets/men2.png";
 import hair from "../assets/hairmen.png";
 import facial from "../assets/facialmen.png";
 import pedicure from "../assets/pedicuremen.png";
 
-
-
 function Beauty({ setHideNavbar }) {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // -------------------- LOADING --------------------
   useEffect(() => {
     setHideNavbar(true);
     const timer = setTimeout(() => {
@@ -78,7 +71,7 @@ function Beauty({ setHideNavbar }) {
       setHideNavbar(false);
     }, 2000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [setHideNavbar]);
 
   const handleNavigate = (path) => navigate(path);
 
@@ -90,10 +83,11 @@ function Beauty({ setHideNavbar }) {
     { id: 4, image: beautycarousel4 },
     { id: 5, image: beautycarousel5 },
   ];
+
   const offerRef = useRef(null);
-  const [offerIndex, setOfferIndex] = useState(0);
   const [offerVisible, setOfferVisible] = useState(3);
   const offerGap = 20;
+  const [offerIndex, setOfferIndex] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -110,12 +104,16 @@ function Beauty({ setHideNavbar }) {
     if (!offerRef.current) return;
     const slideWidth = offerRef.current.children[0].offsetWidth + offerGap;
     const moveX = slideWidth * offerIndex;
-    offerRef.current.style.transform = `translateX(-${moveX}px)`;
     offerRef.current.style.transition = "transform 0.5s ease";
+    offerRef.current.style.transform = `translateX(-${moveX}px)`;
   }, [offerIndex, offerVisible]);
 
-  const offerNext = () => setOfferIndex((prev) => (prev + 1) % offerCards.length);
-  const offerPrev = () => setOfferIndex((prev) => (prev - 1 < 0 ? offerCards.length - 1 : prev - 1));
+  const offerNext = () => {
+    if (offerIndex < offerCards.length - offerVisible) setOfferIndex(prev => prev + 1);
+  };
+  const offerPrev = () => {
+    if (offerIndex > 0) setOfferIndex(prev => prev - 1);
+  };
 
   // -------------------- MOST BOOKED CAROUSEL --------------------
   const mostBooked = [
@@ -127,20 +125,16 @@ function Beauty({ setHideNavbar }) {
     { id: 6, image: mostbook6, text: "Spa", rating: 4.7, reviews: 110, price: "$35" },
   ];
 
-
   const bookedRef = useRef(null);
-  const [bookedIndex, setBookedIndex] = useState(mostBooked.length);
   const [bookedVisible, setBookedVisible] = useState(3);
   const bookedGap = 20;
-  const [showLeftArrow, setShowLeftArrow] = useState(false);
-
-  const bookedSlides = [...mostBooked.slice(-bookedVisible), ...mostBooked, ...mostBooked.slice(0, bookedVisible)];
+  const [bookedIndex, setBookedIndex] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 480) setBookedVisible(1);
-      else if (window.innerWidth < 768) setBookedVisible(2);
-      else if (window.innerWidth < 1024) setBookedVisible(3);
+      if (window.innerWidth <= 480) setBookedVisible(1);
+      else if (window.innerWidth <= 768) setBookedVisible(2);
+      else if (window.innerWidth <= 1024) setBookedVisible(3);
       else setBookedVisible(4);
     };
     handleResize();
@@ -152,23 +146,16 @@ function Beauty({ setHideNavbar }) {
     if (!bookedRef.current) return;
     const slideWidth = bookedRef.current.children[0].offsetWidth + bookedGap;
     const moveX = slideWidth * bookedIndex;
-    bookedRef.current.style.transform = `translateX(-${moveX}px)`;
     bookedRef.current.style.transition = "transform 0.5s ease";
+    bookedRef.current.style.transform = `translateX(-${moveX}px)`;
   }, [bookedIndex, bookedVisible]);
 
   const bookedNext = () => {
-    setBookedIndex((prev) => prev + 1);
-    setShowLeftArrow(true);
+    if (bookedIndex < mostBooked.length - bookedVisible) setBookedIndex(prev => prev + 1);
   };
 
   const bookedPrev = () => {
-    setBookedIndex((prev) => prev - 1);
-    if (bookedIndex - 1 <= 0) setShowLeftArrow(false);
-  };
-
-  const handleBookedTransitionEnd = () => {
-    if (bookedIndex >= mostBooked.length + bookedVisible) setBookedIndex(bookedVisible);
-    if (bookedIndex < bookedVisible) setBookedIndex(mostBooked.length + bookedVisible - 1);
+    if (bookedIndex > 0) setBookedIndex(prev => prev - 1);
   };
 
   // -------------------- SALON AND SPA SERVICES --------------------
@@ -182,9 +169,8 @@ function Beauty({ setHideNavbar }) {
     { img: stress, title: "Stress Relief" },
     { img: pain, title: "Pain Therapy" },
   ];
-  const images = [
-    { img: mostbook5, text: "In curl blow-dry", rating: 4.3, reviews: "333k", price: "₹399" },
-    { img: mostbook6, text: "Straight & blow-dry", rating: 4.4, reviews: "155k", price: "₹399" },
+
+  const hairImages = [
     { img: hair3, text: "Basic makeup package", rating: 4.4, reviews: "155k", price: "₹2,099" },
     { img: hair4, text: "Basic makeup", rating: 4.88, reviews: "3.5M", price: "₹1,599" },
     { img: hair5, text: "Haircut for women", rating: 4.49, reviews: "3.5M", price: "₹549" },
@@ -192,7 +178,6 @@ function Beauty({ setHideNavbar }) {
     { img: hair7, text: "L'Oreal root touch-up", rating: 4.6, reviews: "1.8M", price: "₹1300" },
     { img: hair8, text: "HD finish makeup", rating: 4.3, reviews: "333k", price: "₹2499" },
   ];
-
 
   const spaService = [
     { title: "Stress relief", img: men1, path: "/spa-men/stress" },
@@ -204,8 +189,6 @@ function Beauty({ setHideNavbar }) {
     { img: hair, title: "Cleanup", path: "/salon-men/cleanup" },
     { img: pedicure, title: "Pedicure", path: "/salon-men/pedicure" },
   ];
-
-
 
   if (loading) {
     return (
@@ -278,9 +261,9 @@ function Beauty({ setHideNavbar }) {
         <button className="arrow arrow-right" onClick={offerNext}><HiArrowSmRight /></button>
         <div className="carousel-wrapper">
           <div className="carousel-track" ref={offerRef}>
-            {offerCards.map((card) => (
+            {offerCards.map((card, index) => (
               <div
-                key={card.id}
+                key={index}
                 className="carousel-card"
                 style={{
                   flex: `0 0 calc((100% - ${(offerVisible - 1) * offerGap}px) / ${offerVisible})`,
@@ -298,11 +281,11 @@ function Beauty({ setHideNavbar }) {
       <div className="mostbooked-wrapper">
         <h2 className="mostbooked-heading">Most Booked Services</h2>
         <div className="mostbooked-carousel">
-          {showLeftArrow && <button className="mostbooked-arrow left" onClick={bookedPrev}><FaArrowLeft /></button>}
-          <button className="mostbooked-arrow right" onClick={bookedNext}><FaArrowRight /></button>
+          {bookedIndex > 0 && <button className="mostbooked-arrow left" onClick={bookedPrev}><FaArrowLeft /></button>}
+          {bookedIndex < mostBooked.length - bookedVisible && <button className="mostbooked-arrow right" onClick={bookedNext}><FaArrowRight /></button>}
           <div className="mostbooked-viewport">
-            <div className="mostbooked-track" ref={bookedRef} onTransitionEnd={handleBookedTransitionEnd}>
-              {bookedSlides.map((item, index) => (
+            <div className="mostbooked-track" ref={bookedRef}>
+              {mostBooked.map((item, index) => (
                 <div
                   key={index}
                   className="mostbooked-item"
@@ -322,17 +305,12 @@ function Beauty({ setHideNavbar }) {
         </div>
       </div>
 
-      {/* SALON SECTION */}
+      {/* SALON & SPA Sections */}
       <div className="salon-wrapper">
         <h2 className="salon-heading">Salon for Women</h2>
         <div className="salon-cards">
           {salonServices.map((item, index) => (
-            <div
-              key={index}
-              className="salon-card"
-              onClick={() => navigate(`/salon/${item.title.toLowerCase()}`)}
-              style={{ cursor: "pointer" }}
-            >
+            <div key={index} className="salon-card" onClick={() => navigate(`/salon/${item.title.toLowerCase()}`)}>
               <img src={item.img} alt={item.title} />
               <p className="salon-title">{item.title}</p>
             </div>
@@ -341,24 +319,19 @@ function Beauty({ setHideNavbar }) {
       </div>
       <Walls image={beautywall} />
 
-      {/* SPA SECTION */}
       <div className="spa-wrapper">
         <h2 className="spa-heading">Spa for Women</h2>
         <p className="spa-sub">Refresh. Rewind. Rejuvenate.</p>
         <div className="spa-cards">
           {spaServices.map((item, index) => (
-            <div
-              key={index}
-              className="spa-card"
-              onClick={() => navigate(`/spa/${item.title.toLowerCase().replace(/\s+/g, "-")}`)}
-              style={{ cursor: "pointer" }}
-            >
+            <div key={index} className="spa-card" onClick={() => navigate(`/spa/${item.title.toLowerCase().replace(/\s+/g, "-")}`)}>
               <img src={item.img} alt={item.title} />
               <p className="spa-title">{item.title}</p>
             </div>
           ))}
         </div>
       </div>
+
       {/* Hair Services */}
       <div className="hair-wrapper">
         <div className="hair-header">
@@ -369,41 +342,33 @@ function Beauty({ setHideNavbar }) {
           <button className="seeall-btn">See All</button>
         </div>
         <div className="hair-grid">
-          {images.map((item, index) => (
+          {hairImages.map((item, index) => (
             <div className="hair-card" key={index}>
               <img src={item.img} alt="hair" />
               <p className="hair-title">{item.text}</p>
-              <div className="hair-rating">
-                {item.rating} <span>({item.reviews})</span>
-              </div>
+              <div className="hair-rating">{item.rating} <span>({item.reviews})</span></div>
               <p className="hair-price">{item.price}</p>
             </div>
           ))}
         </div>
       </div>
+
       <Wallpannels image={wall2} />
 
-
-      {/* Salon for Men */}
       <div className="spa-wrapper">
         <h2 className="spa-heading">Salon for Men</h2>
-
         <div className="spa-cards">
           {salonService.map((item, index) => (
-            <div
-              key={index}
-              className="spa-card"
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate(item.path)}
-            >
+            <div key={index} className="spa-card" onClick={() => navigate(item.path)}>
               <img src={item.img} alt={item.title} />
               <p className="spa-title">{item.title}</p>
             </div>
           ))}
         </div>
       </div>
+
       <Wallpannel image={wall3} />
-      {/* Spa for Men */}
+
       <div className="spa-wrapper">
         <h2 className="spa-heading">Spa for Men</h2>
         <p className="spa-sub">Curated massages by top therapists</p>
@@ -416,7 +381,6 @@ function Beauty({ setHideNavbar }) {
           ))}
         </div>
       </div>
-
 
       <Footer />
     </>
