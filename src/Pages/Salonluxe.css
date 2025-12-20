@@ -42,7 +42,6 @@
   margin-top: 30px;
   background: #fff;
   width: 100%;
-   position: sticky !important;
   top: 20px;
 }
 
@@ -357,8 +356,8 @@
     font-size: 0.85rem;
     padding: 5px 12px;  
     position: absolute ;
-    top: 60px;
-    left: 20px;
+    top: 70px;
+    left: 45px;
   }
 }
 
