@@ -38,10 +38,10 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
+  background:white;
+  color: rgba(0, 0, 0, 0.85);
   border: none;
-  width: 48px;
+  width: 40px;
   height: 48px;
   border-radius: 50%;
   cursor: pointer;
@@ -54,12 +54,12 @@
 }
 /* LEFT CORNER */
 .arrow.left {
-  left: -30px;
+  left: -20px;
 }
 
 /* RIGHT CORNER */
 .arrow.right {
-  right: -30px;
+  right: -20px;
 }
 
 
@@ -119,5 +119,9 @@
 @media (max-width: 600px) {
   .revamp-track img {
     width: 100%;
+  }
+  .revamp-carousel-title{
+    margin-top: 50%;
+    font-size: 1.9rem;
   }
 }
