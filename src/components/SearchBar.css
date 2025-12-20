@@ -111,7 +111,7 @@
 /* ================= MOBILE (max-width: 767px) ================= */
 @media (max-width: 767px) {
   .search-dropdown-box {
-    width: 80% !important;          
+    width: 89% !important;          
     /* transform: translateX(-50%); */
     /* top: calc(100% + 8px);  */
     max-width: none;
