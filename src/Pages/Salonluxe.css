@@ -691,12 +691,11 @@
     width: 80%;
   }
   .popup-full-img {
-    height: 220px;
+    height: 230px;
   }
   .popup-details {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
   }
   .details-right {
     width: 100%;
@@ -705,24 +704,26 @@
     width: 100%;
     text-align: center;
   }
+  
 }
 
 /* Small Mobiles */
 @media (max-width: 480px) {
-  .popup-box {
-    width: 100%;
-    padding-bottom: 15px;
-  }
+  /* .popup-box {
+  } */
   .popup-full-img {
-    height: 200px;
+    height: 220px;
   }
   .popup-title {
-    font-size: 18px;
+    font-size: 10px;
   }
   .popup-add-btn {
     padding: 10px 0;
     font-size: 15px;
     width: 100%;
+  }
+  .popup-rating{
+    font-size: 12px;
   }
 }
 .qty-box {
@@ -1076,54 +1077,84 @@
 
   /* Popup bottom */
   .popup-bottom {
-    flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
+  }
+  .popup-total{
+    display: flex;
   }
 
   .popup-done-btn {
-    width: 100%;
+    width: 20%;
     margin-left: 0;
+  }
+  .close-btn{
+    margin: 30px 0 0 15%;
   }
 }
 
 
 /* ---------- SMALL MOBILE (≤ 480px) ---------- */
 @media (max-width: 480px) {
-
+  /* .popup-overlay{
+    width: 100%;
+    background-color: red;
+  } */
   .cart-header,
   .cart-main-heading {
     font-size: 20px;
   }
-
   .cart-title {
     width: 100%;
     font-size: 14px;
   }
 
   .cart-row {
-    flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-
+  .popup-box{
+    height: 400px;
+  }
   .cart-price {
     width: 100%;
     text-align: left;
     font-size: 15px;
   }
+  .close-btn{
+    margin: 0 0 15px 30px;
+  }
+  .popup-full-img{
+    height: 150px;
+  }
 
   .qty-box,
   .qty-box1 {
-    width: 100%;
+    width: 60%;
     justify-content: space-between;
+    padding: 0;
   }
+ .popup-done-btn {
+  width: auto;
+  min-width: 120px;
+  padding: 8px 16px;
+  font-size: 14px;
+  white-space: nowrap;
+}
 
-  .cart-bottom-bar {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
-
+  .popup-total {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.popup-bottom {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 0;
+}
   .cart-total {
     font-size: 16px;
   }
