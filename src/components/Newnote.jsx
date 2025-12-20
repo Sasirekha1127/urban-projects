@@ -15,22 +15,23 @@ const NewnoteCustomCarousel = () => {
   const navigate = useNavigate();
   const trackRef = useRef(null);
 
+  // 👈 Add path property for navigation
   const cards = [
-    { img: furniture, text: "Furniture Wood Polish" },
-    { img: water, text: "Native Water Purifier" },
-    { img: wall, text: "Wall makeover by Rewamp" },
-    { img: smartlock, text: "Native Smart Lock" },
-    { img: kitchcleaning, text: "Kitchen Cleaning" },
-    { img: laptop, text: "Laptop" },
+    { id: 1, img: furniture, text: "Furniture Wood Polish", path: "/service/1" },
+    { id: 2, img: water, text: "Native Water Purifier", path: "/service/2" },
+    { id: 3, img: wall, text: "Wall makeover by Rewamp", path: "/service/3" },
+    { id: 4, img: smartlock, text: "Native Smart Lock", path: "/service/4" },
+    { id: 5, img: kitchcleaning, text: "Kitchen Cleaning", path: "/service/5" },
+    { id: 6, img: laptop, text: "Laptop", path: "/service/6" },
   ];
 
   const gap = 20;
+  const total = cards.length;
 
   const [visibleCount, setVisibleCount] = useState(5);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transition, setTransition] = useState(true);
-
-  const total = cards.length;
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
 
   /* ---------- RESPONSIVE ---------- */
   useEffect(() => {
@@ -40,7 +41,6 @@ const NewnoteCustomCarousel = () => {
       else if (window.innerWidth < 1024) setVisibleCount(3);
       else setVisibleCount(5);
     };
-
     resize();
     window.addEventListener("resize", resize);
     return () => window.removeEventListener("resize", resize);
@@ -57,24 +57,19 @@ const NewnoteCustomCarousel = () => {
   useEffect(() => {
     if (!trackRef.current) return;
 
-    const slideWidth =
-      trackRef.current.children[0].offsetWidth + gap;
-
+    const slideWidth = trackRef.current.children[0].offsetWidth + gap;
     const moveX = slideWidth * (currentIndex + visibleCount);
 
     trackRef.current.style.transform = `translateX(-${moveX}px)`;
-    trackRef.current.style.transition = transition
-      ? "transform 0.4s ease"
-      : "none";
+    trackRef.current.style.transition = transition ? "transform 0.4s ease" : "none";
   }, [currentIndex, visibleCount, transition]);
 
-  /* ---------- RESET WITHOUT USER KNOWING ---------- */
+  /* ---------- RESET FOR INFINITE ---------- */
   const handleTransitionEnd = () => {
     if (currentIndex >= total) {
       setTransition(false);
       setCurrentIndex(0);
     }
-
     if (currentIndex < 0) {
       setTransition(false);
       setCurrentIndex(total - 1);
@@ -85,11 +80,16 @@ const NewnoteCustomCarousel = () => {
   const next = () => {
     setTransition(true);
     setCurrentIndex((prev) => prev + 1);
+    setShowLeftArrow(true);
   };
 
   const prev = () => {
     setTransition(true);
-    setCurrentIndex((prev) => prev - 1);
+    setCurrentIndex((prev) => {
+      const newIndex = prev - 1;
+      if (newIndex <= 0) setShowLeftArrow(false);
+      return newIndex;
+    });
   };
 
   return (
@@ -97,10 +97,14 @@ const NewnoteCustomCarousel = () => {
       <h2 className="newnote-heading">New & Noteworthy</h2>
 
       <div className="newnote-carousel">
-        <button className="newnote-arrow left" onClick={prev}>
-          <FaArrowLeft />
-        </button>
+        {/* LEFT ARROW */}
+        {showLeftArrow && (
+          <button className="newnote-arrow left" onClick={prev}>
+            <FaArrowLeft />
+          </button>
+        )}
 
+        {/* RIGHT ARROW */}
         <button className="newnote-arrow right" onClick={next}>
           <FaArrowRight />
         </button>
@@ -116,9 +120,7 @@ const NewnoteCustomCarousel = () => {
                 key={index}
                 className="newnote-slide"
                 style={{
-                  flex: `0 0 calc((100% - ${
-                    (visibleCount - 1) * gap
-                  }px) / ${visibleCount})`,
+                  flex: `0 0 calc((100% - ${(visibleCount - 1) * gap}px) / ${visibleCount})`,
                   marginRight: gap,
                 }}
               >
@@ -126,9 +128,7 @@ const NewnoteCustomCarousel = () => {
                   src={slide.img}
                   alt={slide.text}
                   className="newnote-image"
-                  onClick={() =>
-                    slide.path && navigate(slide.path)
-                  }
+                  onClick={() => navigate(slide.path)} // CLICK NAVIGATION
                 />
                 <p className="newnote-text">{slide.text}</p>
               </div>

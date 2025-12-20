@@ -95,7 +95,7 @@
 /* ================= TABLET (768px - 1024px) ================= */
 @media (max-width: 1024px) {
   .search-dropdown-box {
-    width: 220px;
+    width: 100%;
   }
 
   .subservice-item img {

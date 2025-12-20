@@ -81,7 +81,7 @@
   border-radius: 50%;
   font-size: 28px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 5;
 }
 
 .revamp-arrow.left { left: -8px; }
@@ -133,6 +133,5 @@
   }
   .revamp-carousel-image{
     margin-top: 20px;
-  }
-  
+  } 
 }
