@@ -10,8 +10,8 @@
 .uc-left {
   width: 30%;
   margin-top: 10%;
-  min-width: 250px;     /* prevents shrinking too much */
-  position: sticky;     /* stays sticky on scroll */
+  min-width: 250px;     
+  /* position: sticky;     */
   top: 20px;
 }
 
@@ -363,7 +363,7 @@
 
 /* RIGHT SIDEBAR */
 .bottom-right {
-  position: sticky;
+  /* position: sticky; */
   top: 90px; 
   display: flex;
   flex-direction: column;
@@ -998,4 +998,133 @@
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 15px;
+}
+/* =========================
+   RESPONSIVE STYLES
+========================= */
+
+/* ---------- TABLET (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+
+  .cart-box {
+    width: 100%;
+  }
+
+  .popup-done-btn {
+    width: 45%;
+    margin-left: auto;
+  }
+
+  .cart-title {
+    font-size: 14px;
+  }
+
+  .cart-price {
+    font-size: 16px;
+  }
+}
+
+
+/* ---------- MOBILE (≤ 768px) ---------- */
+@media (max-width: 768px) {
+
+  /* Cart card stack */
+  .cart-card {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cart-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cart-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  /* Qty box */
+  .qty-box {
+    padding: 6px 12px;
+    gap: 14px;
+  }
+
+  .qty-btn {
+    font-size: 22px;
+  }
+
+  .qty-count {
+    font-size: 16px;
+  }
+
+  /* Footer bar */
+  .footer-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-amount {
+    font-size: 18px;
+  }
+
+  .view-cart-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Popup bottom */
+  .popup-bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .popup-done-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+
+/* ---------- SMALL MOBILE (≤ 480px) ---------- */
+@media (max-width: 480px) {
+
+  .cart-header,
+  .cart-main-heading {
+    font-size: 20px;
+  }
+
+  .cart-title {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .cart-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .cart-price {
+    width: 100%;
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .qty-box,
+  .qty-box1 {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .cart-bottom-bar {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .cart-total {
+    font-size: 16px;
+  }
 }

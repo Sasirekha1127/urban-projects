@@ -171,7 +171,6 @@
 @media (max-width: 768px) {
   .uc-cart-card,
   .lines {
-    margin-left: 5%;
     flex-direction: column;
     text-align: center;
   }
@@ -187,16 +186,22 @@
 
   .uc-cart-img {
     margin-bottom: 10px;
+
   }
 
   .uc-addservice-btn-outline,
   .uc-checkout-btn {
-    width: 80%;
     margin-left: 10%;
     margin-top: 10px;
+    width: 30%;
+    padding: 2px;
+    margin-bottom: 20%;
+    font-size: 1rem;
+
+
   }
 
-  .uc-back-btn {
+  /* .uc-back-btn {
     margin-left: 10%;
-  }
+  } */
 }
