@@ -82,8 +82,8 @@
   z-index: 5;
 }
 
-.arrow.left { left: 10px; }
-.arrow.right { right: 10px; }
+.arrow.left { left: -10px; }
+.arrow.right { right: -10px; }
 
 /* loader */
 .native-loading-overlay {
