@@ -34,7 +34,7 @@
 }
 
 /* Arrows */
-.arrow {
+.arrowss {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -53,12 +53,12 @@
   z-index: 5;
 }
 /* LEFT CORNER */
-.arrow.left {
+.arrowss.left {
   left: -20px;
 }
 
 /* RIGHT CORNER */
-.arrow.right {
+.arrowss.right {
   right: -20px;
 }
 

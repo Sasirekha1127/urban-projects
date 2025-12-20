@@ -78,7 +78,7 @@ export default function Revamp({ setHideNavbar }) {
 
       <div className="revamp-carousel">
         <button
-          className="arrow left"
+          className="arrowss left"
           onClick={() => prev(setIndex1, images1.length)}
         >
           <HiArrowSmLeft />
@@ -91,7 +91,7 @@ export default function Revamp({ setHideNavbar }) {
         </div>
 
         <button
-          className="arrow right"
+          className="arrowss right"
           onClick={() => next(setIndex1, images1.length)}
         >
           <HiArrowSmRight />
@@ -105,7 +105,7 @@ export default function Revamp({ setHideNavbar }) {
 
       <div className="revamp-carousel">
         <button
-          className="arrow left"
+          className="arrowss left"
           onClick={() => prev(setIndex2, images2.length)}
         >
           <HiArrowSmLeft />
@@ -118,7 +118,7 @@ export default function Revamp({ setHideNavbar }) {
         </div>
 
         <button
-          className="arrow right"
+          className="arrowss right"
           onClick={() => next(setIndex2, images2.length)}
         >
           <HiArrowSmRight />
