@@ -121,4 +121,8 @@
 
 @media (max-width: 600px) {
   .native-track img { width: 100%; }
+  .wall-panel-cards {
+    margin-top: 10%;
+  }
+
 }
