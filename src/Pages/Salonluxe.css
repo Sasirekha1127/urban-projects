@@ -1130,7 +1130,7 @@
 
   .qty-box,
   .qty-box1 {
-    width: 60%;
+    /* width: 60%; */
     justify-content: space-between;
     padding: 0;
   }
