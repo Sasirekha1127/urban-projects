@@ -19,6 +19,7 @@ import Salonpackages from "./Pages/Salonpackages.jsx";
 import SalonLuxe from "./Pages/Salonluxe.jsx";
 import ViewCartPage from "./Pages/ViewCartPage.jsx";
 
+
 // COMPONENTS
 import Carouselpage from "./components/Carouselpage.jsx";
 import Newnote from "./components/Newnote.jsx";
@@ -32,6 +33,8 @@ import Salonmen from "./components/Salonmen.jsx";
 import Wal from "./components/Wal.jsx";
 import Homerepair from "./components/Homerepair.jsx";
 import Load from "./components/Loading.jsx";
+import LoginModal from "./Pages/Loginmodel.jsx";
+
 
 export default function AppContent({ cart, setCart }) {
   const location = useLocation();
@@ -115,6 +118,8 @@ export default function AppContent({ cart, setCart }) {
         <Route path="/Wal" element={<Wal />} />
         <Route path="/homerepair" element={<Homerepair />} />
         <Route path="/bathroom-cleaning" element={<BathroomCleaningPage />} />
+        <Route path="/loginmodel" element={<LoginModal />} />
+
       </Routes>
     </>
   );

@@ -11,7 +11,7 @@ import pain from "../assets/spa2.png";
 import "./Salon.css";
 
 const SalonSpa = () => {
-  const navigate = useNavigate(); // 👈 React Router hook
+  const navigate = useNavigate(); // React Router hook
 
   // SALON SERVICES
   const salonServices = [

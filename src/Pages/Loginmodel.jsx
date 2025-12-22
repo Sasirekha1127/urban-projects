@@ -29,7 +29,7 @@ export default function LoginModal({ show, onClose }) {
 
     setTimeout(() => {
       setShowVerifying(false);
-      // 👉 inga OTP screen later add pannalaam
+      //  inga OTP screen later add pannalaam
     }, 1000);
   };
 

@@ -50,7 +50,7 @@ function Home() {
             <h3>What are you looking for?</h3>
 
             <div className="service-grid">
-              <div className="service-group" onClick={() => handleNavigate("/salon")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon-women")}>
                 <div className="service-item1">
                   <img src={women} alt="Salon for Women" />
                 </div>
