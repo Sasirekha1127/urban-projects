@@ -6,7 +6,6 @@ import { LuShoppingCart } from "react-icons/lu";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-
 import bathroomVideo from "../assets/bathroomvideo.mp4";
 import comboIcon from "../assets/combo.png";
 import combobathrrom from "../assets/2bathroom.png";
@@ -92,7 +91,6 @@ const SalonLuxe = ({ cart, setCart }) => {
   const addToCart = () => {
     if (qty === 0) return;
 
-    // Add unique id if not already present
     const itemToAdd = { ...selectedService, qty, id: selectedService.title };
 
     const existing = cart.find((i) => i.title === selectedService.title);
@@ -156,7 +154,6 @@ const SalonLuxe = ({ cart, setCart }) => {
 
             <div className="popup-bottom">
               <div className="popup-total">₹{selectedService.price * qty}</div>
-
               {qty === 0 ? (
                 <button className="popup-done-btn disabled">Add qty</button>
               ) : (
@@ -184,17 +181,14 @@ const SalonLuxe = ({ cart, setCart }) => {
                 <img src={comboIcon} alt="" />
                 <p>Combos</p>
               </div>
-
               <div className="service-box">
                 <img src={combobathrrom} alt="" />
                 <p>Bathroom cleaning</p>
               </div>
-
               <div className="service-box">
                 <img src={kitchenIcon} alt="" />
                 <p>Kitchen cleaning</p>
               </div>
-
               <div className="service-box">
                 <img src={miniIcon} alt="" />
                 <p>Mini services</p>
@@ -214,8 +208,8 @@ const SalonLuxe = ({ cart, setCart }) => {
 
             {/* LEFT LIST */}
             <div className="bottom-left">
+              {/* Combos */}
               <h2 className="combos-heading">Combos</h2>
-
               {combos.map((combo, idx) => (
                 <div key={idx} className="combo-card">
                   <div>
@@ -223,24 +217,18 @@ const SalonLuxe = ({ cart, setCart }) => {
                     <p className="ratingss m-1">
                       <FaStar style={{ color: "blue" }} /> {combo.rating}
                     </p>
-
                     <p className="price m-1">
                       <span className="green-price">₹{combo.price}</span>
                       <span className="old">₹{combo.oldPrice}</span> • {combo.duration}
                     </p>
-
                     <p className="green">₹{combo.perBathroom} per bathroom</p>
                     <p className="desc">{combo.desc}</p>
                   </div>
 
                   <div className="service-img-box">
                     <img src={combo.img} alt="" />
-
-                    {/* Dynamic Button */}
                     {getQty(combo.title) === 0 ? (
-                      <button className="add-btn" onClick={() => openPopup(combo)}>
-                        Add
-                      </button>
+                      <button className="add-btn" onClick={() => openPopup(combo)}>Add</button>
                     ) : (
                       <div className="qty-box">
                         <button
@@ -248,9 +236,7 @@ const SalonLuxe = ({ cart, setCart }) => {
                             setCart(
                               cart
                                 .map((c) =>
-                                  c.title === combo.title
-                                    ? { ...c, qty: c.qty - 1 }
-                                    : c
+                                  c.title === combo.title ? { ...c, qty: c.qty - 1 } : c
                                 )
                                 .filter((c) => c.qty > 0)
                             )
@@ -263,9 +249,7 @@ const SalonLuxe = ({ cart, setCart }) => {
                           onClick={() =>
                             setCart(
                               cart.map((c) =>
-                                c.title === combo.title
-                                  ? { ...c, qty: c.qty + 1 }
-                                  : c
+                                c.title === combo.title ? { ...c, qty: c.qty + 1 } : c
                               )
                             )
                           }
@@ -279,12 +263,8 @@ const SalonLuxe = ({ cart, setCart }) => {
               ))}
 
               <hr />
-
-              {/* BATHROOM CLEANING */}
-              <h2 className="combos-heading" style={{ marginTop: "40px" }}>
-                Bathroom cleaning
-              </h2>
-
+              {/* Bathroom cleaning */}
+              <h2 className="combos-heading" style={{ marginTop: "40px" }}>Bathroom cleaning</h2>
               {/* ITEM 1 */}
               <div className="combo-card">
                 <div>
@@ -292,18 +272,14 @@ const SalonLuxe = ({ cart, setCart }) => {
                   <p className="ratingss m-1">
                     <FaStar style={{ color: "blue" }} /> 4.79 (3.7M reviews)
                   </p>
-
                   <p className="price m-1">
                     <span className="green-price">Starts at ₹419</span>
                     <span className="old">₹519</span>
                   </p>
-
                   <p className="desc">Floor & tile cleaning with scrubbing machine</p>
                 </div>
-
                 <div className="service-img-box">
                   <img src={intense} alt="" />
-
                   {getQty("Intense bathroom cleaning") === 0 ? (
                     <button
                       className="add-btn"
@@ -355,7 +331,6 @@ const SalonLuxe = ({ cart, setCart }) => {
                   )}
                 </div>
               </div>
-
               {/* ITEM 2 */}
               <div className="combo-card">
                 <div>
@@ -363,18 +338,14 @@ const SalonLuxe = ({ cart, setCart }) => {
                   <p className="ratingss m-1">
                     <FaStar style={{ color: "blue" }} /> 4.81 (1.1M reviews)
                   </p>
-
                   <p className="price m-1">
                     <span className="green-price">Starts at ₹479</span>
                     <span className="old">₹579</span>
                   </p>
-
                   <p className="desc">Extra machine scrubbing included</p>
                 </div>
-
                 <div className="service-img-box">
                   <img src={intense} alt="" />
-
                   {getQty("Move-in bathroom cleaning") === 0 ? (
                     <button
                       className="add-btn"
@@ -428,33 +399,23 @@ const SalonLuxe = ({ cart, setCart }) => {
               </div>
 
               <hr />
-
               {/* MINI SERVICES */}
-              <h2 className="combos-heading" style={{ marginTop: "40px" }}>
-                Mini services
-              </h2>
-
+              <h2 className="combos-heading" style={{ marginTop: "40px" }}>Mini services</h2>
               {miniServices.map((item, i) => (
                 <div key={i} className="combo-card">
                   <div>
                     <h4 className="combo-title">{item.title}</h4>
-
                     <p className="ratingss m-1">
                       <FaStar style={{ color: "blue" }} /> {item.rating} ({item.reviews} reviews)
                     </p>
-
                     <p className="price m-1">
                       <span className="green-price">₹{item.price}</span> • {item.time}
                     </p>
                   </div>
-
                   <div className="service-img-box">
                     <img src={item.img} alt="" />
-
                     {getQty(item.title) === 0 ? (
-                      <button className="add-btn" onClick={() => openPopup(item)}>
-                        Add
-                      </button>
+                      <button className="add-btn" onClick={() => openPopup(item)}>Add</button>
                     ) : (
                       <div className="qty-box">
                         <button
@@ -462,9 +423,7 @@ const SalonLuxe = ({ cart, setCart }) => {
                             setCart(
                               cart
                                 .map((c) =>
-                                  c.title === item.title
-                                    ? { ...c, qty: c.qty - 1 }
-                                    : c
+                                  c.title === item.title ? { ...c, qty: c.qty - 1 } : c
                                 )
                                 .filter((c) => c.qty > 0)
                             )
@@ -472,16 +431,12 @@ const SalonLuxe = ({ cart, setCart }) => {
                         >
                           −
                         </button>
-
                         <span>{getQty(item.title)}</span>
-
                         <button
                           onClick={() =>
                             setCart(
                               cart.map((c) =>
-                                c.title === item.title
-                                  ? { ...c, qty: c.qty + 1 }
-                                  : c
+                                c.title === item.title ? { ...c, qty: c.qty + 1 } : c
                               )
                             )
                           }
@@ -504,50 +459,48 @@ const SalonLuxe = ({ cart, setCart }) => {
                     <p>No items in your cart</p>
                   </div>
                 ) : (
-
                   <div className="cart-box">
                     <div className="cart-header">Cart </div>
-                    {cart.map((item, idx) => (
-                      <>
 
-                        <div key={idx} className="cart-row">
-                          <p className="cart-title">{item.title}</p>
+                    {/* DESCENDING ORDER CART */}
+                    {[...cart].reverse().map((item) => (
+                      <div key={item.title} className="cart-row">
+                        <p className="cart-title">{item.title}</p>
 
-                          <div className="qty-box">
-                            <button
-                              className="qty-btn"
-                              onClick={() =>
-                                setCart(
-                                  cart
-                                    .map((c, i2) =>
-                                      i2 === idx ? { ...c, qty: c.qty - 1 } : c
-                                    )
-                                  .filter((c) => c.qty > 0)
-                                )
-                              }
-                            >
-                              −
-                            </button>
-
-                            <span className="qty-count">{item.qty}</span>
-
-                            <button
-                              className="qty-btn"
-                              onClick={() =>
-                                setCart(
-                                  cart.map((c, i2) =>
-                                    i2 === idx ? { ...c, qty: c.qty + 1 } : c
+                        <div className="qty-box">
+                          <button
+                            className="qty-btn"
+                            onClick={() =>
+                              setCart(
+                                cart
+                                  .map((c) =>
+                                    c.title === item.title ? { ...c, qty: c.qty - 1 } : c
                                   )
-                                )
-                              }
-                            >
-                              +
-                            </button>
-                          </div>
+                                  .filter((c) => c.qty > 0)
+                              )
+                            }
+                          >
+                            −
+                          </button>
 
-                          <p className="cart-price">₹{item.price * item.qty}</p>
+                          <span className="qty-count">{item.qty}</span>
+
+                          <button
+                            className="qty-btn"
+                            onClick={() =>
+                              setCart(
+                                cart.map((c) =>
+                                  c.title === item.title ? { ...c, qty: c.qty + 1 } : c
+                                )
+                              )
+                            }
+                          >
+                            +
+                          </button>
                         </div>
-                      </>
+
+                        <p className="cart-price">₹{item.price * item.qty}</p>
+                      </div>
                     ))}
 
                     <div className="cart-bottom-bar">
@@ -576,7 +529,6 @@ const SalonLuxe = ({ cart, setCart }) => {
                         </div>
                       </div>
                     ))}
-
                   <p className="view-more" onClick={() => setShowAllOffers(!showAllOffers)}>
                     {showAllOffers ? "View less ^" : "View more"}
                   </p>
@@ -588,7 +540,6 @@ const SalonLuxe = ({ cart, setCart }) => {
                     <h3>UC Promise</h3>
                     <img src={uc} alt="uc logo" className="promise-logo" />
                   </div>
-
                   <ul>
                     <li>✔ Verified Professionals</li>
                     <li>✔ Hassle Free Booking</li>
@@ -602,7 +553,6 @@ const SalonLuxe = ({ cart, setCart }) => {
         </div>
       </div>
       <NavbarUC cart={cart} setCart={setCart} />
-
     </div>
   );
 };

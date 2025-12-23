@@ -1,13 +1,10 @@
 import React from "react";
 import "./CartPage.css";
 import { useNavigate } from "react-router-dom";
-import { LuShoppingCart } from "react-icons/lu";
-import card from "../assets/card.png"
-import { LuArrowLeft } from "react-icons/lu";
+import { LuShoppingCart, LuArrowLeft } from "react-icons/lu";
+import card from "../assets/card.png";
 
-
-
-export default function CartPage({ cart = [], setCart = () => { } }) {
+export default function CartPage({ cart = [], setCart = () => {} }) {
   const navigate = useNavigate();
 
   const increaseQty = (id) => {
@@ -21,15 +18,23 @@ export default function CartPage({ cart = [], setCart = () => { } }) {
   const decreaseQty = (id) => {
     setCart(
       cart.map((item) =>
-        item.id === id ? { ...item, qty: Math.max(1, (item.qty || 1) - 1) } : item
+        item.id === id
+          ? { ...item, qty: Math.max(1, (item.qty || 1) - 1) }
+          : item
       )
     );
   };
 
-  const removeItem = (id) => setCart(cart.filter((item) => item.id !== id));
+  const removeItem = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
 
-  const total = cart.reduce((sum, item) => sum + (item.price || 0) * (item.qty || 1), 0);
+  const total = cart.reduce(
+    (sum, item) => sum + (item.price || 0) * (item.qty || 1),
+    0
+  );
 
+  // 🔴 EMPTY CART UI
   if (cart.length === 0) {
     return (
       <div className="cart-empty-box">
@@ -48,45 +53,60 @@ export default function CartPage({ cart = [], setCart = () => { } }) {
   }
 
   return (
-   <>
-  {/* Back button */}
-  <div className="uc-back-btn" onClick={() => navigate(-1)}>
-    <LuArrowLeft size={24} /> 
-  </div>
-
-  {/* Cart header row */}
-  <div className="cart-header-row">
-    <LuShoppingCart size={40} className="cart-icons" />
-    <h1 className="uc-cart-title">Your Cart</h1>
-  </div>
-  <hr className="lines" />
-
-  {/* Cart items */}
-  {cart.map((item) => (
-    <div className="uc-cart-card" key={item.id}>
-      <img src={card} alt={item.title} className="uc-cart-img" />
-      <div className="uc-cart-info">
-        <h2 className="uc-cart-item-title">{item.title}</h2>
-        <p className="uc-cart-subtitle">
-          {item.qty} service{item.qty > 1 ? "s" : ""} • ₹{item.price * item.qty}
-        </p>
+    <>
+      {/* 🔙 Back button */}
+      <div className="uc-back-btn" onClick={() => navigate(-1)}>
+        <LuArrowLeft size={24} />
       </div>
-    </div>
-  ))}
 
-  {/* Checkout buttons */}
-  <div className="uc-checkout-wrapper">
-    <button
-      className="uc-addservice-btn-outline"
-      onClick={() => navigate("/")}
-    >
-      Add Services
-    </button>
-    <button className="uc-checkout-btn"   onClick={() => navigate("/view-cart")}>
+      {/* 🛒 Cart header */}
+      <div className="cart-header-row">
+        <LuShoppingCart size={40} className="cart-icons" />
+        <h1 className="uc-cart-title">Your Cart</h1>
+      </div>
+      <hr className="lines" />
 
-      Checkout
-    </button>
-  </div>
-</>
+      {/* 🟣 CART ITEMS (DESCENDING ORDER) */}
+      {[...cart].reverse().map((item) => (
+        <div className="uc-cart-card" key={item.id}>
+          <img src={card} alt={item.title} className="uc-cart-img" />
+
+          <div className="uc-cart-info">
+            <h2 className="uc-cart-item-title">{item.title}</h2>
+
+            <p className="uc-cart-subtitle">
+              {item.qty} service{item.qty > 1 ? "s" : ""} • ₹
+              {item.price * item.qty}
+            </p>
+
+            {/* Quantity controls (optional UI use pannalaam) */}
+            {/* 
+            <div className="qty-controls">
+              <button onClick={() => decreaseQty(item.id)}>-</button>
+              <span>{item.qty}</span>
+              <button onClick={() => increaseQty(item.id)}>+</button>
+            </div>
+            */}
+          </div>
+        </div>
+      ))}
+
+      {/* 💳 Checkout buttons */}
+      <div className="uc-checkout-wrapper">
+        <button
+          className="uc-addservice-btn-outline"
+          onClick={() => navigate("/")}
+        >
+          Add Services
+        </button>
+
+        <button
+          className="uc-checkout-btn"
+          onClick={() => navigate("/view-cart")}
+        >
+          Checkout ₹{total}
+        </button>
+      </div>
+    </>
   );
 }
