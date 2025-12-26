@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "../Pages/Loginmodel.css";
+import "./Loginmodel.css";
 
 export default function LoginModal({ show, onClose }) {
   const [phone, setPhone] = useState("");
@@ -7,13 +7,11 @@ export default function LoginModal({ show, onClose }) {
   const [showOtpScreen, setShowOtpScreen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [time, setTime] = useState(30);
-
   const inputsRef = useRef([]);
 
   const isValidPhone = phone.length === 10;
   const isOtpComplete = otp.every((d) => d !== "");
 
-  // Popup open
   useEffect(() => {
     if (show) {
       setPhone("");
@@ -24,17 +22,15 @@ export default function LoginModal({ show, onClose }) {
     }
   }, [show]);
 
-  // Timer for OTP
   useEffect(() => {
     if (!showOtpScreen || time === 0) return;
-    const timer = setInterval(() => setTime(t => t - 1), 1000);
+    const timer = setInterval(() => setTime((t) => t - 1), 1000);
     return () => clearInterval(timer);
   }, [showOtpScreen, time]);
 
   const handleContinue = () => {
     if (!isValidPhone) return;
     setShowVerifying(true);
-
     setTimeout(() => {
       setShowVerifying(false);
       setShowOtpScreen(true);
@@ -45,11 +41,9 @@ export default function LoginModal({ show, onClose }) {
   const handleOtpChange = (e, index) => {
     const value = e.target.value.replace(/\D/g, "");
     if (!value) return;
-
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
     if (index < 5) inputsRef.current[index + 1].focus();
   };
 
@@ -61,8 +55,14 @@ export default function LoginModal({ show, onClose }) {
 
   const handleVerifyOtp = () => {
     if (!isOtpComplete) return;
-    alert("OTP Verified ✅");
+
+    alert("Login successful ✅");
+
+    // 🔑 IMPORTANT
+    localStorage.setItem("isLoggedIn", "true");
+
     onClose();
+    window.location.reload();
   };
 
   if (!show) return null;
@@ -72,7 +72,6 @@ export default function LoginModal({ show, onClose }) {
       <div className="login-modal">
         <button className="close-btns" onClick={onClose}>×</button>
 
-        {/* PHONE SCREEN */}
         {!showOtpScreen && (
           <>
             <h2>Enter your phone number</h2>
@@ -92,9 +91,7 @@ export default function LoginModal({ show, onClose }) {
               />
             </div>
 
-            {showVerifying && (
-              <div className="captcha-box">Verifying...</div>
-            )}
+            {showVerifying && <p>Verifying...</p>}
 
             {!showVerifying && (
               <button
@@ -108,11 +105,10 @@ export default function LoginModal({ show, onClose }) {
           </>
         )}
 
-        {/* OTP SCREEN (Urban Company style) */}
         {showOtpScreen && (
           <>
             <h2>Enter verification code</h2>
-            <p>A 6-digit verification code has been sent to +91 {phone}</p>
+            <p>Code sent to +91 {phone}</p>
 
             <div className="otp-box">
               {otp.map((digit, i) => (
@@ -128,10 +124,10 @@ export default function LoginModal({ show, onClose }) {
               ))}
             </div>
 
-            <div className="timer">⏱ 00:{time < 10 ? `0${time}` : time}</div>
+            <p>⏱ 00:{time < 10 ? `0${time}` : time}</p>
 
             <button
-              className={`logins-btn ${isOtpComplete ? "active" : ""}`}
+              className={`login-btn ${isOtpComplete ? "active" : ""}`}
               disabled={!isOtpComplete}
               onClick={handleVerifyOtp}
             >

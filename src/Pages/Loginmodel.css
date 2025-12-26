@@ -201,8 +201,10 @@
 }
 .otp-box {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin: 20px 0;
+  flex-wrap: wrap;   /* small screens support */
 }
 
 .otp-box input {
@@ -220,12 +222,15 @@
   border-color: #6c2bd9;
 }
 
+/* TIMER */
 .timer {
   font-size: 14px;
   color: #555;
   margin-bottom: 20px;
+  text-align: center;
 }
 
+/* LOGIN BUTTON */
 .logins-btn {
   width: 100%;
   padding: 14px;
@@ -233,9 +238,37 @@
   border: none;
   background: #e5e5e5;
   font-weight: 600;
+  font-size: 15px;
 }
 
 .logins-btn.active {
   background: #6c2bd9;
   color: #fff;
+}
+
+/* 📱 MOBILE (below 768px) */
+@media (max-width: 768px) {
+  .otp-box input {
+    width: 42px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .logins-btn {
+    padding: 16px;
+    font-size: 16px;
+  }
+}
+
+/* 📱 SMALL MOBILE (below 480px) */
+@media (max-width: 480px) {
+  .otp-box {
+    gap: 8px;
+  }
+
+  .otp-box input {
+    width: 12%;
+    height: 46px;
+    font-size: 16px;
+  }
 }
