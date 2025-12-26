@@ -58,7 +58,7 @@ export default function LoginModal({ show, onClose }) {
 
     alert("Login successful ✅");
 
-    // 🔑 IMPORTANT
+    //  IMPORTANT
     localStorage.setItem("isLoggedIn", "true");
 
     onClose();

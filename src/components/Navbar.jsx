@@ -28,20 +28,22 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  useEffect(() => {
-    let typeSpeed = 90;
-    const currentword = word[index];
+  const searchRef = useRef(null);
+  const navigate = useNavigate();
 
-    const handleTyping = () => {
+  // Typing effect for search placeholder
+  useEffect(() => {
+    const currentWord = word[index];
+    const timer = setTimeout(() => {
       if (!isDeleting) {
         setPlaceholder((p) => {
-          const updated = currentword.substring(0, p.length + 1);
-          if (updated === currentword) setTimeout(() => setIsDeleting(true), 1000);
+          const updated = currentWord.substring(0, p.length + 1);
+          if (updated === currentWord) setTimeout(() => setIsDeleting(true), 1000);
           return updated;
         });
       } else {
         setPlaceholder((p) => {
-          const updated = currentword.substring(0, p.length - 1);
+          const updated = currentWord.substring(0, p.length - 1);
           if (updated === "") {
             setIsDeleting(false);
             setIndex((i) => (i + 1) % word.length);
@@ -49,14 +51,9 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
           return updated;
         });
       }
-    };
-
-    const timer = setTimeout(handleTyping, typeSpeed);
+    }, 90);
     return () => clearTimeout(timer);
   }, [placeholder, isDeleting, index, word]);
-
-  const searchRef = useRef(null);
-  const navigate = useNavigate();
 
   return (
     <>
@@ -66,6 +63,7 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
         <>
           <Navbar bg="white" expand="lg" fixed="top" className="border-bottom navbar-tall py-3">
             <Container fluid className="px-4">
+              {/* Logo */}
               <Navbar.Brand
                 onClick={() => {
                   setShowLoader(true);
@@ -90,27 +88,49 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
                       style={{ cursor: "pointer" }}
                     >
                       <LuShoppingCart size={22} className="text-dark" />
-
-                      {cartCount > 0 && (
-                        <span className="uc-cart-badge">{cartCount}</span>
-                      )}
+                      {cartCount > 0 && <span className="uc-cart-badge">{cartCount}</span>}
                     </div>
 
-
-                    <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
+                    <div
+                      onClick={() => setShowLogin((prev) => !prev)}
+                      style={{ cursor: "pointer" }}
+                    >
                       <RiAccountCircleLine size={22} className="ms-1 text-dark" />
                     </div>
+
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                   </>
                 )}
               </div>
 
+              {/* Desktop Navbar Links */}
               <Navbar.Collapse id="basic-navbar-nav">
                 {!hideLink && (
                   <Nav className="me-auto mx-3 gap-4">
-                    <NavLink to="/beauty" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Beauty</NavLink>
-                    <NavLink to="/revamp" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Revamp</NavLink>
-                    <NavLink to="/native" className={({ isActive }) => `text-secondary nav-link-small ${isActive ? "active-link" : ""}`}>Native</NavLink>
+                    <NavLink
+                      to="/beauty"
+                      className={({ isActive }) =>
+                        `text-secondary nav-link-small ${isActive ? "active-link" : ""}`
+                      }
+                    >
+                      Beauty
+                    </NavLink>
+                    <NavLink
+                      to="/revamp"
+                      className={({ isActive }) =>
+                        `text-secondary nav-link-small ${isActive ? "active-link" : ""}`
+                      }
+                    >
+                      Revamp
+                    </NavLink>
+                    <NavLink
+                      to="/native"
+                      className={({ isActive }) =>
+                        `text-secondary nav-link-small ${isActive ? "active-link" : ""}`
+                      }
+                    >
+                      Native
+                    </NavLink>
                   </Nav>
                 )}
               </Navbar.Collapse>
@@ -119,21 +139,39 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
               {(!hideSearch || !hideLocation) && (
                 <div className="search-wrapper w-100">
                   <Form className="mt-2 search-section d-flex gap-2">
+                    {/* Location */}
                     {!hideLocation && (
-                      <div className="d-flex align-items-center px-2 ms-auto py-2 border border-secondary-subtle rounded cursor-pointer location-box"
-                        onClick={() => setShowLocation(true)}>
+                      <div
+                        className="d-flex align-items-center px-2 ms-auto py-2 border border-secondary-subtle rounded cursor-pointer location-box"
+                        onClick={() => setShowLocation(true)}
+                      >
                         <SlLocationPin size={22} />
-                        <FormControl type="text" placeholder="Connaught Place, New..." className="border-0 bg-transparent shadow-none" readOnly />
+                        <FormControl
+                          type="text"
+                          placeholder="Connaught Place, New..."
+                          className="border-0 bg-transparent shadow-none"
+                          readOnly
+                        />
                         <IoIosArrowDown className="ms-2" />
                       </div>
                     )}
 
+                    {/* Search */}
                     {!hideSearch && (
-                      <div className="search-icons d-flex ">
-                        <div ref={searchRef} className="text-secondary d-flex align-items-center search-box border border-secondary-subtle rounded"
-                          onClick={() => setShowSearch(true)} style={{ cursor: "pointer" }}>
+                      <div className="search-icons d-flex">
+                        <div
+                          ref={searchRef}
+                          className="text-secondary d-flex align-items-center search-box border border-secondary-subtle rounded"
+                          onClick={() => setShowSearch(true)}
+                          style={{ cursor: "pointer" }}
+                        >
                           <FaSearch />
-                          <FormControl type="text" placeholder={`Search for '${placeholder}'`} className="border-0 bg-transparent shadow-none cursor-pointer" readOnly />
+                          <FormControl
+                            type="text"
+                            placeholder={`Search for '${placeholder}'`}
+                            className="border-0 bg-transparent shadow-none cursor-pointer"
+                            readOnly
+                          />
                         </div>
                       </div>
                     )}
@@ -142,19 +180,18 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
                     {!hideIcons && (
                       <div className="d-none d-lg-flex align-items-center ms-auto icon-wrapper">
                         <div
-                          className="uc-cart-wrapper "
+                          className="uc-cart-wrapper"
                           onClick={() => navigate("/cart")}
                           style={{ cursor: "pointer", marginLeft: "15px" }}
                         >
                           <LuShoppingCart size={22} className="text-dark" />
-
-                          {cartCount > 0 && (
-                            <span className="uc-cart-badge">{cartCount}</span>
-                          )}
+                          {cartCount > 0 && <span className="uc-cart-badge">{cartCount}</span>}
                         </div>
 
-
-                        <div onClick={() => setShowLogin(true)} style={{ cursor: "pointer" }}>
+                        <div
+                          onClick={() => setShowLogin((prev) => !prev)}
+                          style={{ cursor: "pointer" }}
+                        >
                           <RiAccountCircleLine size={22} className="ms-2 text-dark" />
                         </div>
                       </div>
@@ -165,11 +202,16 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
             </Container>
           </Navbar>
 
+          {/* Dropdowns / Modals */}
           <LocationBox show={showLocation} handleClose={() => setShowLocation(false)} />
-          <SearchDropdown target={searchRef.current} show={showSearch} handleClose={() => setShowSearch(false)} onServices={(name) => setPlaceholder(name)} />
-          <LoginPopup show={showLogin} handleClose={() => setShowLogin(false)} />
+          <SearchDropdown
+            target={searchRef.current}
+            show={showSearch}
+            handleClose={() => setShowSearch(false)}
+            onServices={(name) => setPlaceholder(name)}
+          />
+          <LoginPopup show={showLogin} onClose={() => setShowLogin(false)} />
         </>
-        
       )}
     </>
   );

@@ -1,32 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LoginModal from "../Pages/Loginmodel";
 import "./LoginHoverBox.css";
 
-export default function LoginHoverBox({ show }) {
+export default function LoginHoverBox({ show, onClose }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const ref = useRef();
 
+  // Maintain login status
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn");
-    if (loggedIn) {
-      setIsLoggedIn(true);
-    }
+    if (localStorage.getItem("isLoggedIn") === "true") setIsLoggedIn(true);
   }, []);
+
+  // Click outside to close hover
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (show && ref.current && !ref.current.contains(e.target)) {
+        onClose?.();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [show, onClose]);
 
   if (!show) return null;
 
   const handleLoginClick = () => {
-    setModalOpen(true);
+    if (!isLoggedIn) setModalOpen(true);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn"); // ✅ logout
+    localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
+    setModalOpen(false);
     alert("Logged out successfully");
+    onClose?.(); // close hover
   };
 
   return (
-    <div className="login-hover-box">
+    <div ref={ref} className="login-hover-box">
       {!isLoggedIn ? (
         <p className="login-hover-item" onClick={handleLoginClick}>
           Login
@@ -41,7 +53,17 @@ export default function LoginHoverBox({ show }) {
         </>
       )}
 
-      {modalOpen && <LoginModal show={modalOpen} onClose={() => setModalOpen(false)} />}
+      {modalOpen && !isLoggedIn && (
+        <LoginModal
+          show={modalOpen}
+          onClose={() => setModalOpen(false)}
+          onLoginSuccess={() => {
+            setIsLoggedIn(true);
+            setModalOpen(false);
+            onClose?.(); // close hover after login
+          }}
+        />
+      )}
     </div>
   );
 }
