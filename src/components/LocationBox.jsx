@@ -1,43 +1,49 @@
-import React from "react";
-import { Modal, FormControl } from "react-bootstrap";
-import { IoArrowBack } from "react-icons/io5";
-import { RxCross2 } from "react-icons/rx";
+import React, { useState, useEffect } from "react";
+import { Modal, Button, FormControl } from "react-bootstrap";
 
-function LocationBox ({ show, handleClose }) {
+export default function LocationBox({ show, onClose }) {
+  const [address, setAddress] = useState("");
+
+  useEffect(() => {
+    if (show) {
+      const saved = localStorage.getItem("userAddress") || "";
+      setAddress(saved); // prefill saved address
+    }
+  }, [show]);
+
+  const handleConfirm = () => {
+    if (!address.trim()) return; // prevent empty address
+
+    localStorage.setItem("userAddress", address); // save to localStorage
+
+    // SAFETY CHECK
+    if (typeof onClose === "function") {
+      onClose(address); // pass value to parent
+    }
+  };
+
   return (
     <Modal
       show={show}
-      onHide={handleClose}
+      onHide={() => typeof onClose === "function" && onClose(null)} // clicking outside or close button
       centered
-      dialogClassName="bottom-slide-modal"
-      contentClassName="bottom-slide-content"
+      backdrop="static"
+      keyboard={false}
     >
-      <div className="modal-wrapper">
-        {/* Close icon outside */}
-        <RxCross2
-          size={26}
-          className="outside-close-icon"
-          onClick={handleClose}
+      <Modal.Body>
+        <FormControl
+          placeholder="Enter address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         />
-
-        <Modal.Body className="p-4">
-          {/* Search box with arrow inside */}
-          <div className="search-input-wrapper mb-3">
-            <IoArrowBack
-              size={22}
-              onClick={handleClose}
-              className="back-arrow"
-            />
-            <FormControl
-              type="text"
-              placeholder="Search for your location/society/apartment"
-              className="search-input shadow-none"
-            />
-          </div>
-        </Modal.Body>
-      </div>
+        <Button
+          type="button"
+          className="mt-3 w-100"
+          onClick={handleConfirm}
+        >
+          Confirm Address
+        </Button>
+      </Modal.Body>
     </Modal>
   );
-};
-
-export default LocationBox;
+}

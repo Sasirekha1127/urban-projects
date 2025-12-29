@@ -31,7 +31,7 @@
   color: red;
 }
 
-/* 📱 MOBILE (below 768px) */
+/*  MOBILE (below 768px) */
 @media (max-width: 768px) {
   .login-hover-box {
     top: 60px;           /* navbar keela */
@@ -47,7 +47,7 @@
   }
 }
 
-/* 📱 SMALL MOBILE (below 480px) */
+/*  SMALL MOBILE (below 480px) */
 @media (max-width: 480px) {
   .login-hover-box {
     right: 20%;

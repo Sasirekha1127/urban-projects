@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 
 // NAVBAR
@@ -19,7 +19,6 @@ import Salonpackages from "./Pages/Salonpackages.jsx";
 import SalonLuxe from "./Pages/Salonluxe.jsx";
 import ViewCartPage from "./Pages/ViewCartPage.jsx";
 
-
 // COMPONENTS
 import Carouselpage from "./components/Carouselpage.jsx";
 import Newnote from "./components/Newnote.jsx";
@@ -35,6 +34,8 @@ import Homerepair from "./components/Homerepair.jsx";
 import Load from "./components/Loading.jsx";
 import LoginModal from "./Pages/Loginmodel.jsx";
 
+// LOCATION MODAL
+import LocationBox from "./components/LocationBox.jsx";
 
 export default function AppContent({ cart, setCart }) {
   const location = useLocation();
@@ -45,10 +46,20 @@ export default function AppContent({ cart, setCart }) {
   // NEW — Navbar hide state (needed for Beauty.jsx fade-out effect)
   const [hideNavbar, setHideNavbar] = useState(false);
 
+  // LocationBox State
+  const [showLocationModal, setShowLocationModal] = useState(false);
+  const [userAddress, setUserAddress] = useState(
+    localStorage.getItem("userAddress") || ""
+  );
+
+  const handleLocationClose = (address) => {
+    setShowLocationModal(false);
+    if (address) setUserAddress(address);
+  };
+
   // Navbar & Search hiding paths
   const hideNavbarRoutes = ["/cart", "/view-cart", "/salon/luxe", "/bathroom-cleaning"];
   const hideSearchRoutes = ["/beauty", "/native", "/revamp"];
-
   const currentPath = location.pathname.replace(/\/$/, "").toLowerCase();
 
   const shouldHideNavbar = hideNavbarRoutes.includes(currentPath);
@@ -57,7 +68,7 @@ export default function AppContent({ cart, setCart }) {
   return (
     <>
       {/* NAVBAR SHOW / HIDE */}
-      { !hideNavbar && !shouldHideNavbar && (
+      {!hideNavbar && !shouldHideNavbar && (
         <NavbarUC
           hideSearch={shouldHideSearch}
           hideLocation={false}
@@ -65,23 +76,22 @@ export default function AppContent({ cart, setCart }) {
           hideLink={false}
           cart={cart}
           setCart={setCart}
+          userAddress={userAddress} // pass address to Navbar
+          openLocationModal={() => setShowLocationModal(true)} // button to open modal
         />
       )}
+
+      {/* LOCATION MODAL */}
+      <LocationBox show={showLocationModal} onClose={handleLocationClose} />
 
       {/* ROUTES */}
       <Routes>
         {/* MAIN ROUTES */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home userAddress={userAddress} />} />
         <Route path="/Load" element={<Load />} />
-
-        {/* Beauty now receives setHideNavbar only */}
-        <Route
-          path="/beauty"
-          element={<Beauty setHideNavbar={setHideNavbar} />}
-        />
-
-        <Route path="/revamp" element={<Revamp  setHideNavbar={setHideNavbar} />} />
-        <Route path="/native" element={<Native  setHideNavbar={setHideNavbar}/>} />
+        <Route path="/beauty" element={<Beauty setHideNavbar={setHideNavbar} />} />
+        <Route path="/revamp" element={<Revamp setHideNavbar={setHideNavbar} />} />
+        <Route path="/native" element={<Native setHideNavbar={setHideNavbar} />} />
 
         {/* CART */}
         <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
@@ -93,17 +103,7 @@ export default function AppContent({ cart, setCart }) {
         <Route path="/salonpackages" element={<Salonpackages />} />
 
         {/* VIEW CART */}
-        <Route
-          path="/view-cart"
-          element={
-            <ViewCartPage
-              cart={cart}
-              setCart={setCart}
-              addons={addons}
-              setAddons={setAddons}
-            />
-          }
-        />
+        <Route path="/view-cart" element={<ViewCartPage cart={cart} setCart={setCart} addons={addons} setAddons={setAddons} />} />
 
         {/* OTHER COMPONENT ROUTES */}
         <Route path="/carouselpage" element={<Carouselpage />} />
@@ -119,7 +119,6 @@ export default function AppContent({ cart, setCart }) {
         <Route path="/homerepair" element={<Homerepair />} />
         <Route path="/bathroom-cleaning" element={<BathroomCleaningPage />} />
         <Route path="/loginmodel" element={<LoginModal />} />
-
       </Routes>
     </>
   );

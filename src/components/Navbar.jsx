@@ -20,6 +20,8 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [address, setAddress] = useState("");
+
 
   const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
 
@@ -54,6 +56,22 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
     }, 90);
     return () => clearTimeout(timer);
   }, [placeholder, isDeleting, index, word]);
+
+  const handleLocationClose = (addr) => {
+    if (addr) {
+      setAddress(addr);
+      localStorage.setItem("userAddress", addr);
+    }
+    setShowLocation(false);
+  };
+
+  useEffect(() => {
+    const savedAddress = localStorage.getItem("userAddress");
+    if (savedAddress) {
+      setAddress(savedAddress);
+    }
+  }, []);
+
 
   return (
     <>
@@ -148,10 +166,12 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
                         <SlLocationPin size={22} />
                         <FormControl
                           type="text"
-                          placeholder="Connaught Place, New..."
+                          value={address || ""}
+                          placeholder="Add address"
                           className="border-0 bg-transparent shadow-none"
                           readOnly
                         />
+
                         <IoIosArrowDown className="ms-2" />
                       </div>
                     )}
@@ -203,7 +223,11 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
           </Navbar>
 
           {/* Dropdowns / Modals */}
-          <LocationBox show={showLocation} handleClose={() => setShowLocation(false)} />
+          <LocationBox
+            show={showLocation}
+            address={address}
+            onClose={handleLocationClose}
+          />
           <SearchDropdown
             target={searchRef.current}
             show={showSearch}

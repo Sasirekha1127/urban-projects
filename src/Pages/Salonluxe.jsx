@@ -556,5 +556,5 @@ const SalonLuxe = ({ cart, setCart }) => {
     </div>
   );
 };
-
 export default SalonLuxe;
+

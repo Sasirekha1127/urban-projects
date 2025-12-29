@@ -1,30 +1,32 @@
-// ViewCartPage.jsx
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./ViewCartPage.css";
 import uc from "../assets/UC.png";
 import mini from "../assets/mini.png";
 import mirror from "../assets/mirror-img.png";
 import LoginModal from "../Pages/Loginmodel.jsx";
+import LocationBox from "../components/LocationBox.jsx";
+import loginIcon from "../assets/login.png";
 
 /* FREQUENTLY ADDED PRODUCTS */
 const frequentlyAdded = [
-  {
-    id: "addon1",
-    title: "Additional washbasin cleaning",
-    price: 69,
-    image: mini,
-  },
-  {
-    id: "addon2",
-    title: "Mirror cleaning (upto 1)",
-    price: 59,
-    image: mirror,
-  },
+  { id: "addon1", title: "Additional washbasin cleaning", price: 69, image: mini },
+  { id: "addon2", title: "Mirror cleaning (upto 1)", price: 59, image: mirror },
 ];
 
 export default function ViewCartPage({ cart = [], setCart = () => {} }) {
   const carouselRef = useRef(null);
+
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLocationBox, setShowLocationBox] = useState(false);
+  const [userAddress, setUserAddress] = useState(""); // ✅ Store confirmed address
+
+  /* CHECK LOGIN STATUS */
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   /* SCROLL HANDLERS */
   const scrollLeft = () => carouselRef.current.scrollBy({ left: -220, behavior: "smooth" });
@@ -34,7 +36,6 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
   const increaseQty = (id) => {
     setCart(cart.map((item) => (item.id === id ? { ...item, qty: item.qty + 1 } : item)));
   };
-
   const decreaseQty = (id) => {
     setCart(
       cart
@@ -43,15 +44,10 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
     );
   };
 
-  /* ADD ADDON → ADD TO TOP (DESCENDING) */
-  const addAddonToCart = (addon) => {
-    setCart([{ ...addon, qty: 1 }, ...cart]);
-  };
+  /* ADD ADDON */
+  const addAddonToCart = (addon) => setCart([{ ...addon, qty: 1 }, ...cart]);
 
-  /* TOTAL AMOUNT */
   const totalAmount = cart.reduce((total, item) => total + item.price * item.qty, 0);
-
-  /* VISIBLE ADDONS (NOT ALREADY ADDED) */
   const visibleAddons = frequentlyAdded.filter((addon) => !cart.some((item) => item.id === addon.id));
 
   return (
@@ -67,46 +63,110 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
       <div className="checkout-wrappers">
         {/* LEFT SIDE */}
         <div className="checkout-left">
-          <div className="text">Saving ₹200 on this order</div>
-
-          <div className="account-card">
-            <h4>Account</h4>
-            <p>To book the service, please login or sign up</p>
-            <button className="login-btn" onClick={() => setShowLoginPopup(true)}>
-              Login
-            </button>
+          <div className="saving-tag">
+            <span>Saving ₹200 on this order</span>
           </div>
+
+          {!isLoggedIn ? (
+            <div className="account-card">
+              <h4>Account</h4>
+              <p>To book the service, please login or sign up</p>
+              <button className="login-btn" onClick={() => setShowLoginPopup(true)}>
+                Login
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* PHONE */}
+              <div className="uc-box">
+                <div className="uc-row">
+                  <img src={loginIcon} alt="icon" className="uc-icon-img" />
+                  <div>
+                    <p className="uc-title">Send booking details to</p>
+                    <p className="uc-sub">+91 8807012570</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ADDRESS */}
+              <div className="uc-box">
+                <div className="uc-row align-items-center">
+                  <img src={loginIcon} alt="icon" className="uc-icon-img" />
+                  <p className="uc-title mb-0">Address</p>
+                </div>
+
+                {userAddress ? (
+                  <div className="d-flex align-items-center mt-2">
+                    <p className="address-text mb-0">{userAddress}</p>
+                    <button
+                      className="btn btn-outline-secondary ms-auto"
+                      style={{ padding: "0 8px", fontSize: "0.8rem", cursor: "pointer" }}
+                      onClick={() => setShowLocationBox(true)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="purple-btn full mt-2"
+                    onClick={() => setShowLocationBox(true)}
+                  >
+                    Select Address
+                  </button>
+                )}
+              </div>
+
+              {/* PAYMENT */}
+              <div className={`uc-box ${userAddress ? "" : "disabled"}`}>
+                <div className="uc-row">
+                  <span className="uc-icon">💳</span>
+                  <p className="uc-title">Payment method</p>
+                </div>
+              </div>
+
+              {/* PLACE ORDER */}
+              {cart.length > 0 && (
+                <div className="uc-box mt-3">
+                  <button
+                    className="purple-btn full"
+                    disabled={!userAddress} // disable if no address
+                    onClick={() => {
+                      if (!userAddress) return;
+                      alert("Order Placed Successfully!");
+                      setCart([]); // clear cart after order
+                    }}
+                  >
+                    {userAddress ? "Place Order" : "Select Address to Place Order"}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         {/* RIGHT SIDE */}
         <div className="checkout-right">
-          {/* CART ITEMS (DESCENDING ORDER) */}
           {cart.map((item) => (
             <div className="service-cards" key={item.id}>
               <h5>{item.title}</h5>
-
               <div className="service-right">
                 <div className="qty-box">
                   <button onClick={() => decreaseQty(item.id)}>-</button>
                   <span>{item.qty}</span>
                   <button onClick={() => increaseQty(item.id)}>+</button>
                 </div>
-
                 <div className="prices">₹{item.price * item.qty}</div>
               </div>
             </div>
           ))}
 
-          {/* FREQUENTLY ADDED PRODUCTS */}
           {visibleAddons.length > 0 && (
             <div className="addon-card">
               <h5>Frequently added together</h5>
-
               <div className="carousel-wrappers">
                 <button className="arrows left" onClick={scrollLeft}>
                   &#10094;
                 </button>
-
                 <div className="addon-carousel" ref={carouselRef}>
                   {visibleAddons.map((addon) => (
                     <div className="addon-slide" key={addon.id}>
@@ -114,7 +174,6 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
                         <p>{addon.title}</p>
                         <span>₹{addon.price}</span>
                       </div>
-
                       <div className="addon-right">
                         <img src={addon.image} alt={addon.title} />
                         <button onClick={() => addAddonToCart(addon)}>Add</button>
@@ -122,7 +181,6 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
                     </div>
                   ))}
                 </div>
-
                 <button className="arrows right" onClick={scrollRight}>
                   &#10095;
                 </button>
@@ -130,7 +188,6 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
             </div>
           )}
 
-          {/* PAYMENT SUMMARY */}
           <div className="payment-card">
             <h5>Payment summary</h5>
             <div className="pay-row">
@@ -151,7 +208,23 @@ export default function ViewCartPage({ cart = [], setCart = () => {} }) {
       </div>
 
       {/* LOGIN MODAL */}
-      <LoginModal show={showLoginPopup} onClose={() => setShowLoginPopup(false)} />
+      <LoginModal
+        show={showLoginPopup}
+        onClose={() => {
+          setShowLoginPopup(false);
+          setIsLoggedIn(true);
+          localStorage.setItem("isLoggedIn", "true");
+        }}
+      />
+
+      {/* LOCATION MODAL */}
+      <LocationBox
+        show={showLocationBox}
+        handleClose={(address) => {
+          if (address) setUserAddress(address); // save confirmed address
+          setShowLocationBox(false);
+        }}
+      />
     </>
   );
 }

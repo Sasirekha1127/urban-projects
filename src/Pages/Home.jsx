@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Pages/Home.css";
 
-// ------- Assets -------
+// Assets
 import urban from "../assets/urban.png";
 import women from "../assets/women.png";
+import men from "../assets/men.png";
 import cleaningImage from "../assets/cleaning.png";
 import electricianImage from "../assets/electricion.png";
 import waterpurifierImage from "../assets/waterpurifier.png";
 import acImage from "../assets/ac repairs.png";
-import men from "../assets/men.png";
 import customerImg from "../assets/customer.png";
 import starImg from "../assets/star.png";
 
-// ------- Libraries -------
+// Libraries
 import { useNavigate } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-// ------- Components -------
+// Components
 import ApplianceSection from "../Pages/Appliance.jsx";
 import Footer from "./Footer.jsx";
-import Carouselpage from "../components/Carouselpage.jsx"; 
+import Carouselpage from "../components/Carouselpage.jsx";
 import Newnote from "../components/Newnote.jsx";
 import Mostbook from "../components/Mostbook.jsx";
 import Walls from "../components/Walls.jsx";
@@ -30,109 +30,101 @@ import CleaningPest from "../components/Cleaningpest.jsx";
 import Wallpannels from "../components/Wallpannels.jsx";
 import Salonmen from "../components/Salonmen.jsx";
 
+// Modals
+import LoginModal from "../Pages/Loginmodel.jsx";
+import LocationBox from "../components/LocationBox.jsx";
+
 function Home() {
   const navigate = useNavigate();
 
+  const [showLogin, setShowLogin] = useState(false);
+  const [showAddress, setShowAddress] = useState(false);
+  const [address, setAddress] = useState("");
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  // Load saved address
+  useEffect(() => {
+    const saved = localStorage.getItem("userAddress");
+    if (saved) setAddress(saved);
+  }, []);
+
+  // Navigate handler
   const handleNavigate = (path) => {
-    if (path) navigate(path);
+    if (!isLoggedIn) {
+      setShowLogin(true);
+      return;
+    }
+    if (!address) {
+      setShowAddress(true);
+      return;
+    }
+    navigate(path);
+  };
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userAddress");
+    window.location.reload();
   };
 
   return (
     <>
-      {/* ---------- MAIN HOME SECTION ---------- */}
+      {/* ---------- HOME SECTION ---------- */}
       <div className="home-wrapper">
         <div className="home-container">
-          <h1>
-            Home services at your <br /> doorstep
-          </h1>
+          <h1>Home services at your <br /> doorstep</h1>
 
           <div className="home-box">
             <h3>What are you looking for?</h3>
-
             <div className="service-grid">
               <div className="service-group" onClick={() => handleNavigate("/salon-women")}>
-                <div className="service-item1">
-                  <img src={women} alt="Salon for Women" />
-                </div>
-                <div className="service-text">
-                  <p>Salon for Women</p>
-                </div>
+                <div className="service-item1"><img src={women} alt="Salon for Women" /></div>
+                <div className="service-text"><p>Salon for Women</p></div>
               </div>
-
               <div className="service-group" onClick={() => handleNavigate("/men")}>
-                <div className="service-item1">
-                  <img src={men} alt="Salon for Men" />
-                </div>
-                <div className="service-text">
-                  <p>Salon for Men</p>
-                </div>
+                <div className="service-item1"><img src={men} alt="Salon for Men" /></div>
+                <div className="service-text"><p>Salon for Men</p></div>
               </div>
-
               <div className="service-group" onClick={() => handleNavigate("/cleaning")}>
-                <div className="service-item1">
-                  <img src={cleaningImage} alt="Cleaning" />
-                </div>
-                <div className="service-text">
-                  <p>Cleaning</p>
-                </div>
+                <div className="service-item1"><img src={cleaningImage} alt="Cleaning" /></div>
+                <div className="service-text"><p>Cleaning</p></div>
               </div>
-
               <div className="service-group" onClick={() => handleNavigate("/electrician")}>
-                <div className="service-item1">
-                  <img src={electricianImage} alt="Electrician" />
-                </div>
-                <div className="service-text">
-                  <p>Electricians & Carpenters</p>
-                </div>
+                <div className="service-item1"><img src={electricianImage} alt="Electrician" /></div>
+                <div className="service-text"><p>Electricians & Carpenters</p></div>
               </div>
-
               <div className="service-group" onClick={() => handleNavigate("/waterpurifier")}>
-                <div className="service-item1">
-                  <img src={waterpurifierImage} alt="Purifier" />
-                </div>
-                <div className="service-text">
-                  <p>Native Water Purifier</p>
-                </div>
+                <div className="service-item1"><img src={waterpurifierImage} alt="Purifier" /></div>
+                <div className="service-text"><p>Native Water Purifier</p></div>
               </div>
-
               <div className="service-group" onClick={() => handleNavigate("/ac-repair")}>
-                <div className="service-item1">
-                  <img src={acImage} alt="AC Repair" />
-                </div>
-                <div className="service-text">
-                  <p>AC & Appliance Repair</p>
-                </div>
+                <div className="service-item1"><img src={acImage} alt="AC Repair" /></div>
+                <div className="service-text"><p>AC & Appliance Repair</p></div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* RIGHT SIDE IMAGE */}
         <div className="home-image-container">
           <img src={urban} alt="Beauty Service" className="home-image" />
         </div>
       </div>
 
-      {/* ---------- RATINGS SECTION ---------- */}
+      {/* RATINGS */}
       <div className="ratings-section">
         <div className="rating-box1">
-          <img src={starImg} alt="rating" className="rating-icon" />
-          <div>
-            <h4>4.8</h4>
-            <p>Service Rating*</p>
-          </div>
+          <img src={starImg} alt="rating" />
+          <div><h4>4.8</h4><p>Service Rating*</p></div>
         </div>
-
         <div className="rating-box1">
-          <img src={customerImg} alt="customers" className="rating-icon" />
-          <div>
-            <h4>12M+</h4>
-            <p>Customers Globally*</p>
-          </div>
+          <img src={customerImg} alt="customers" />
+          <div><h4>12M+</h4><p>Customers Globally*</p></div>
         </div>
       </div>
 
-      {/* COMPONENTS */}
+      {/* OTHER COMPONENTS */}
       <Carouselpage />
       <Newnote />
       <Mostbook />
@@ -144,6 +136,16 @@ function Home() {
       <ApplianceSection />
       <Salonmen />
       <Footer />
+
+      {/* MODALS */}
+      <LoginModal show={showLogin} onClose={() => setShowLogin(false)} />
+      <LocationBox
+        show={showAddress}
+        onClose={(addr) => {
+          if (addr) setAddress(addr);
+          setShowAddress(false);
+        }}
+      />
     </>
   );
 }

@@ -45,6 +45,7 @@ export default function MiniHeader() {
       <LocationBox
         show={showLocationBox}
         handleClose={() => setShowLocationBox(false)}
+        
       />
     </div>
   );
