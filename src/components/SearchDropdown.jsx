@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import bathroomImg from "../assets/bathroom.png";
 import doorImg from "../assets/door.png";
 import homeImg from "../assets/home.png";
+import hair from "../assets/hair3.png"
+import hair2 from "../assets/hair4.png"
+import hair3 from "../assets/hair5.png"
+
 import "./SearchBar.css";
 
 export default function SearchDropdown({ target, show, handleClose, onServices }) {
@@ -12,52 +16,26 @@ export default function SearchDropdown({ target, show, handleClose, onServices }
   const [selectedService, setSelectedService] = useState(null);
 
   const trending = [
-    {
-      text: "Professional bathroom cleaning",
-      className: "trend-bathroom",
-      subServices: [
-        {
-          name: "Bathroom cleaning",
-          info: "3 services in Bathroom & Kitchen Cleaning",
-          image: bathroomImg,
-          link: "/bathroom-cleaning",
-        },
-        {
-          name: "Door cleaning (upto 1)",
-          info: "4.8 (12k) ₹89 - Bathroom & Kitchen Cleaning",
-          image: doorImg,
-         
+  {
+    text: "Professional bathroom cleaning",
+    className: "trend-bathroom",
+    subServices: [
+      { name: "Bathroom cleaning", info: "3 services in Bathroom & Kitchen Cleaning", image: bathroomImg, link: "/salon/luxe" },
+      { name: "Door cleaning (upto 1)", info: "4.8 (12k) ₹89 - Bathroom & Kitchen Cleaning", image: doorImg, link: "/salon/luxe" },
+      { name: "Full home deep cleaning", info: "4.7 (8k) ₹899 - Full Home Deep Cleaning", image: homeImg, link: "/salon/luxe" }
+    ]
+  },
+  {
+    text: "Salon",
+    className: "trend-salon",
+    subServices: [
+      { name: "Salon Luxe", image: hair , link: "/salon/luxe" },
+      { name: "Salon Prime", image:hair2, link: "/salon/luxe" },
+      { name: "Hair studio for Women", image: hair3, link: "/salon/women" }
+    ]
+  }
+];
 
-        },
-        {
-          name: "Full home deep cleaning",
-          info: "4.7 (8k) ₹899 - Full Home Deep Cleaning",
-          image: homeImg,
-        },
-      ],
-    },
-    {
-      text: "Salon",
-      className: "trend-salon",
-      subServices: [
-        {
-          name: "Salon Luxe",
-          link: "/salon/luxe",
-          image: "/images/haircut.jpg",
-        },
-        {
-          name: "Salon Prime",
-          image: "/images/facial.jpg",
-           link: "/salon/luxe",
-        },
-        {
-          name: "Hair studio for Women",
-          image: "/images/waxing.jpg",
-          link: "/salon/women",
-        },
-      ],
-    },
-  ];
 
   const handleItemClick = (item) => {
     // Remove the navigate for "Salon"

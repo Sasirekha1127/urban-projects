@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CartPage.css";
 import { useNavigate } from "react-router-dom";
 import { LuShoppingCart, LuArrowLeft } from "react-icons/lu";
@@ -6,6 +6,19 @@ import card from "../assets/card.png";
 
 export default function CartPage({ cart = [], setCart = () => {} }) {
   const navigate = useNavigate();
+
+  /* 🔥 LOAD CART ON PAGE LOAD */
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, [setCart]);
+
+  /* 🔥 SAVE CART ON EVERY CHANGE */
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const increaseQty = (id) => {
     setCart(
@@ -34,7 +47,7 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
     0
   );
 
-  // 🔴 EMPTY CART UI
+  /* 🔴 EMPTY CART UI */
   if (cart.length === 0) {
     return (
       <div className="cart-empty-box">
@@ -54,44 +67,34 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
 
   return (
     <>
-      {/* 🔙 Back button */}
+      {/* 🔙 Back */}
       <div className="uc-back-btn" onClick={() => navigate(-1)}>
         <LuArrowLeft size={24} />
       </div>
 
-      {/* 🛒 Cart header */}
+      {/* 🛒 Header */}
       <div className="cart-header-row">
         <LuShoppingCart size={40} className="cart-icons" />
         <h1 className="uc-cart-title">Your Cart</h1>
       </div>
       <hr className="lines" />
 
-      {/* 🟣 CART ITEMS (DESCENDING ORDER) */}
+      {/* 🟣 ITEMS */}
       {[...cart].reverse().map((item) => (
         <div className="uc-cart-card" key={item.id}>
           <img src={card} alt={item.title} className="uc-cart-img" />
 
           <div className="uc-cart-info">
             <h2 className="uc-cart-item-title">{item.title}</h2>
-
             <p className="uc-cart-subtitle">
               {item.qty} service{item.qty > 1 ? "s" : ""} • ₹
               {item.price * item.qty}
             </p>
-
-            {/* Quantity controls (optional UI use pannalaam) */}
-            {/* 
-            <div className="qty-controls">
-              <button onClick={() => decreaseQty(item.id)}>-</button>
-              <span>{item.qty}</span>
-              <button onClick={() => increaseQty(item.id)}>+</button>
-            </div>
-            */}
           </div>
         </div>
       ))}
 
-      {/* 💳 Checkout buttons */}
+      {/* 💳 Checkout */}
       <div className="uc-checkout-wrapper">
         <button
           className="uc-addservice-btn-outline"

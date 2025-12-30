@@ -43,12 +43,6 @@ function Home() {
 
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-  // Load saved address
-  useEffect(() => {
-    const saved = localStorage.getItem("userAddress");
-    if (saved) setAddress(saved);
-  }, []);
-
   // Navigate handler
   const handleNavigate = (path) => {
     if (!isLoggedIn) {

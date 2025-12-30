@@ -54,16 +54,18 @@ export default function LoginModal({ show, onClose }) {
   };
 
   const handleVerifyOtp = () => {
-    if (!isOtpComplete) return;
+  if (!isOtpComplete) return;
 
-    alert("Login successful ✅");
+  alert("Login successful ");
 
-    //  IMPORTANT
-    localStorage.setItem("isLoggedIn", "true");
+  // SAVE LOGIN DATA
+  localStorage.setItem("isLoggedIn", "true");
+  localStorage.setItem("userPhone", phone);
 
-    onClose();
-    window.location.reload();
-  };
+  // PASS PHONE TO VIEW CART
+  onClose(phone);
+};
+
 
   if (!show) return null;
 

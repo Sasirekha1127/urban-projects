@@ -1,44 +1,60 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Button, FormControl } from "react-bootstrap";
+import React, { useState } from "react";
+import { Modal, FormControl, Button } from "react-bootstrap";
+import { IoArrowBack } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
 
-export default function LocationBox({ show, onClose }) {
+function LocationBox({ show, handleClose }) {
   const [address, setAddress] = useState("");
 
-  useEffect(() => {
-    if (show) {
-      const saved = localStorage.getItem("userAddress") || "";
-      setAddress(saved); // prefill saved address
-    }
-  }, [show]);
-
   const handleConfirm = () => {
-    if (!address.trim()) return; // prevent empty address
+    if (!address.trim()) return;
 
-    localStorage.setItem("userAddress", address); // save to localStorage
+    // Save to localStorage
+    localStorage.setItem("userAddress", address);
 
-    // SAFETY CHECK
-    if (typeof onClose === "function") {
-      onClose(address); // pass value to parent
-    }
+    // Fire custom event so Navbar + ViewCartPage update instantly
+    window.dispatchEvent(new Event("addressUpdated"));
+
+    // Send address to parent if needed
+    handleClose(address);
   };
 
   return (
     <Modal
       show={show}
-      onHide={() => typeof onClose === "function" && onClose(null)} // clicking outside or close button
+      onHide={() => handleClose()}
       centered
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Body>
+      <Modal.Body className="p-4">
+        {/* Close */}
+        <RxCross2
+          size={24}
+          style={{ position: "absolute", right: 15, top: 15, cursor: "pointer" }}
+          onClick={() => handleClose()}
+        />
+
+        {/* Back */}
+        <IoArrowBack
+          size={22}
+          style={{ cursor: "pointer", marginBottom: 10 }}
+          onClick={() => handleClose()}
+        />
+
+        <h5>Enter your address</h5>
+
         <FormControl
-          placeholder="Enter address"
+          type="text"
+          placeholder="Enter full address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          className="mb-3"
         />
+
         <Button
-          type="button"
-          className="mt-3 w-100"
+          className="w-100"
+          disabled={!address.trim()}
           onClick={handleConfirm}
         >
           Confirm Address
@@ -47,3 +63,5 @@ export default function LocationBox({ show, onClose }) {
     </Modal>
   );
 }
+
+export default LocationBox;

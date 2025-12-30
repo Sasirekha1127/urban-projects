@@ -34,26 +34,44 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
   const navigate = useNavigate();
 
   // Typing effect for search placeholder
-  useEffect(() => {
-    const currentWord = word[index];
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        setPlaceholder((p) => {
-          const updated = currentWord.substring(0, p.length + 1);
-          if (updated === currentWord) setTimeout(() => setIsDeleting(true), 1000);
-          return updated;
-        });
-      } else {
-        setPlaceholder((p) => {
-          const updated = currentWord.substring(0, p.length - 1);
-          if (updated === "") {
-            setIsDeleting(false);
-            setIndex((i) => (i + 1) % word.length);
-          }
-          return updated;
-        });
-      }
-    }, 90);
+ // 1️⃣ Address sync with localStorage + event listener
+useEffect(() => {
+  // On page load
+  setAddress(localStorage.getItem("userAddress") || "");
+
+  const updateAddress = () => {
+    setAddress(localStorage.getItem("userAddress") || "");
+  };
+
+  window.addEventListener("addressUpdated", updateAddress);
+
+  return () => {
+    window.removeEventListener("addressUpdated", updateAddress);
+  };
+}, []);
+
+// 2️⃣ Typing effect for search placeholder
+useEffect(() => {
+  const currentWord = word[index];
+  const timer = setTimeout(() => {
+    if (!isDeleting) {
+      setPlaceholder((p) => {
+        const updated = currentWord.substring(0, p.length + 1);
+        if (updated === currentWord) setTimeout(() => setIsDeleting(true), 1000);
+        return updated;
+      });
+    } else {
+      setPlaceholder((p) => {
+        const updated = currentWord.substring(0, p.length - 1);
+        if (updated === "") {
+          setIsDeleting(false);
+          setIndex((i) => (i + 1) % word.length);
+        }
+        return updated;
+      });
+    }
+  }, 90);
+
     return () => clearTimeout(timer);
   }, [placeholder, isDeleting, index, word]);
 
@@ -61,16 +79,13 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
     if (addr) {
       setAddress(addr);
       localStorage.setItem("userAddress", addr);
+      window.dispatchEvent(new Event("addressUpdated"));
+
     }
     setShowLocation(false);
   };
 
-  useEffect(() => {
-    const savedAddress = localStorage.getItem("userAddress");
-    if (savedAddress) {
-      setAddress(savedAddress);
-    }
-  }, []);
+  
 
 
   return (
