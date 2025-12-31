@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Pages/Home.css";
 
 // Assets
@@ -39,9 +39,23 @@ function Home() {
 
   const [showLogin, setShowLogin] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(localStorage.getItem("userAddress") || "");
 
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+  // Optional: listen for updated address from LocationBox
+  useEffect(() => {
+    const handleAddressUpdate = () => {
+      const addr = localStorage.getItem("userAddress") || "";
+      setAddress(addr);
+    };
+
+    window.addEventListener("addressUpdated", handleAddressUpdate);
+
+    return () => {
+      window.removeEventListener("addressUpdated", handleAddressUpdate);
+    };
+  }, []);
 
   // Navigate handler
   const handleNavigate = (path) => {
@@ -49,10 +63,8 @@ function Home() {
       setShowLogin(true);
       return;
     }
-    if (!address) {
-      setShowAddress(true);
-      return;
-    }
+
+    // Navigate directly without opening LocationBox
     navigate(path);
   };
 
@@ -73,27 +85,27 @@ function Home() {
           <div className="home-box">
             <h3>What are you looking for?</h3>
             <div className="service-grid">
-              <div className="service-group" onClick={() => handleNavigate("/salon-women")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon/luxe")}>
                 <div className="service-item1"><img src={women} alt="Salon for Women" /></div>
                 <div className="service-text"><p>Salon for Women</p></div>
               </div>
-              <div className="service-group" onClick={() => handleNavigate("/men")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon/luxe")}>
                 <div className="service-item1"><img src={men} alt="Salon for Men" /></div>
                 <div className="service-text"><p>Salon for Men</p></div>
               </div>
-              <div className="service-group" onClick={() => handleNavigate("/cleaning")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon/luxe")}>
                 <div className="service-item1"><img src={cleaningImage} alt="Cleaning" /></div>
                 <div className="service-text"><p>Cleaning</p></div>
               </div>
-              <div className="service-group" onClick={() => handleNavigate("/electrician")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon/luxe")}>
                 <div className="service-item1"><img src={electricianImage} alt="Electrician" /></div>
                 <div className="service-text"><p>Electricians & Carpenters</p></div>
               </div>
-              <div className="service-group" onClick={() => handleNavigate("/waterpurifier")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon/luxe")}>
                 <div className="service-item1"><img src={waterpurifierImage} alt="Purifier" /></div>
                 <div className="service-text"><p>Native Water Purifier</p></div>
               </div>
-              <div className="service-group" onClick={() => handleNavigate("/ac-repair")}>
+              <div className="service-group" onClick={() => handleNavigate("/salon/luxe")}>
                 <div className="service-item1"><img src={acImage} alt="AC Repair" /></div>
                 <div className="service-text"><p>AC & Appliance Repair</p></div>
               </div>
