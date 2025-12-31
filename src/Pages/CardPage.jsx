@@ -98,7 +98,7 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
       <div className="uc-checkout-wrapper">
         <button
           className="uc-addservice-btn-outline"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/salon/luxe")}
         >
           Add Services
         </button>
