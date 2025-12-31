@@ -29,13 +29,25 @@ export default function LoginHoverBox({ show, onClose }) {
     if (!isLoggedIn) setModalOpen(true);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
-    setModalOpen(false);
-    alert("Logged out successfully");
-    onClose?.(); // close hover
-  };
+const handleLogout = () => {
+  // 1️⃣ Auth
+  localStorage.removeItem("isLoggedIn");
+
+  // 2️⃣ Clear address / location / pincode
+  localStorage.removeItem("address");
+  localStorage.removeItem("pincode");
+
+  // 3️⃣ Update state
+  setIsLoggedIn(false);
+  setModalOpen(false);
+
+
+  // 5️⃣ Feedback
+  alert("Logged out successfully");
+
+  // 6️⃣ Close hover
+  onClose?.();
+};
 
   return (
     <div ref={ref} className="login-hover-box">

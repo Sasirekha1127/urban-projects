@@ -26,19 +26,22 @@ function LocationBox({ show, handleClose }) {
       centered
       backdrop="static"
       keyboard={false}
+      scrollable // ensures only modal content scrolls
     >
-      <Modal.Body className="p-4">
-        {/* Close */}
+      <Modal.Body
+        style={{ maxHeight: "70vh", overflowY: "auto", position: "relative", padding: "1.5rem" }}
+      >
+        {/* Close Icon */}
         <RxCross2
           size={24}
           style={{ position: "absolute", right: 15, top: 15, cursor: "pointer" }}
           onClick={() => handleClose()}
         />
 
-        {/* Back */}
+        {/* Back Icon */}
         <IoArrowBack
           size={22}
-          style={{ cursor: "pointer", marginBottom: 10 }}
+          style={{ cursor: "pointer", marginBottom: 15 }}
           onClick={() => handleClose()}
         />
 

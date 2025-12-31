@@ -20,7 +20,7 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
   const [showSearch, setShowSearch] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
-  const [address, setAddress] = useState("");
+  // const [address, setAddress] = useState("");
 
 
   const cartCount = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
@@ -34,43 +34,40 @@ function NavbarUC({ hideSearch, hideLocation, hideIcons, hideLink, cart = [] }) 
   const navigate = useNavigate();
 
   // Typing effect for search placeholder
- // 1️⃣ Address sync with localStorage + event listener
-useEffect(() => {
-  // On page load
-  setAddress(localStorage.getItem("userAddress") || "");
+  const [address, setAddress] = useState(localStorage.getItem("userAddress") || "");
 
-  const updateAddress = () => {
-    setAddress(localStorage.getItem("userAddress") || "");
-  };
+  useEffect(() => {
+    const updateAddress = () => {
+      setAddress(localStorage.getItem("userAddress") || "");
+    };
 
-  window.addEventListener("addressUpdated", updateAddress);
+    window.addEventListener("addressUpdated", updateAddress);
 
-  return () => {
-    window.removeEventListener("addressUpdated", updateAddress);
-  };
-}, []);
+    return () => window.removeEventListener("addressUpdated", updateAddress);
+  }, []);
 
-// 2️⃣ Typing effect for search placeholder
-useEffect(() => {
-  const currentWord = word[index];
-  const timer = setTimeout(() => {
-    if (!isDeleting) {
-      setPlaceholder((p) => {
-        const updated = currentWord.substring(0, p.length + 1);
-        if (updated === currentWord) setTimeout(() => setIsDeleting(true), 1000);
-        return updated;
-      });
-    } else {
-      setPlaceholder((p) => {
-        const updated = currentWord.substring(0, p.length - 1);
-        if (updated === "") {
-          setIsDeleting(false);
-          setIndex((i) => (i + 1) % word.length);
-        }
-        return updated;
-      });
-    }
-  }, 90);
+
+  // 2️⃣ Typing effect for search placeholder
+  useEffect(() => {
+    const currentWord = word[index];
+    const timer = setTimeout(() => {
+      if (!isDeleting) {
+        setPlaceholder((p) => {
+          const updated = currentWord.substring(0, p.length + 1);
+          if (updated === currentWord) setTimeout(() => setIsDeleting(true), 1000);
+          return updated;
+        });
+      } else {
+        setPlaceholder((p) => {
+          const updated = currentWord.substring(0, p.length - 1);
+          if (updated === "") {
+            setIsDeleting(false);
+            setIndex((i) => (i + 1) % word.length);
+          }
+          return updated;
+        });
+      }
+    }, 90);
 
     return () => clearTimeout(timer);
   }, [placeholder, isDeleting, index, word]);
@@ -85,7 +82,7 @@ useEffect(() => {
     setShowLocation(false);
   };
 
-  
+
 
 
   return (
@@ -182,13 +179,13 @@ useEffect(() => {
                         <FormControl
                           type="text"
                           value={address || ""}
-                          placeholder="Add address"
+                          placeholder="Select Location"
                           className="border-0 bg-transparent shadow-none"
                           readOnly
                         />
-
                         <IoIosArrowDown className="ms-2" />
                       </div>
+
                     )}
 
                     {/* Search */}

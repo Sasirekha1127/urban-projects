@@ -58,7 +58,7 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
         />
         <h3>Your cart is empty</h3>
         <p>Let’s add some services</p>
-        <button className="explore-btn" onClick={() => navigate("/")}>
+        <button className="explore-btn" onClick={() => navigate("/salon/luxe")}>
           Explore Services
         </button>
       </div>
