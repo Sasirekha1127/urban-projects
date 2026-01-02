@@ -2,14 +2,20 @@ import React, { useState, useEffect, useRef } from "react";
 import LoginModal from "../Pages/Loginmodel";
 import "./LoginHoverBox.css";
 
-export default function LoginHoverBox({ show, onClose }) {
-  const [modalOpen, setModalOpen] = useState(false);
+export default function LoginHoverBox({ show, onClose, setCart }) {
+  const [modalOpen, setModalOpen] = useState(false); // login modal
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const ref = useRef();
 
-  // Maintain login status
+  // Sync login state on mount & listen for global login events
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "true") setIsLoggedIn(true);
+    const checkLogin = () => {
+      setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
+    };
+
+    checkLogin(); // initial check
+    window.addEventListener("loginUpdated", checkLogin);
+    return () => window.removeEventListener("loginUpdated", checkLogin);
   }, []);
 
   // Click outside to close hover
@@ -29,25 +35,32 @@ export default function LoginHoverBox({ show, onClose }) {
     if (!isLoggedIn) setModalOpen(true);
   };
 
-const handleLogout = () => {
-  // 1️⃣ Auth
-  localStorage.removeItem("isLoggedIn");
+  const handleLogoutClick = () => {
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (!confirmLogout) return;
 
-  // 2️⃣ Clear address / location / pincode
-  localStorage.removeItem("address");
-  localStorage.removeItem("pincode");
+    // Clear auth & user data
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userAddress");
+    localStorage.removeItem("pincode");
 
-  // 3️⃣ Update state
-  setIsLoggedIn(false);
-  setModalOpen(false);
+    // Clear cart
+    localStorage.removeItem("cart");
+    if (setCart) setCart([]);
 
+    // Update state immediately
+    setIsLoggedIn(false);
 
-  // 5️⃣ Feedback
-  alert("Logged out successfully");
+    // Close hover
+    onClose?.();
 
-  // 6️⃣ Close hover
-  onClose?.();
-};
+    // Optional alert
+    alert("Logged out successfully ✅");
+
+    // Notify other components
+    window.dispatchEvent(new Event("loginUpdated"));
+  };
 
   return (
     <div ref={ref} className="login-hover-box">
@@ -59,20 +72,23 @@ const handleLogout = () => {
         <>
           <p className="login-hover-item1">Help Center</p>
           <p className="login-hover-item1">My Bookings</p>
-          <p className="login-hover-item1 logout" onClick={handleLogout}>
+          <p className="login-hover-item1 logout" onClick={handleLogoutClick}>
             Logout
           </p>
         </>
       )}
 
+      {/* Login modal */}
       {modalOpen && !isLoggedIn && (
         <LoginModal
           show={modalOpen}
           onClose={() => setModalOpen(false)}
           onLoginSuccess={() => {
-            setIsLoggedIn(true);
+            localStorage.setItem("isLoggedIn", "true");
+            setIsLoggedIn(true); // updates icon immediately
             setModalOpen(false);
-            onClose?.(); // close hover after login
+            onClose?.();
+            window.dispatchEvent(new Event("loginUpdated"));
           }}
         />
       )}

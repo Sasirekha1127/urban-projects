@@ -41,31 +41,36 @@ export default function LoginModal({ show, onClose }) {
   const handleOtpChange = (e, index) => {
     const value = e.target.value.replace(/\D/g, "");
     if (!value) return;
+
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-    if (index < 5) inputsRef.current[index + 1].focus();
+
+    if (index < 5) inputsRef.current[index + 1]?.focus();
   };
 
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      inputsRef.current[index - 1].focus();
+      inputsRef.current[index - 1]?.focus();
     }
   };
 
-  const handleVerifyOtp = () => {
+ const handleVerifyOtp = () => {
   if (!isOtpComplete) return;
 
-  alert("Login successful ");
+  alert("Login successful ✅");
 
-  // SAVE LOGIN DATA
+  // ✅ Login status
   localStorage.setItem("isLoggedIn", "true");
+
+  // ✅ Save phone number (ONLY ONCE)
   localStorage.setItem("userPhone", phone);
 
-  // PASS PHONE TO VIEW CART
+  // 🔔 Notify Navbar / Cart
+  window.dispatchEvent(new Event("loginUpdated"));
+
   onClose(phone);
 };
-
 
   if (!show) return null;
 
@@ -140,4 +145,4 @@ export default function LoginModal({ show, onClose }) {
       </div>
     </div>
   );
-} 
+}

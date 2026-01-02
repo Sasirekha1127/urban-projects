@@ -70,10 +70,20 @@ function Home() {
 
   // Logout
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userAddress");
-    window.location.reload();
-  };
+  // Auth
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("token");
+
+  // User data
+  localStorage.removeItem("userAddress");
+  localStorage.removeItem("pincode");
+
+  // Cart
+  localStorage.removeItem("cart");
+
+  // Redirect
+  navigate("/", { replace: true });
+};
 
   return (
     <>

@@ -28,12 +28,25 @@ export default function ViewCartPage({ cart = [], setCart = () => { } }) {
 
   /* CHECK LOGIN STATUS */
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "true") {
-      setIsLoggedIn(true);
+    const syncLoginData = () => {
+      const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+      setIsLoggedIn(loggedIn);
       setUserPhone(localStorage.getItem("userPhone") || "");
       setUserAddress(localStorage.getItem("userAddress") || "");
-    }
+    };
+
+    // initial load
+    syncLoginData();
+
+    // listen login from anywhere (Navbar / HoverBox)
+    window.addEventListener("loginUpdated", syncLoginData);
+
+    return () => {
+      window.removeEventListener("loginUpdated", syncLoginData);
+    };
   }, []);
+
 
   /* SCROLL */
   const scrollLeft = () =>
@@ -257,12 +270,15 @@ export default function ViewCartPage({ cart = [], setCart = () => { } }) {
         show={showLoginPopup}
         onClose={(phone) => {
           setShowLoginPopup(false);
-          setIsLoggedIn(true);
-          setUserPhone(phone || "");
+
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("userPhone", phone || "");
+
+          // 🔥 VERY IMPORTANT
+          window.dispatchEvent(new Event("loginUpdated"));
         }}
       />
+
 
       {/* LOCATION MODAL */}
       <LocationBox
