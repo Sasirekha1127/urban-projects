@@ -1,0 +1,37 @@
+body.modal-open {
+  overflow: hidden !important;  /* prevent page scrolling */
+}
+
+.custom-modal-dialog {
+  max-height: 80vh;       /* modal max height = 80% of viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center */
+  margin: 0 auto;
+}
+
+/* Modal body scrolls only if content is too tall */
+.custom-modal-body {
+  position: relative;
+  padding: 1.5rem;
+  overflow-y: auto;       /* vertical scroll only inside body */
+  max-height: 70vh;       /* leave space for header/footer if needed */
+}
+
+/* Close icon (top-right) */
+.modal-close-icon {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+}
+
+/* Back icon (top-left) */
+.modal-back-icon {
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.modal.show {
+  display: block;
+}
+

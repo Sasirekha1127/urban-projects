@@ -280,10 +280,10 @@ export default function ViewCartPage({ cart = [], setCart = () => { } }) {
       />
 
 
-      {/* LOCATION MODAL */}
       <LocationBox
         show={showLocationBox}
-        handleClose={(address) => {
+        address={userAddress}
+        onClose={(address) => {  // ✅ must be onClose
           if (address) {
             setUserAddress(address);
             localStorage.setItem("userAddress", address);
@@ -291,6 +291,7 @@ export default function ViewCartPage({ cart = [], setCart = () => { } }) {
           setShowLocationBox(false);
         }}
       />
+
     </>
   );
 }

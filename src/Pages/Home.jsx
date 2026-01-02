@@ -64,26 +64,21 @@ function Home() {
       return;
     }
 
-    // Navigate directly without opening LocationBox
+    if (!address) {
+      setShowAddress(true); // 🔥 THIS WAS MISSING
+      return;
+    }
+
     navigate(path);
   };
 
+
   // Logout
   const handleLogout = () => {
-  // Auth
-  localStorage.removeItem("isLoggedIn");
-  localStorage.removeItem("token");
-
-  // User data
-  localStorage.removeItem("userAddress");
-  localStorage.removeItem("pincode");
-
-  // Cart
-  localStorage.removeItem("cart");
-
-  // Redirect
-  navigate("/", { replace: true });
-};
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userAddress");
+    window.location.reload();
+  };
 
   return (
     <>
@@ -155,13 +150,21 @@ function Home() {
 
       {/* MODALS */}
       <LoginModal show={showLogin} onClose={() => setShowLogin(false)} />
-      <LocationBox
-        show={showAddress}
-        onClose={(addr) => {
-          if (addr) setAddress(addr);
-          setShowAddress(false);
-        }}
-      />
+      {showAddress && (
+        <LocationBox
+          show={showAddress}
+          handleClose={(addr) => {
+            if (addr) {
+              setAddress(addr);
+              localStorage.setItem("userAddress", addr);
+            }
+            setShowAddress(false); // ✅ modal close
+          }}
+        />
+
+      )}
+
+
     </>
   );
 }
