@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, FormControl } from "react-bootstrap";
 import { RxCross2 } from "react-icons/rx";
+import "./LocationBox.css";
 
 function LocationBox({ show, address, onClose }) {
   const [value, setValue] = useState("");
 
-  // parent address load
   useEffect(() => {
     setValue(address || "");
   }, [address]);
 
+  // 🔥 Prevent scrollbar on page when modal opens
+  useEffect(() => {
+    if (show) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "0px";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+  }, [show]);
+
   const confirmAddress = () => {
     if (!value.trim()) return;
-
-    onClose(value);   // ✅ THIS closes modal + updates navbar
+    onClose(value);
   };
 
   return (
-    <Modal show={show} onHide={() => onClose()} centered>
-      <Modal.Header className="d-flex justify-content-between">
+    <Modal
+      show={show}
+      onHide={() => onClose()}
+      centered
+      dialogClassName="custom-modal-dialog"
+    >
+      <Modal.Header>
         <h5>Select Location</h5>
-        <RxCross2 style={{ cursor: "pointer" }} onClick={() => onClose()} />
+        <RxCross2 className="modal-close-icon" onClick={() => onClose()} />
       </Modal.Header>
 
-      <Modal.Body>
+      <Modal.Body className="custom-modal-body">
         <FormControl
           placeholder="Enter your address"
           value={value}

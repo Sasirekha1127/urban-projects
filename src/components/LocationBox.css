@@ -1,37 +1,29 @@
+/* prevent page scrolling */
 body.modal-open {
-  overflow: hidden !important;  /* prevent page scrolling */
+  overflow: hidden !important;
+  padding-right: 0 !important; /* remove Bootstrap auto-padding */
 }
 
+/* Modal dialog styling */
 .custom-modal-dialog {
-  max-height: 80vh;       /* modal max height = 80% of viewport */
+  max-height: 90vh; /* modal never taller than viewport */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertical center */
-  margin: 0 auto;
+  justify-content: center;
 }
 
-/* Modal body scrolls only if content is too tall */
+/* Modal body scrolls only if needed */
 .custom-modal-body {
-  position: relative;
-  padding: 1.5rem;
-  overflow-y: auto;       /* vertical scroll only inside body */
-  max-height: 70vh;       /* leave space for header/footer if needed */
+  overflow-y: auto; /* scroll only inside modal */
+  max-height: 70vh;
+  padding: 1rem;
 }
 
-/* Close icon (top-right) */
+/* Close icon */
 .modal-close-icon {
   position: absolute;
   right: 15px;
   top: 15px;
   cursor: pointer;
 }
-
-/* Back icon (top-left) */
-.modal-back-icon {
-  cursor: pointer;
-  margin-bottom: 15px;
-}
-.modal.show {
-  display: block;
-}
-
