@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import "./CartPage.css";
 import { useNavigate } from "react-router-dom";
-import { LuShoppingCart, LuArrowLeft } from "react-icons/lu";
+import { LuShoppingCart, LuArrowLeft, LuTrash, LuPlus, LuMinus } from "react-icons/lu";
 import card from "../assets/card.png";
 
 export default function CartPage({ cart = [], setCart = () => {} }) {
   const navigate = useNavigate();
 
-  /* 🔥 LOAD CART ON PAGE LOAD */
+  /* LOAD CART ON PAGE LOAD */
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
@@ -15,7 +15,7 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
     }
   }, [setCart]);
 
-  /* 🔥 SAVE CART ON EVERY CHANGE */
+  /* SAVE CART ON EVERY CHANGE */
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -47,7 +47,7 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
     0
   );
 
-  /* 🔴 EMPTY CART UI */
+  /* EMPTY CART UI */
   if (cart.length === 0) {
     return (
       <div className="cart-empty-box">
@@ -67,19 +67,19 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
 
   return (
     <>
-      {/* 🔙 Back */}
+      {/* Back */}
       <div className="uc-back-btn" onClick={() => navigate(-1)}>
         <LuArrowLeft size={24} />
       </div>
 
-      {/* 🛒 Header */}
+      {/* Header */}
       <div className="cart-header-row">
         <LuShoppingCart size={40} className="cart-icons" />
         <h1 className="uc-cart-title">Your Cart</h1>
       </div>
       <hr className="lines" />
 
-      {/* 🟣 ITEMS */}
+      {/*  ITEMS */}
       {[...cart].reverse().map((item) => (
         <div className="uc-cart-card" key={item.id}>
           <img src={card} alt={item.title} className="uc-cart-img" />
@@ -87,14 +87,25 @@ export default function CartPage({ cart = [], setCart = () => {} }) {
           <div className="uc-cart-info">
             <h2 className="uc-cart-item-title">{item.title}</h2>
             <p className="uc-cart-subtitle">
-              {item.qty} service{item.qty > 1 ? "s" : ""} • ₹
-              {item.price * item.qty}
+              ₹{item.price} x {item.qty} service{item.qty > 1 ? "s" : ""}
             </p>
+
+            {/* 🔹 Quantity controls */}
+            <div className="uc-qty-controls">
+              <button onClick={() => decreaseQty(item.id)}><LuMinus /></button>
+              <span>{item.qty}</span>
+              <button onClick={() => increaseQty(item.id)}><LuPlus /></button>
+            </div>
+
+            {/* 🔹 Delete item */}
+            <button className="uc-delete-btn" onClick={() => removeItem(item.id)}>
+              <LuTrash /> Remove
+            </button>
           </div>
         </div>
       ))}
 
-      {/* 💳 Checkout */}
+      {/* Checkout */}
       <div className="uc-checkout-wrapper">
         <button
           className="uc-addservice-btn-outline"

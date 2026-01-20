@@ -7,21 +7,35 @@ export default function LoginModal({ show, onClose }) {
   const [showOtpScreen, setShowOtpScreen] = useState(false);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [time, setTime] = useState(30);
+  const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
   const inputsRef = useRef([]);
 
   const isValidPhone = phone.length === 10;
   const isOtpComplete = otp.every((d) => d !== "");
 
+  // ✅ Check login state on mount
   useEffect(() => {
-    if (show) {
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const savedPhone = localStorage.getItem("userPhone");
+
+    if (loggedIn && savedPhone) {
+      setPhone(savedPhone);
+      setAlreadyLoggedIn(true); // mark as logged in
+    }
+  }, []);
+
+  // Reset modal state when opened
+  useEffect(() => {
+    if (show && !alreadyLoggedIn) {
       setPhone("");
       setShowOtpScreen(false);
       setShowVerifying(false);
       setOtp(["", "", "", "", "", ""]);
       setTime(30);
     }
-  }, [show]);
+  }, [show, alreadyLoggedIn]);
 
+  // OTP countdown timer
   useEffect(() => {
     if (!showOtpScreen || time === 0) return;
     const timer = setInterval(() => setTime((t) => t - 1), 1000);
@@ -31,6 +45,7 @@ export default function LoginModal({ show, onClose }) {
   const handleContinue = () => {
     if (!isValidPhone) return;
     setShowVerifying(true);
+
     setTimeout(() => {
       setShowVerifying(false);
       setShowOtpScreen(true);
@@ -55,31 +70,39 @@ export default function LoginModal({ show, onClose }) {
     }
   };
 
- const handleVerifyOtp = () => {
-  if (!isOtpComplete) return;
+  const handleVerifyOtp = () => {
+    if (!isOtpComplete) return;
 
-  alert("Login successful ✅");
+    alert("Login successful ✅");
 
-  // ✅ Login status
-  localStorage.setItem("isLoggedIn", "true");
+    // ✅ Persist login
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userPhone", phone);
 
-  // ✅ Save phone number (ONLY ONCE)
-  localStorage.setItem("userPhone", phone);
+    // 🔔 Notify other components
+    window.dispatchEvent(new Event("loginUpdated"));
 
-  // 🔔 Notify Navbar / Cart
-  window.dispatchEvent(new Event("loginUpdated"));
-
-  onClose(phone);
-};
+    onClose(phone);
+  };
 
   if (!show) return null;
 
   return (
     <div className="modal-overlay">
       <div className="login-modal">
-        <button className="close-btns" onClick={onClose}>×</button>
+        <button className="close-btns" onClick={() => onClose(phone)}>
+          ×
+        </button>
 
-        {!showOtpScreen && (
+        {alreadyLoggedIn ? (
+          <div>
+            <h2>Welcome back!</h2>
+            <p>You are already logged in with +91 {phone}</p>
+            <button className="login-btn active" onClick={() => onClose(phone)}>
+              Continue
+            </button>
+          </div>
+        ) : !showOtpScreen ? (
           <>
             <h2>Enter your phone number</h2>
             <p>We’ll send you a verification code</p>
@@ -92,9 +115,7 @@ export default function LoginModal({ show, onClose }) {
                 placeholder="Enter phone number"
                 value={phone}
                 disabled={showVerifying}
-                onChange={(e) =>
-                  setPhone(e.target.value.replace(/\D/g, ""))
-                }
+                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
               />
             </div>
 
@@ -110,9 +131,7 @@ export default function LoginModal({ show, onClose }) {
               </button>
             )}
           </>
-        )}
-
-        {showOtpScreen && (
+        ) : (
           <>
             <h2>Enter verification code</h2>
             <p>Code sent to +91 {phone}</p>

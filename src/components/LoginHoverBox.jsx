@@ -46,8 +46,9 @@ export default function LoginHoverBox({ show, onClose, setCart }) {
     localStorage.removeItem("pincode");
 
     // Clear cart
-    localStorage.removeItem("cart");
-    if (setCart) setCart([]);
+    // localStorage.removeItem("cart");
+    // if (setCart) setCart([]);
+    
 
     // Update state immediately
     setIsLoggedIn(false);

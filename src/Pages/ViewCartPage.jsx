@@ -178,7 +178,7 @@ export default function ViewCartPage({ cart = [], setCart = () => { } }) {
                       alert("Order Placed Successfully!");
 
                       // Clear cart
-                      setCart([]);
+                      // setCart([]);
 
                       // Redirect to home page
                       navigate("/");
