@@ -234,7 +234,7 @@ export default function ViewCartPage({ cart = [], setCart = () => { } }) {
                         <button onClick={() => addAddonToCart(addon)}>
                           Add
                         </button>
-                      </div>
+                      </div> 
                     </div>
                   ))}
                 </div>
